@@ -1,0 +1,394 @@
+### LIGHTS
+
+# Fix for Philips Hue lights going unavailable
+# Turns off "turn on" automations for two minutes after light goes to unavailable
+
+- alias: "Light fix 1"
+  trigger:
+    platform: state
+    entity_id: light.hue_color_lamp_1
+    to: 'unavailable'
+  action:
+    - service: automation.turn_off
+      entity_id: automation.set_light_1_brightness_to_max_when_turned_on_day
+    - service: automation.turn_off
+      entity_id: automation.set_light_1_brightness_to_max_when_turned_on_evening
+    - delay:
+        hours: 3
+    - service: automation.turn_on
+      entity_id: automation.set_light_1_brightness_to_max_when_turned_on_day
+    - service: automation.turn_on
+      entity_id: automation.set_light_1_brightness_to_max_when_turned_on_evening
+
+- alias: "Light fix 2"
+  trigger:
+    platform: state
+    entity_id: light.hue_color_lamp_2
+    to: 'unavailable'
+  action:
+    - service: automation.turn_off
+      entity_id: automation.set_light_2_brightness_to_max_when_turned_on_day
+    - service: automation.turn_off
+      entity_id: automation.set_light_2_brightness_to_max_when_turned_on_evening
+    - delay:
+        hours: 3
+    - service: automation.turn_on
+      entity_id: automation.set_light_2_brightness_to_max_when_turned_on_day
+    - service: automation.turn_on
+      entity_id: automation.set_light_2_brightness_to_max_when_turned_on_evening
+
+- alias: "Light fix 3"
+  trigger:
+    platform: state
+    entity_id: light.hue_color_lamp_3
+    to: 'unavailable'
+  action:
+    - service: automation.turn_off
+      entity_id: automation.set_light_3_brightness_to_max_when_turned_on_day
+    - service: automation.turn_off
+      entity_id: automation.set_light_3_brightness_to_max_when_turned_on_evening
+    - delay:
+        hours: 3
+    - service: automation.turn_on
+      entity_id: automation.set_light_3_brightness_to_max_when_turned_on_day
+    - service: automation.turn_on
+      entity_id: automation.set_light_3_brightness_to_max_when_turned_on_evening
+
+# DURING DAY
+
+- alias: "Set light 1 brightness to max when turned on (day)"
+  trigger:
+    platform: state
+    entity_id: light.hue_color_lamp_1
+    to: 'on'
+  condition:
+    condition: state
+    entity_id: sun.sun
+    state: 'above_horizon'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.hue_color_lamp_1
+      brightness: 255
+      kelvin: 4000
+
+- alias: "Set light 2 brightness to max when turned on (day)"
+  trigger:
+    platform: state
+    entity_id: light.hue_color_lamp_2
+    to: 'on'
+  condition:
+    condition: state
+    entity_id: sun.sun
+    state: 'above_horizon'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.hue_color_lamp_2
+      brightness: 255
+      kelvin: 4000
+
+- alias: "Set light 3 brightness to max when turned on (day)"
+  trigger:
+    platform: state
+    entity_id: light.hue_color_lamp_3
+    to: 'on'
+  condition:
+    condition: state
+    entity_id: sun.sun
+    state: 'above_horizon'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.hue_color_lamp_3
+      brightness: 255
+      kelvin: 4000
+
+# DURING EVENING/NIGHT
+
+- alias: "Set light 1 brightness to max when turned on (evening)"
+  trigger:
+    platform: state
+    entity_id: light.hue_color_lamp_1
+    to: 'on'
+  condition:
+    condition: state
+    entity_id: sun.sun
+    state: 'below_horizon'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.hue_color_lamp_1
+      brightness: 200
+      kelvin: 2700
+
+- alias: "Set light 2 brightness to max when turned on (evening)"
+  trigger:
+    platform: state
+    entity_id: light.hue_color_lamp_2
+    to: 'on'
+  condition:
+    condition: state
+    entity_id: sun.sun
+    state: 'below_horizon'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.hue_color_lamp_2
+      brightness: 200
+      kelvin: 2700
+
+- alias: "Set light 3 brightness to max when turned on (evening)"
+  trigger:
+    platform: state
+    entity_id: light.hue_color_lamp_3
+    to: 'on'
+  condition:
+    condition: state
+    entity_id: sun.sun
+    state: 'below_horizon'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.hue_color_lamp_3
+      brightness: 200
+      kelvin: 2700
+
+###
+
+- alias: "Change light 1 temperature after sunset"
+  trigger:
+    platform: state
+    entity_id: sun.sun
+    to: 'below_horizon'
+  condition:
+    condition: state
+    entity_id: light.hue_color_lamp_1
+    state: 'on'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.hue_color_lamp_1
+      kelvin: 2700
+      transition: 15
+
+- alias: "Change light 2 temperature after sunset"
+  trigger:
+    platform: state
+    entity_id: sun.sun
+    to: 'below_horizon'
+  condition:
+    condition: state
+    entity_id: light.hue_color_lamp_2
+    state: 'on'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.hue_color_lamp_2
+      kelvin: 2700
+      transition: 15
+
+- alias: "Change light 3 temperature after sunset"
+  trigger:
+    platform: state
+    entity_id: sun.sun
+    to: 'below_horizon'
+  condition:
+    condition: state
+    entity_id: light.hue_color_lamp_3
+    state: 'on'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.hue_color_lamp_3
+      kelvin: 2700
+      transition: 15
+
+###
+
+- alias: "Dim light 1 in the evening if on"
+  trigger:
+    platform: time
+    at: '19:30'
+  condition:
+    condition: state
+    entity_id: light.hue_color_lamp_1
+    state: 'on'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.hue_color_lamp_1
+      brightness: 150
+      transition: 15
+
+- alias: "Dim light 2 in the evening if on"
+  trigger:
+    platform: time
+    at: '19:30'
+  condition:
+    condition: state
+    entity_id: light.hue_color_lamp_2
+    state: 'on'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.hue_color_lamp_2
+      brightness: 150
+      transition: 15
+
+- alias: "Dim light 3 in the evening if on"
+  trigger:
+    platform: time
+    at: '19:30'
+  condition:
+    condition: state
+    entity_id: light.hue_color_lamp_3
+    state: 'on'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.hue_color_lamp_3
+      brightness: 150
+      transition: 15
+
+### TURN ON AC AUTOMATION
+
+- alias: "Turn on AC when it's too hot or cold"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.mi_t_582d34345074 #sensor.current_temperature
+      below: 22.6 #19
+      for: "00:30:00"
+    - platform: numeric_state
+      entity_id: sensor.mi_t_582d34345074 #sensor.current_temperature
+      above: 30 # 25 degrees during Summer, hotter during winter due to fireplace
+      for: "00:30:00"
+  action:
+    - service: notify.discord
+      data:
+        message: "AC turning ON! Current temperature is {{ states('sensor.mi_t_582d34345074') }}°C"
+        target: ["645569766626689065"]
+    - service: climate.set_temperature
+      entity_id: climate.melcloud_living_room_177727
+      data:
+        temperature: '23'
+    - service: climate.set_fan_mode
+      entity_id: climate.melcloud_living_room_177727
+      data:
+        fan_mode: 'Speed Auto'
+    - service: climate.set_hvac_mode
+      data:
+        entity_id: climate.melcloud_living_room_177727
+        hvac_mode: 'auto'
+    - service: climate.set_swing_mode
+      entity_id: climate.melcloud_living_room_177727
+      data:
+        swing_mode: 'Auto'
+
+### TURN AC OFF AUTOMATION
+
+- alias: "Turn off AC when target temperature is reached"
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.mi_t_582d34345074 #sensor.current_temperature
+    below: 26 #24
+    above: 23 #22
+    for: "01:00:00"
+  condition:
+    condition: state
+    entity_id: climate.melcloud_living_room_177727
+    state: 'auto'
+  action:
+    - service: climate.set_hvac_mode
+      data:
+        entity_id: climate.melcloud_living_room_177727
+        hvac_mode: 'off'
+    - service: notify.discord
+      data:
+        message: "AC turning OFF! Current temperature is {{ states('sensor.mi_t_582d34345074') }}°C"
+        target: ["645569766626689065"]
+
+### ROOMBA NOTIFICATIONS
+
+- alias: "Roomba notifications"
+  trigger:
+    - platform: state
+      entity_id: vacuum.roomba
+      from: "off"
+      to: "on"
+      for: "00:02:00"
+    - platform: state
+      entity_id: vacuum.roomba
+      from: "on"
+      to: "off"
+      for: "00:02:00"
+  action:
+    - service: notify.discord
+      data:
+        message: "Roomba is now {{ states.vacuum.roomba.attributes.status }}"
+        target: ["645569708363481088"]
+
+### SYSTEM NOTIFICATIONS
+
+- alias: "Health check"
+  trigger:
+    platform: time_pattern
+    minutes: "/15"
+  action:
+    service: rest_command.health_check
+
+- alias: "CPU Temperature too high"
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.cpu_temperature
+    above: 77
+    for: "00:02:00"
+  action:
+    service: notify.telegram
+    data:
+      title: "System alert!"
+      message: "Raspberry Pi CPU temperature critical! Current temperature is {{ states('sensor.cpu_temperature') }}°C"
+
+- alias: "Disk usage exceeded 80 percent"
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.disk_use_percent
+    above: 80.0
+  action:
+    service: notify.telegram
+    data:
+      title: "System alert!"
+      message: "Raspberry Pi free disk space running low!"
+
+- alias: "Xiaomi temperature sensor battery low"
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.living_room_sensor_battery
+    below: 15
+  action:
+    service: notify.telegram
+    data:
+      title: '*Battery low alert!*'
+      message: "Xiaomi Mijia temperature and humidity sensor battery is running low. Please replace the battery."
+
+### THEME
+
+- alias: "Set HA theme for day and night"
+  trigger:
+    - platform: homeassistant
+      event: start
+    - platform: state
+      entity_id: sun.sun
+      to: above_horizon
+    - platform: state
+      entity_id: sun.sun
+      to: below_horizon
+  action:
+    - service_template: frontend.set_theme
+      data_template: # set midnight to default for daytime light theme
+        name: >
+          {% if states.sun.sun.state == "above_horizon" %}
+            default
+          {% else %}
+            midnight
+          {% endif %}

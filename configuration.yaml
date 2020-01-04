@@ -1,0 +1,183 @@
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+### INCLUDES
+
+homeassistant:
+  customize: !include customize.yaml
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+
+frontend:
+  themes: !include_dir_merge_named themes
+
+# HTTP Setup
+#http:
+#  base_url: !secret duckdns_url
+#  ssl_certificate: /ssl/fullchain.pem
+#  ssl_key: /ssl/privkey.pem
+#  ip_ban_enabled: True
+#  login_attempts_threshold: 5
+
+
+### RECORDER, HISTORY AND LOG SETUP
+
+# Log levels
+logger:
+  default: info
+  logs:
+    homeassistant.setup: warning
+    homeassistant.loader: error
+    roomba.roomba.Roomba: warning
+    pychromecast.socket_client: error
+    custom_components.climate.melcloud_living_room_177727: fatal
+    homeassistant.components.cast: error
+    homeassistant.components.cast.media_player: error
+    pychromecast: error
+    pychromecast.discovery: error
+
+# Recorder excludes // may increase SD card longevity
+recorder:
+  purge_keep_days: 7
+  purge_interval: 1
+  exclude:
+    domains:
+      - media_player
+    entities:
+      - binary_sensor.updater
+      - sensor.last_boot
+      - automation.health_check
+
+# History
+history:
+  exclude:
+    domains:
+      - automation
+      - person
+      - group
+      - persistent_notification
+      - discovery
+      - history_graph
+
+
+### INTEGRATIONS
+
+# InfluxDB configuration
+influxdb:
+  username: !secret influxdb_username
+  password: !secret influxdb_password
+  max_retries: 3
+  default_measurement: state
+  include:
+    domains:
+      - sensor
+
+# Health check: https://healthchecks.io/
+rest_command:
+  health_check:
+    url: !secret health_check_url
+
+# Telegram Bot (polling method)
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegram_token
+    allowed_chat_ids:
+      - !secret telegram_chatid
+
+# Notify components
+notify:
+  - name: discord
+    platform: discord
+    token: !secret discord_bot_token
+  - name: telegram
+    platform: telegram
+    chat_id: !secret telegram_chatid
+
+# MelCloud: https://github.com/o0Zz/ha-melcloud/
+climate:
+  - platform: melcloud
+    email: !secret email
+    password: !secret melcloud
+
+# iRobot Roomba: https://www.home-assistant.io/components/roomba/
+vacuum:
+  - platform: roomba
+    host: !secret roomba_host
+    username: !secret roomba_username
+    password: !secret roomba_password
+
+# Spotify
+media_player:
+  - platform: spotify
+    client_id: !secret spotify_clientid
+    client_secret: !secret spotify_clientsecret
+
+# Circadian lightning for lights (HACS custom component)
+circadian_lighting:
+
+switch:
+  - platform: circadian_lighting
+    lights_rgb:
+      - light.hue_color_lamp_1
+      - light.hue_color_lamp_2
+      - light.hue_color_lamp_3
+
+### SENSORS ###
+sensor:
+  - platform: mitemp_bt
+    rounding: True
+    decimals: 1
+    period: 300
+  - platform: systemmonitor
+    resources:
+      - type: disk_use_percent
+        arg: /
+      - type: memory_use_percent
+      - type: load_15m
+      - type: processor_use
+      - type: network_in
+        arg: wlan0
+      - type: network_out
+        arg: wlan0
+      - type: last_boot
+  - platform: template
+    sensors:
+      outside_temperature:
+        friendly_name: "Outside temperature"
+        unit_of_measurement: '°C'
+        value_template: "{{states.weather.home.attributes.temperature}}"
+      ac_state:
+        friendly_name: "Air Conditioner state"
+        #unit_of_measurement: 'Mode'
+        value_template: "{{states.climate.melcloud_living_room_177727.state}}"
+      living_room_sensor_battery:
+        friendly_name: Xiaomi Mijia battery
+        unit_of_measurement: '%'
+        value_template: "{{states.sensor.mi_t_582d34345074.attributes.battery_level}}"
+  - platform: command_line
+    name: "CPU Temperature"
+    command: "cat /sys/class/thermal/thermal_zone0/temp"
+    unit_of_measurement: '°C'
+    value_template: '{{ value | multiply(0.001) | round(1) }}'
+  - platform: google_travel_time
+    name: "Travel time to Sulava HQ"
+    api_key: !secret googlemaps_apikey
+    origin: zone.home
+    destination: zone.sulava_hq
+    scan_interval: 900
+    options:
+      mode: transit
+  - platform: google_travel_time
+    name: "Travel time to HoTT"
+    api_key: !secret googlemaps_apikey
+    origin: zone.home
+    destination: zone.hott
+    scan_interval: 900
+    options:
+      mode: driving
