@@ -256,11 +256,11 @@
 - alias: "Turn on AC when it's too hot or cold"
   trigger:
     - platform: numeric_state
-      entity_id: sensor.mi_t_582d34345074 #sensor.current_temperature
+      entity_id: sensor.mi_t_582d34345074
       below: 22.6 #19
       for: "00:30:00"
     - platform: numeric_state
-      entity_id: sensor.mi_t_582d34345074 #sensor.current_temperature
+      entity_id: sensor.mi_t_582d34345074
       above: 30 # 25 degrees during Summer, hotter during winter due to fireplace
       for: "00:30:00"
   action:
@@ -290,7 +290,7 @@
 - alias: "Turn off AC when target temperature is reached"
   trigger:
     platform: numeric_state
-    entity_id: sensor.mi_t_582d34345074 #sensor.current_temperature
+    entity_id: sensor.mi_t_582d34345074
     below: 26 #24
     above: 23 #22
     for: "01:00:00"

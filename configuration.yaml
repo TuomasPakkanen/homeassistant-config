@@ -12,7 +12,7 @@ homeassistant:
 
 group: !include groups.yaml
 automation: !include automations.yaml
-script: !include scripts.yaml
+#script: !include scripts.yaml # currently no active scripts in use
 
 frontend:
   themes: !include_dir_merge_named themes
@@ -121,12 +121,49 @@ media_player:
 # Circadian lightning for lights (HACS custom component)
 circadian_lighting:
 
+### SWITCHES ###
 switch:
   - platform: circadian_lighting
     lights_rgb:
       - light.hue_color_lamp_1
       - light.hue_color_lamp_2
       - light.hue_color_lamp_3
+  - platform: template
+    switches:
+      ac:
+        friendly_name: "AC"
+        value_template: "{{ is_state('climate.melcloud_living_room_177727', 'auto') or is_state('climate.melcloud_living_room_177727', 'heat') or is_state('climate.melcloud_living_room_177727', 'dry') or is_state('climate.melcloud_living_room_177727', 'fan_only') or is_state('climate.melcloud_living_room_177727', 'cool') }}"
+        turn_on:
+          - service: climate.set_temperature
+            entity_id: climate.melcloud_living_room_177727
+            data:
+              temperature: '23'
+          - service: climate.set_fan_mode
+            entity_id: climate.melcloud_living_room_177727
+            data:
+              fan_mode: 'Speed Auto'
+          - service: climate.set_hvac_mode
+            data:
+              entity_id: climate.melcloud_living_room_177727
+              hvac_mode: 'auto'
+          - service: climate.set_swing_mode
+            entity_id: climate.melcloud_living_room_177727
+            data:
+              swing_mode: 'Auto'
+        turn_off:
+          service: climate.set_hvac_mode
+          data:
+            entity_id: climate.melcloud_living_room_177727
+            hvac_mode: 'off'
+      roomba:
+        friendly_name: "Roomba"
+        value_template: "{{ is_state('vacuum.roomba', 'on') }}"
+        turn_on:
+          service: vacuum.turn_on
+          entity_id: vacuum.roomba
+        turn_off:
+          service: vacuum.turn_off
+          entity_id: vacuum.roomba
 
 ### SENSORS ###
 sensor:
