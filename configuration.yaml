@@ -124,10 +124,19 @@ circadian_lighting:
 ### SWITCHES ###
 switch:
   - platform: circadian_lighting
+    name: "Circadian lighting (living room)"
+    min_brightness: 50
     lights_rgb:
-      - light.hue_color_lamp_1
-      - light.hue_color_lamp_2
-      - light.hue_color_lamp_3
+      - light.extended_color_light_1
+      - light.extended_color_light_2
+      - light.extended_color_light_3
+  - platform: circadian_lighting
+    name: "Circadian lighting (media room)"
+    min_brightness: 50
+    lights_ct:
+      - light.media_room_light_1
+      - light.media_room_light_2
+      - light.media_room_light_3
   - platform: template
     switches:
       ac:

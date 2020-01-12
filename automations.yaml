@@ -1,65 +1,89 @@
 ### LIGHTS
 
-# Fix for Philips Hue lights going unavailable
-# Turns off "turn on" automations for two minutes after light goes to unavailable
+# IKEA REMOTE
 
-- alias: "Light fix 1"
+- alias: 'Toggle lamp from dimmer'
   trigger:
-    platform: state
-    entity_id: light.hue_color_lamp_1
-    to: 'unavailable'
+    platform: event
+    event_type: deconz_event
+    event_data:
+      id: tradfri_remote_control
+      event: 1002
   action:
-    - service: automation.turn_off
-      entity_id: automation.set_light_1_brightness_to_max_when_turned_on_day
-    - service: automation.turn_off
-      entity_id: automation.set_light_1_brightness_to_max_when_turned_on_evening
-    - delay:
-        hours: 3
-    - service: automation.turn_on
-      entity_id: automation.set_light_1_brightness_to_max_when_turned_on_day
-    - service: automation.turn_on
-      entity_id: automation.set_light_1_brightness_to_max_when_turned_on_evening
+    service: light.toggle
+    entity_id: light.media_room
 
-- alias: "Light fix 2"
-  trigger:
-    platform: state
-    entity_id: light.hue_color_lamp_2
-    to: 'unavailable'
-  action:
-    - service: automation.turn_off
-      entity_id: automation.set_light_2_brightness_to_max_when_turned_on_day
-    - service: automation.turn_off
-      entity_id: automation.set_light_2_brightness_to_max_when_turned_on_evening
-    - delay:
-        hours: 3
-    - service: automation.turn_on
-      entity_id: automation.set_light_2_brightness_to_max_when_turned_on_day
-    - service: automation.turn_on
-      entity_id: automation.set_light_2_brightness_to_max_when_turned_on_evening
 
-- alias: "Light fix 3"
+- alias: 'Increase brightness of lamp from dimmer'
   trigger:
-    platform: state
-    entity_id: light.hue_color_lamp_3
-    to: 'unavailable'
+    platform: event
+    event_type: deconz_event
+    event_data:
+      id: tradfri_remote_control
+      event: 2002
   action:
-    - service: automation.turn_off
-      entity_id: automation.set_light_3_brightness_to_max_when_turned_on_day
-    - service: automation.turn_off
-      entity_id: automation.set_light_3_brightness_to_max_when_turned_on_evening
-    - delay:
-        hours: 3
-    - service: automation.turn_on
-      entity_id: automation.set_light_3_brightness_to_max_when_turned_on_day
-    - service: automation.turn_on
-      entity_id: automation.set_light_3_brightness_to_max_when_turned_on_evening
+    - service: light.turn_on
+      data_template:
+        entity_id: light.media_room
+        brightness: >
+          {% set bri = state_attr('light.media_room', 'brightness') | int %}
+          {{ [bri+50, 255] | min }}
+
+- alias: 'Decrease brightness of lamp from dimmer'
+  trigger:
+    platform: event
+    event_type: deconz_event
+    event_data:
+      id: tradfri_remote_control
+      event: 3002
+  action:
+    - service: light.turn_on
+      data_template:
+        entity_id: light.media_room
+        brightness: >
+          {% set bri = state_attr('light.media_room', 'brightness') | int %}
+          {{ [bri-50, 1] | max }}
+
+- alias: 'Set color temperature of lamps to warmer'
+  trigger:
+    platform: event
+    event_type: deconz_event
+    event_data:
+      id: tradfri_remote_control
+      event: 5002
+  action:
+    - service: light.turn_on
+      data_template:
+        entity_id: light.media_room
+        color_temp: >
+          {% set mired = state_attr('light.media_room', 'color_temp') | int %}
+          {% if mired < 251 %} 370
+          {% elif mired > 250 and mired < 371 %} 455
+          {% else %} 250 {% endif %}
+
+- alias: 'Set color temperature of lamps to colder'
+  trigger:
+    platform: event
+    event_type: deconz_event
+    event_data:
+      id: tradfri_remote_control
+      event: 4002
+  action:
+    - service: light.turn_on
+      data_template:
+        entity_id: light.media_room
+        color_temp: >
+          {% set mired = state_attr('light.media_room', 'color_temp') | int %}
+          {% if mired > 454 %} 370
+          {% elif mired > 250 and mired < 371 %} 250
+          {% else %} 455 {% endif %}
 
 # DURING DAY
 
 - alias: "Set light 1 brightness to max when turned on (day)"
   trigger:
     platform: state
-    entity_id: light.hue_color_lamp_1
+    entity_id: light.extended_color_light_1
     to: 'on'
   condition:
     condition: state
@@ -68,14 +92,14 @@
   action:
     service: light.turn_on
     data:
-      entity_id: light.hue_color_lamp_1
+      entity_id: light.extended_color_light_1
       brightness: 255
       kelvin: 4000
 
 - alias: "Set light 2 brightness to max when turned on (day)"
   trigger:
     platform: state
-    entity_id: light.hue_color_lamp_2
+    entity_id: light.extended_color_light_2
     to: 'on'
   condition:
     condition: state
@@ -84,14 +108,14 @@
   action:
     service: light.turn_on
     data:
-      entity_id: light.hue_color_lamp_2
+      entity_id: light.extended_color_light_2
       brightness: 255
       kelvin: 4000
 
 - alias: "Set light 3 brightness to max when turned on (day)"
   trigger:
     platform: state
-    entity_id: light.hue_color_lamp_3
+    entity_id: light.extended_color_light_3
     to: 'on'
   condition:
     condition: state
@@ -100,7 +124,7 @@
   action:
     service: light.turn_on
     data:
-      entity_id: light.hue_color_lamp_3
+      entity_id: light.extended_color_light_3
       brightness: 255
       kelvin: 4000
 
@@ -109,7 +133,7 @@
 - alias: "Set light 1 brightness to max when turned on (evening)"
   trigger:
     platform: state
-    entity_id: light.hue_color_lamp_1
+    entity_id: light.extended_color_light_1
     to: 'on'
   condition:
     condition: state
@@ -118,14 +142,14 @@
   action:
     service: light.turn_on
     data:
-      entity_id: light.hue_color_lamp_1
+      entity_id: light.extended_color_light_1
       brightness: 200
       kelvin: 2700
 
 - alias: "Set light 2 brightness to max when turned on (evening)"
   trigger:
     platform: state
-    entity_id: light.hue_color_lamp_2
+    entity_id: light.extended_color_light_2
     to: 'on'
   condition:
     condition: state
@@ -134,14 +158,14 @@
   action:
     service: light.turn_on
     data:
-      entity_id: light.hue_color_lamp_2
+      entity_id: light.extended_color_light_2
       brightness: 200
       kelvin: 2700
 
 - alias: "Set light 3 brightness to max when turned on (evening)"
   trigger:
     platform: state
-    entity_id: light.hue_color_lamp_3
+    entity_id: light.extended_color_light_3
     to: 'on'
   condition:
     condition: state
@@ -150,7 +174,7 @@
   action:
     service: light.turn_on
     data:
-      entity_id: light.hue_color_lamp_3
+      entity_id: light.extended_color_light_3
       brightness: 200
       kelvin: 2700
 
@@ -163,12 +187,12 @@
     to: 'below_horizon'
   condition:
     condition: state
-    entity_id: light.hue_color_lamp_1
+    entity_id: light.extended_color_light_1
     state: 'on'
   action:
     service: light.turn_on
     data:
-      entity_id: light.hue_color_lamp_1
+      entity_id: light.extended_color_light_1
       kelvin: 2700
       transition: 15
 
@@ -179,12 +203,12 @@
     to: 'below_horizon'
   condition:
     condition: state
-    entity_id: light.hue_color_lamp_2
+    entity_id: light.extended_color_light_2
     state: 'on'
   action:
     service: light.turn_on
     data:
-      entity_id: light.hue_color_lamp_2
+      entity_id: light.extended_color_light_2
       kelvin: 2700
       transition: 15
 
@@ -195,12 +219,12 @@
     to: 'below_horizon'
   condition:
     condition: state
-    entity_id: light.hue_color_lamp_3
+    entity_id: light.extended_color_light_3
     state: 'on'
   action:
     service: light.turn_on
     data:
-      entity_id: light.hue_color_lamp_3
+      entity_id: light.extended_color_light_3
       kelvin: 2700
       transition: 15
 
@@ -212,12 +236,12 @@
     at: '19:30'
   condition:
     condition: state
-    entity_id: light.hue_color_lamp_1
+    entity_id: light.extended_color_light_1
     state: 'on'
   action:
     service: light.turn_on
     data:
-      entity_id: light.hue_color_lamp_1
+      entity_id: light.extended_color_light_1
       brightness: 150
       transition: 15
 
@@ -227,12 +251,12 @@
     at: '19:30'
   condition:
     condition: state
-    entity_id: light.hue_color_lamp_2
+    entity_id: light.extended_color_light_2
     state: 'on'
   action:
     service: light.turn_on
     data:
-      entity_id: light.hue_color_lamp_2
+      entity_id: light.extended_color_light_2
       brightness: 150
       transition: 15
 
@@ -242,12 +266,12 @@
     at: '19:30'
   condition:
     condition: state
-    entity_id: light.hue_color_lamp_3
+    entity_id: light.extended_color_light_3
     state: 'on'
   action:
     service: light.turn_on
     data:
-      entity_id: light.hue_color_lamp_3
+      entity_id: light.extended_color_light_3
       brightness: 150
       transition: 15
 
@@ -258,11 +282,11 @@
     - platform: numeric_state
       entity_id: sensor.mi_t_582d34345074
       below: 22.6 #19
-      for: "00:30:00"
+      for: "00:10:00"
     - platform: numeric_state
       entity_id: sensor.mi_t_582d34345074
       above: 30 # 25 degrees during Summer, hotter during winter due to fireplace
-      for: "00:30:00"
+      for: "00:10:00"
   action:
     - service: notify.discord
       data:
@@ -370,25 +394,3 @@
     data:
       title: '*Battery low alert!*'
       message: "Xiaomi Mijia temperature and humidity sensor battery is running low. Please replace the battery."
-
-### THEME
-
-- alias: "Set HA theme for day and night"
-  trigger:
-    - platform: homeassistant
-      event: start
-    - platform: state
-      entity_id: sun.sun
-      to: above_horizon
-    - platform: state
-      entity_id: sun.sun
-      to: below_horizon
-  action:
-    - service_template: frontend.set_theme
-      data_template: # set midnight to default for daytime light theme
-        name: >
-          {% if states.sun.sun.state == "above_horizon" %}
-            default
-          {% else %}
-            midnight
-          {% endif %}

@@ -10,9 +10,3 @@ system:
     - sensor.network_out_wlan0
     - sensor.processor_use
     - sensor.cpu_temperature
-light:
-  name: Living room lights
-  entities:
-    - light.hue_color_lamp_1
-    - light.hue_color_lamp_2
-    - light.hue_color_lamp_3
