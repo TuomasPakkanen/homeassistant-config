@@ -1,6 +1,6 @@
-### LIGHTS
+### LIGHT AUTOMATIONS ###
 
-# IKEA REMOTE
+# IKEA REMOTE #
 
 - alias: 'Toggle lamp from dimmer'
   trigger:
@@ -12,7 +12,6 @@
   action:
     service: light.toggle
     entity_id: light.media_room
-
 
 - alias: 'Increase brightness of lamp from dimmer'
   trigger:
@@ -78,12 +77,12 @@
           {% elif mired > 250 and mired < 371 %} 250
           {% else %} 455 {% endif %}
 
-# DURING DAY
+# LIGHTS DURING THE DAY #
 
-- alias: "Set light 1 brightness to max when turned on (day)"
+- alias: "Set table lamp brightness to max when turned on (day)"
   trigger:
     platform: state
-    entity_id: light.extended_color_light_1
+    entity_id: light.table_lamp
     to: 'on'
   condition:
     condition: state
@@ -92,14 +91,14 @@
   action:
     service: light.turn_on
     data:
-      entity_id: light.extended_color_light_1
+      entity_id: light.table_lamp
       brightness: 255
       kelvin: 4000
 
-- alias: "Set light 2 brightness to max when turned on (day)"
+- alias: "Set tripod lamp brightness to max when turned on (day)"
   trigger:
     platform: state
-    entity_id: light.extended_color_light_2
+    entity_id: light.tripod_lamp
     to: 'on'
   condition:
     condition: state
@@ -108,14 +107,14 @@
   action:
     service: light.turn_on
     data:
-      entity_id: light.extended_color_light_2
+      entity_id: light.tripod_lamp
       brightness: 255
       kelvin: 4000
 
-- alias: "Set light 3 brightness to max when turned on (day)"
+- alias: "Set feather lamp brightness to max when turned on (day)"
   trigger:
     platform: state
-    entity_id: light.extended_color_light_3
+    entity_id: light.feather_lamp
     to: 'on'
   condition:
     condition: state
@@ -124,16 +123,16 @@
   action:
     service: light.turn_on
     data:
-      entity_id: light.extended_color_light_3
+      entity_id: light.feather_lamp
       brightness: 255
       kelvin: 4000
 
-# DURING EVENING/NIGHT
+# LIGHTS DURING THE EVENING/NIGHT
 
-- alias: "Set light 1 brightness to max when turned on (evening)"
+- alias: "Set table lamp brightness to max when turned on (evening)"
   trigger:
     platform: state
-    entity_id: light.extended_color_light_1
+    entity_id: light.table_lamp
     to: 'on'
   condition:
     condition: state
@@ -142,14 +141,14 @@
   action:
     service: light.turn_on
     data:
-      entity_id: light.extended_color_light_1
+      entity_id: light.table_lamp
       brightness: 200
       kelvin: 2700
 
-- alias: "Set light 2 brightness to max when turned on (evening)"
+- alias: "Set tripod lamp brightness to max when turned on (evening)"
   trigger:
     platform: state
-    entity_id: light.extended_color_light_2
+    entity_id: light.tripod_lamp
     to: 'on'
   condition:
     condition: state
@@ -158,14 +157,14 @@
   action:
     service: light.turn_on
     data:
-      entity_id: light.extended_color_light_2
+      entity_id: light.tripod_lamp
       brightness: 200
       kelvin: 2700
 
-- alias: "Set light 3 brightness to max when turned on (evening)"
+- alias: "Set feather lamp brightness to max when turned on (evening)"
   trigger:
     platform: state
-    entity_id: light.extended_color_light_3
+    entity_id: light.feather_lamp
     to: 'on'
   condition:
     condition: state
@@ -174,108 +173,110 @@
   action:
     service: light.turn_on
     data:
-      entity_id: light.extended_color_light_3
+      entity_id: light.feather_lamp
       brightness: 200
       kelvin: 2700
 
-###
+# CHANGE LIGHT TEMPERATURES AFTER SUNSET #
 
-- alias: "Change light 1 temperature after sunset"
+- alias: "Change table lamp temperature after sunset"
   trigger:
     platform: state
     entity_id: sun.sun
     to: 'below_horizon'
   condition:
     condition: state
-    entity_id: light.extended_color_light_1
+    entity_id: light.table_lamp
     state: 'on'
   action:
     service: light.turn_on
     data:
-      entity_id: light.extended_color_light_1
+      entity_id: light.table_lamp
       kelvin: 2700
       transition: 15
 
-- alias: "Change light 2 temperature after sunset"
+- alias: "Change tripod lamp temperature after sunset"
   trigger:
     platform: state
     entity_id: sun.sun
     to: 'below_horizon'
   condition:
     condition: state
-    entity_id: light.extended_color_light_2
+    entity_id: light.tripod_lamp
     state: 'on'
   action:
     service: light.turn_on
     data:
-      entity_id: light.extended_color_light_2
+      entity_id: light.tripod_lamp
       kelvin: 2700
       transition: 15
 
-- alias: "Change light 3 temperature after sunset"
+- alias: "Change feather lamp temperature after sunset"
   trigger:
     platform: state
     entity_id: sun.sun
     to: 'below_horizon'
   condition:
     condition: state
-    entity_id: light.extended_color_light_3
+    entity_id: light.feather_lamp
     state: 'on'
   action:
     service: light.turn_on
     data:
-      entity_id: light.extended_color_light_3
+      entity_id: light.feather_lamp
       kelvin: 2700
       transition: 15
 
-###
+# DIM LIGHTS AT 21:00 #
 
-- alias: "Dim light 1 in the evening if on"
+- alias: "Dim table_lamp in the evening if on"
   trigger:
     platform: time
-    at: '19:30'
+    at: '21:00'
   condition:
     condition: state
-    entity_id: light.extended_color_light_1
+    entity_id: light.table_lamp
     state: 'on'
   action:
     service: light.turn_on
     data:
-      entity_id: light.extended_color_light_1
+      entity_id: light.table_lamp
       brightness: 150
       transition: 15
 
-- alias: "Dim light 2 in the evening if on"
+- alias: "Dim tripod lamp in the evening if on"
   trigger:
     platform: time
-    at: '19:30'
+    at: '21:00'
   condition:
     condition: state
-    entity_id: light.extended_color_light_2
+    entity_id: light.tripod_lamp
     state: 'on'
   action:
     service: light.turn_on
     data:
-      entity_id: light.extended_color_light_2
+      entity_id: light.tripod_lamp
       brightness: 150
       transition: 15
 
-- alias: "Dim light 3 in the evening if on"
+- alias: "Dim feather lamp in the evening if on"
   trigger:
     platform: time
-    at: '19:30'
+    at: '21:00'
   condition:
     condition: state
-    entity_id: light.extended_color_light_3
+    entity_id: light.feather_lamp
     state: 'on'
   action:
     service: light.turn_on
     data:
-      entity_id: light.extended_color_light_3
+      entity_id: light.feather_lamp
       brightness: 150
       transition: 15
 
-### TURN ON AC AUTOMATION
+### AIR CONDITIONER AUTOMATIONS ###
+
+# TURN ON AC
 
 - alias: "Turn on AC when it's too hot or cold"
   trigger:
@@ -309,7 +310,7 @@
       data:
         swing_mode: 'Auto'
 
-### TURN AC OFF AUTOMATION
+# TURN AC OFF
 
 - alias: "Turn off AC when target temperature is reached"
   trigger:
@@ -332,7 +333,9 @@
         message: "AC turning OFF! Current temperature is {{ states('sensor.mi_t_582d34345074') }}°C"
         target: ["645569766626689065"]
 
-### ROOMBA NOTIFICATIONS
+### NOTIFICATIONS ###
+
+# ROOMBA
 
 - alias: "Roomba notifications"
   trigger:
@@ -352,7 +355,7 @@
         message: "Roomba is now {{ states.vacuum.roomba.attributes.status }}"
         target: ["645569708363481088"]
 
-### SYSTEM NOTIFICATIONS
+# SYSTEM
 
 - alias: "Health check"
   trigger:
@@ -365,7 +368,7 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.cpu_temperature
-    above: 77
+    above: 75
     for: "00:02:00"
   action:
     service: notify.telegram

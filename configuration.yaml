@@ -127,9 +127,9 @@ switch:
     name: "Circadian lighting (living room)"
     min_brightness: 50
     lights_rgb:
-      - light.extended_color_light_1
-      - light.extended_color_light_2
-      - light.extended_color_light_3
+      - light.table_lamp
+      - light.tripod_lamp
+      - light.feather_lamp
   - platform: circadian_lighting
     name: "Circadian lighting (media room)"
     min_brightness: 50
