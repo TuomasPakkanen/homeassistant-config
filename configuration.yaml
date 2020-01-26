@@ -59,7 +59,6 @@ history:
   exclude:
     domains:
       - automation
-      - person
       - group
       - persistent_notification
       - discovery

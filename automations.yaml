@@ -229,7 +229,7 @@
 
 # DIM LIGHTS AT 21:00 #
 
-- alias: "Dim table_lamp in the evening if on"
+- alias: "Dim table lamp in the evening if on"
   trigger:
     platform: time
     at: '21:00'
@@ -274,9 +274,34 @@
       brightness: 150
       transition: 15
 
+# TURN ON LIVING ROOM LIGHTS AUTOMATICALLY #
+
+- alias: "Turn on living room lights automatically if home"
+  trigger:
+    platform: state
+    entity_id: sensor.daylight
+    to: 'sunset_start'
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: person.moona
+        state: 'home'
+      - condition: state
+        entity_id: person.tuomas_pakkanen 
+        state: 'home'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.living_room
+      brightness: 200
+      kelvin: 2700
+      transition: 5
+    
+
 ### AIR CONDITIONER AUTOMATIONS ###
 
-# TURN ON AC
+# TURN ON AC #
 
 - alias: "Turn on AC when it's too hot or cold"
   trigger:
@@ -310,7 +335,7 @@
       data:
         swing_mode: 'Auto'
 
-# TURN AC OFF
+# TURN AC OFF #
 
 - alias: "Turn off AC when target temperature is reached"
   trigger:
@@ -333,9 +358,20 @@
         message: "AC turning OFF! Current temperature is {{ states('sensor.mi_t_582d34345074') }}°C"
         target: ["645569766626689065"]
 
+### THEME ###
+
+- alias: 'Set theme at startup'
+  trigger:
+    - platform: homeassistant
+      event: start
+  action:
+    service: frontend.set_theme
+    data:
+      name: ios-dark-mode
+
 ### NOTIFICATIONS ###
 
-# ROOMBA
+# ROOMBA #
 
 - alias: "Roomba notifications"
   trigger:
@@ -355,7 +391,7 @@
         message: "Roomba is now {{ states.vacuum.roomba.attributes.status }}"
         target: ["645569708363481088"]
 
-# SYSTEM
+# SYSTEM #
 
 - alias: "Health check"
   trigger:
