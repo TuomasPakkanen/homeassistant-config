@@ -85,9 +85,29 @@
     entity_id: light.table_lamp
     to: 'on'
   condition:
-    condition: state
-    entity_id: sun.sun
-    state: 'above_horizon'
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'night_end'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'nautical_dawn'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'dawn'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'sunrise_start'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'sunrise_end'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'golden_hour_1'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'solar_noon'
   action:
     service: light.turn_on
     data:
@@ -101,9 +121,29 @@
     entity_id: light.tripod_lamp
     to: 'on'
   condition:
-    condition: state
-    entity_id: sun.sun
-    state: 'above_horizon'
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'night_end'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'nautical_dawn'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'dawn'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'sunrise_start'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'sunrise_end'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'golden_hour_1'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'solar_noon'
   action:
     service: light.turn_on
     data:
@@ -117,9 +157,29 @@
     entity_id: light.feather_lamp
     to: 'on'
   condition:
-    condition: state
-    entity_id: sun.sun
-    state: 'above_horizon'
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'night_end'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'nautical_dawn'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'dawn'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'sunrise_start'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'sunrise_end'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'golden_hour_1'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'solar_noon'
   action:
     service: light.turn_on
     data:
@@ -127,7 +187,7 @@
       brightness: 255
       kelvin: 4000
 
-# LIGHTS DURING THE EVENING/NIGHT
+# LIGHTS DURING THE EVENING/NIGHT #
 
 - alias: "Set table lamp brightness to max when turned on (evening)"
   trigger:
@@ -135,9 +195,29 @@
     entity_id: light.table_lamp
     to: 'on'
   condition:
-    condition: state
-    entity_id: sun.sun
-    state: 'below_horizon'
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'golden_hour_2'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'sunset_start'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'sunset_end'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'dusk'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'nautical_dusk'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'night_start'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'nadir'
   action:
     service: light.turn_on
     data:
@@ -151,9 +231,29 @@
     entity_id: light.tripod_lamp
     to: 'on'
   condition:
-    condition: state
-    entity_id: sun.sun
-    state: 'below_horizon'
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'golden_hour_2'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'sunset_start'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'sunset_end'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'dusk'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'nautical_dusk'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'night_start'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'nadir'
   action:
     service: light.turn_on
     data:
@@ -167,9 +267,29 @@
     entity_id: light.feather_lamp
     to: 'on'
   condition:
-    condition: state
-    entity_id: sun.sun
-    state: 'below_horizon'
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'golden_hour_2'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'sunset_start'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'sunset_end'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'dusk'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'nautical_dusk'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'night_start'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'nadir'
   action:
     service: light.turn_on
     data:
@@ -179,11 +299,11 @@
 
 # CHANGE LIGHT TEMPERATURES AFTER SUNSET #
 
-- alias: "Change table lamp temperature after sunset"
+- alias: "Change table lamp temperature in the evening"
   trigger:
     platform: state
-    entity_id: sun.sun
-    to: 'below_horizon'
+    entity_id: sensor.daylight
+    to: 'golden_hour_2'
   condition:
     condition: state
     entity_id: light.table_lamp
@@ -195,11 +315,11 @@
       kelvin: 2700
       transition: 15
 
-- alias: "Change tripod lamp temperature after sunset"
+- alias: "Change tripod lamp temperature in the evening"
   trigger:
     platform: state
-    entity_id: sun.sun
-    to: 'below_horizon'
+    entity_id: sensor.daylight
+    to: 'golden_hour_2'
   condition:
     condition: state
     entity_id: light.tripod_lamp
@@ -211,11 +331,11 @@
       kelvin: 2700
       transition: 15
 
-- alias: "Change feather lamp temperature after sunset"
+- alias: "Change feather lamp temperature in the evening"
   trigger:
     platform: state
-    entity_id: sun.sun
-    to: 'below_horizon'
+    entity_id: sensor.daylight
+    to: 'golden_hour_2'
   condition:
     condition: state
     entity_id: light.feather_lamp
@@ -280,7 +400,8 @@
   trigger:
     platform: state
     entity_id: sensor.daylight
-    to: 'sunset_start'
+    to: 'golden_hour_2'
+    for: "00:40:00"
   condition:
     condition: or
     conditions:
