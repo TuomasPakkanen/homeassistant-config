@@ -7,15 +7,6 @@ weather.home:
 media_player.living_room:
   friendly_name: Sonos
 
-person.tuomas_pakkanen:
-  hidden: true
-
-sun.sun:
-  hidden: true
-
-binary_sensor.updater:
-  hidden: true
-
 sensor.mi_h_582d34345074:
   friendly_name: Living room humidity
 

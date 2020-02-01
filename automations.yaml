@@ -187,6 +187,27 @@
       brightness: 255
       kelvin: 4000
 
+# TURN ON TRIPOD LAMP IN THE MORNING #
+
+- alias: "Turn on tripod lamp in the morning if home"
+  trigger: 
+    platform: time
+    at: '7:00'
+  condition:
+    - condition: state
+      entity_id: person.tuomas_pakkanen
+      state: 'home'
+    - condition: state
+      entity_id: person.moona
+      state: 'home'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.tripod_lamp
+      brightness: 254
+      kelvin: 4000
+      transition: 900
+
 # LIGHTS DURING THE EVENING/NIGHT #
 
 - alias: "Set table lamp brightness to max when turned on (evening)"
@@ -394,7 +415,23 @@
       brightness: 150
       transition: 15
 
-# TURN ON LIVING ROOM LIGHTS AUTOMATICALLY #
+# TURN OFF LIVING ROOM LIGHTS WHEN GOING TO BED #
+
+- alias: "Turn off living room lights when going to bed"
+  trigger: 
+    platform: time
+    at: '22:30'
+  condition:
+    condition: state
+    entity_id: light.tripod_lamp
+    state: 'on'
+  action:
+    service: light.turn_off
+    data:
+      entity_id: light.living_room
+      transition: 900
+
+# TURN ON LIVING ROOM LIGHTS WHEN SUN STARTS TO SET #
 
 - alias: "Turn on living room lights automatically if home"
   trigger:
@@ -419,6 +456,47 @@
       kelvin: 2700
       transition: 5
     
+# TURN ON TRIPOD LAMP WHEN COMING HOME IF DARK OUTSIDE #
+
+- alias: "Turn on tripod lamp when coming home if it's dark outside"
+  trigger: 
+    - platform: state
+      entity_id: person.tuomas_pakkanen
+      to: 'home'
+    - platform: state
+      entity_id: person.moona
+      to: 'home'
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'golden_hour_2'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'sunset_start'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'sunset_end'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'dusk'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'nautical_dusk'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'night_start'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'nadir'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.tripod_lamp
+      brightness: 200
+      kelvin: 2700
+      transition: 30
 
 ### AIR CONDITIONER AUTOMATIONS ###
 
