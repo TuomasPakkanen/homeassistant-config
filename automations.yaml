@@ -83,6 +83,7 @@
   trigger:
     platform: state
     entity_id: light.table_lamp
+    from: 'unavailable'
     to: 'on'
   condition:
     condition: or
@@ -119,6 +120,7 @@
   trigger:
     platform: state
     entity_id: light.tripod_lamp
+    from: 'unavailable'
     to: 'on'
   condition:
     condition: or
@@ -155,6 +157,7 @@
   trigger:
     platform: state
     entity_id: light.feather_lamp
+    from: 'unavailable'
     to: 'on'
   condition:
     condition: or
@@ -214,6 +217,7 @@
   trigger:
     platform: state
     entity_id: light.table_lamp
+    from: 'unavailable'
     to: 'on'
   condition:
     condition: or
@@ -244,6 +248,7 @@
   trigger:
     platform: state
     entity_id: light.tripod_lamp
+    from: 'unavailable'
     to: 'on'
   condition:
     condition: or
@@ -274,6 +279,7 @@
   trigger:
     platform: state
     entity_id: light.feather_lamp
+    from: 'unavailable'
     to: 'on'
   condition:
     condition: or
