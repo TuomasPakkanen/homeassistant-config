@@ -112,7 +112,7 @@
     service: light.turn_on
     data:
       entity_id: light.table_lamp
-      brightness: 255
+      brightness_pct: 100
       kelvin: 4000
 
 - alias: "Set tripod lamp brightness to max when turned on (day)"
@@ -148,7 +148,7 @@
     service: light.turn_on
     data:
       entity_id: light.tripod_lamp
-      brightness: 255
+      brightness_pct: 100
       kelvin: 4000
 
 - alias: "Set feather lamp brightness to max when turned on (day)"
@@ -184,7 +184,7 @@
     service: light.turn_on
     data:
       entity_id: light.feather_lamp
-      brightness: 255
+      brightness_pct: 100
       kelvin: 4000
 
 # TURN ON TRIPOD LAMP IN THE MORNING #
@@ -204,13 +204,13 @@
     service: light.turn_on
     data:
       entity_id: light.tripod_lamp
-      brightness: 254
+      brightness_pct: 100
       kelvin: 4000
-      transition: 900
+      transition: 15
 
 # LIGHTS DURING THE EVENING/NIGHT #
 
-- alias: "Set table lamp brightness to max when turned on (evening)"
+- alias: "Set table lamp brightness when turned on (evening)"
   trigger:
     platform: state
     entity_id: light.table_lamp
@@ -233,20 +233,14 @@
       - condition: state
         entity_id: sensor.daylight
         state: 'nautical_dusk'
-      - condition: state
-        entity_id: sensor.daylight
-        state: 'night_start'
-      - condition: state
-        entity_id: sensor.daylight
-        state: 'nadir'
   action:
     service: light.turn_on
     data:
       entity_id: light.table_lamp
-      brightness: 200
+      brightness_pct: 80
       kelvin: 2700
 
-- alias: "Set tripod lamp brightness to max when turned on (evening)"
+- alias: "Set tripod lamp brightness when turned on (evening)"
   trigger:
     platform: state
     entity_id: light.tripod_lamp
@@ -269,20 +263,14 @@
       - condition: state
         entity_id: sensor.daylight
         state: 'nautical_dusk'
-      - condition: state
-        entity_id: sensor.daylight
-        state: 'night_start'
-      - condition: state
-        entity_id: sensor.daylight
-        state: 'nadir'
   action:
     service: light.turn_on
     data:
       entity_id: light.tripod_lamp
-      brightness: 200
+      brightness_pct: 80
       kelvin: 2700
 
-- alias: "Set feather lamp brightness to max when turned on (evening)"
+- alias: "Set feather lamp brightness when turned on (evening)"
   trigger:
     platform: state
     entity_id: light.feather_lamp
@@ -305,17 +293,11 @@
       - condition: state
         entity_id: sensor.daylight
         state: 'nautical_dusk'
-      - condition: state
-        entity_id: sensor.daylight
-        state: 'night_start'
-      - condition: state
-        entity_id: sensor.daylight
-        state: 'nadir'
   action:
     service: light.turn_on
     data:
       entity_id: light.feather_lamp
-      brightness: 200
+      brightness_pct: 80
       kelvin: 2700
 
 # CHANGE LIGHT TEMPERATURES AFTER SUNSET #
@@ -382,7 +364,7 @@
     service: light.turn_on
     data:
       entity_id: light.table_lamp
-      brightness: 150
+      brightness_pct: 60
       transition: 15
 
 - alias: "Dim tripod lamp in the evening if on"
@@ -397,7 +379,7 @@
     service: light.turn_on
     data:
       entity_id: light.tripod_lamp
-      brightness: 150
+      brightness_pct: 60
       transition: 15
 
 - alias: "Dim feather lamp in the evening if on"
@@ -412,7 +394,7 @@
     service: light.turn_on
     data:
       entity_id: light.feather_lamp
-      brightness: 150
+      brightness_pct: 60
       transition: 15
 
 # TURN OFF LIVING ROOM LIGHTS WHEN GOING TO BED #
@@ -429,7 +411,7 @@
     service: light.turn_off
     data:
       entity_id: light.living_room
-      transition: 900
+      transition: 30
 
 # TURN ON LIVING ROOM LIGHTS WHEN SUN STARTS TO SET #
 
@@ -452,7 +434,7 @@
     service: light.turn_on
     data:
       entity_id: light.living_room
-      brightness: 200
+      brightness_pct: 80
       kelvin: 2700
       transition: 5
     
@@ -494,7 +476,7 @@
     service: light.turn_on
     data:
       entity_id: light.tripod_lamp
-      brightness: 200
+      brightness_pct: 80
       kelvin: 2700
       transition: 30
 

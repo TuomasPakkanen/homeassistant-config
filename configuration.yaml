@@ -215,7 +215,7 @@ sensor:
     api_key: !secret googlemaps_apikey
     origin: zone.home
     destination: zone.sulava_hq
-    scan_interval: 900
+    scan_interval: 1800
     options:
       mode: transit
   - platform: google_travel_time
@@ -223,6 +223,6 @@ sensor:
     api_key: !secret googlemaps_apikey
     origin: zone.home
     destination: zone.hott
-    scan_interval: 900
+    scan_interval: 1800
     options:
       mode: driving
