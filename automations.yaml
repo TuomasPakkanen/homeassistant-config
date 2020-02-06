@@ -403,22 +403,6 @@
       brightness_pct: 60
       transition: 15
 
-# TURN OFF LIVING ROOM LIGHTS WHEN GOING TO BED #
-
-- alias: "Turn off living room lights when going to bed"
-  trigger: 
-    platform: time
-    at: '22:30'
-  condition:
-    condition: state
-    entity_id: light.tripod_lamp
-    state: 'on'
-  action:
-    service: light.turn_off
-    data:
-      entity_id: light.living_room
-      transition: 30
-
 # TURN ON LIVING ROOM LIGHTS WHEN SUN STARTS TO SET #
 
 - alias: "Turn on living room lights automatically if home"
@@ -485,6 +469,113 @@
       brightness_pct: 80
       kelvin: 2700
       transition: 30
+
+# MEDIA ROOM LIGHTS #
+
+- alias: "Set media room temperature and brightness in the morning and day"
+  trigger:
+    platform: state
+    entity_id: light.media_room
+    to: 'on'
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'night_end'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'nautical_dawn'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'dawn'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'sunrise_start'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'sunrise_end'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'golden_hour_1'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'solar_noon'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.media_room
+      brightness_pct: 100
+      kelvin: 4000
+
+- alias: "Set media room temperature and brightness in the evening"
+  trigger:
+    platform: state
+    entity_id: light.media_room
+    to: 'on'
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'sunset_start'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'sunset_end'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'dusk'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'nautical_dusk'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'nadir'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.media_room
+      brightness_pct: 20
+      kelvin: 2200
+
+# TURN OFF LIVING ROOM LIGHTS WHEN GOING TO BED #
+
+- alias: "Turn off living room lights when going to bed"
+  trigger: 
+    platform: time
+    at: '22:30'
+  condition:
+    condition: state
+    entity_id: light.tripod_lamp
+    state: 'on'
+  action:
+    service: light.turn_off
+    data:
+      entity_id: light.living_room
+      transition: 900
+
+# TURN OFF LGIHTS WHEN LEAVING HOME #
+
+- alias: "Turn off lights when nobody is home"
+  trigger:
+    - platform: state
+      entity_id: person.tuomas_pakkanen
+      to: 'not_home'
+    - platform: state
+      entity_id: person.moona
+      to: 'not_home'
+  condition:
+    - condition: state
+      entity_id: person.tuomas_pakkanen
+      state: 'not_home'
+    - condition: state
+      entity_id: person.moona
+      state: 'not_home'
+  action:
+    service: light.turn_off
+    data:
+      entity_id: light.living_room
+
 
 ### AIR CONDITIONER AUTOMATIONS ###
 
