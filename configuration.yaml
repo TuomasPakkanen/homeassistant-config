@@ -112,10 +112,9 @@ vacuum:
     password: !secret roomba_password
 
 # Spotify
-media_player:
-  - platform: spotify
-    client_id: !secret spotify_clientid
-    client_secret: !secret spotify_clientsecret
+spotify:
+  client_id: !secret spotify_clientid
+  client_secret: !secret spotify_clientsecret
 
 # Circadian lightning for lights (HACS custom component)
 circadian_lighting:
