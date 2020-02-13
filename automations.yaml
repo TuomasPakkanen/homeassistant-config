@@ -518,6 +518,9 @@
     conditions:
       - condition: state
         entity_id: sensor.daylight
+        state: 'golden_hour_2'
+      - condition: state
+        entity_id: sensor.daylight
         state: 'sunset_start'
       - condition: state
         entity_id: sensor.daylight
