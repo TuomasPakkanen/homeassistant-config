@@ -190,26 +190,44 @@
       brightness_pct: 100
       kelvin: 4000
 
-# TURN ON TRIPOD LAMP IN THE MORNING #
+# MORNING ROUTINE #
 
-- alias: "Turn on tripod lamp in the morning if home"
+- alias: "Morning routine"
   trigger: 
-    platform: time
-    at: '7:00'
+    platform: state
+    entity_id: binary_sensor.presence_3
+    to: 'on'
   condition:
+    - condition: time
+      after: '07:00:00'
+      before: '09:30:00'
     - condition: state
-      entity_id: person.tuomas_pakkanen
-      state: 'home'
-    - condition: state
-      entity_id: person.moona
-      state: 'home'
-  action:
-    service: light.turn_on
-    data:
       entity_id: light.tripod_lamp
-      brightness_pct: 100
-      kelvin: 4000
-      transition: 15
+      state: 'off'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.tripod_lamp
+        brightness_pct: 100
+        kelvin: 4000
+        transition: 15
+    - service: tts.cloud_say
+      entity_id: media_player.living_room
+      data: 
+        message: 'Good Morning'
+    - delay: '00:00:05'
+    - service: media_player.select_source
+      data: 
+        entity_id: media_player.living_room
+        source: 'Radio Aalto 92.5 (Top 40 & Pop Music)'
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.living_room
+        volume_level: 0.20
+    - service: media_player.turn_on
+      data:
+        entity_id: media_player.living_room
+    
 
 # LIGHTS DURING THE EVENING/NIGHT #
 
@@ -459,9 +477,6 @@
       - condition: state
         entity_id: sensor.daylight
         state: 'night_start'
-      - condition: state
-        entity_id: sensor.daylight
-        state: 'nadir'
   action:
     service: light.turn_on
     data:
@@ -530,6 +545,9 @@
         state: 'dusk'
       - condition: state
         entity_id: sensor.daylight
+        state: 'night_start'
+      - condition: state
+        entity_id: sensor.daylight
         state: 'nautical_dusk'
       - condition: state
         entity_id: sensor.daylight
@@ -545,17 +563,73 @@
 
 - alias: "Turn off living room lights when going to bed"
   trigger: 
-    platform: time
-    at: '22:30'
+    platform: state
+    entity_id: binary_sensor.presence_3
+    to: 'on'
   condition:
-    condition: state
-    entity_id: light.tripod_lamp
-    state: 'on'
+    - condition: state
+      entity_id: light.tripod_lamp
+      state: 'on'
+    - condition: time
+      after: '21:00:00'
+      before: '23:59:00'
   action:
     service: light.turn_off
     data:
       entity_id: light.living_room
-      transition: 900
+      transition: 1800
+
+# TURN ON TRIPOD LAMP FOR 5 MINS DURING THE NIGHT IF COMING DOWNSTAIRS #
+- alias: "Turn on tripod lamp for 5 mins during the night if coming downstairs"
+  trigger: 
+    platform: state
+    entity_id: binary_sensor.presence_3
+    to: 'on'
+  condition:
+    - condition: state
+      entity_id: light.tripod_lamp
+      state: 'off'
+    - condition: time
+      after: '21:00:00'
+      before: '23:59:00'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.tripod_lamp
+        brightness_pct: 50
+        kelvin: 2200
+        transition: 15
+    - delay: '00:04:00'
+    - service: light.turn_off
+      data:
+        entity_id: light.tripod_lamp
+        transition: 15
+
+# COMING HOME DURING THE NIGHT #
+- alias: "Turn on tripod lamp for 10 minutes when coming home during the night"
+  trigger: 
+    - platform: state
+      entity_id: person.tuomas_pakkanen
+      to: 'home'
+    - platform: state
+      entity_id: person.moona
+      to: 'home'
+  condition:
+    condition: time
+    after: '00:10:00'
+    before: '05:00:00'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.tripod_lamp
+        brightness_pct: 50
+        kelvin: 2200
+        transition: 15
+    - delay: '00:10:00'
+    - service: light.turn_off
+      data:
+        entity_id: light.tripod_lamp
+        transition: 15
 
 # TURN OFF LGIHTS WHEN LEAVING HOME #
 
