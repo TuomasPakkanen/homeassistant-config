@@ -520,7 +520,7 @@
     service: light.turn_on
     data:
       entity_id: light.media_room
-      brightness_pct: 100
+      brightness_pct: 80
       kelvin: 4000
 
 - alias: "Set media room temperature and brightness in the evening"
@@ -574,12 +574,17 @@
       after: '21:00:00'
       before: '23:59:00'
   action:
-    service: light.turn_off
-    data:
-      entity_id: light.living_room
-      transition: 1800
+    - service: light.turn_off
+      data:
+        entity_id: light.living_room
+        transition: 1800
+    - service: sonos.set_sleep_timer
+      data:
+        entity_id: media_player.living_room
+        sleep_time: 5400
 
-# TURN ON TRIPOD LAMP FOR 5 MINS DURING THE NIGHT IF COMING DOWNSTAIRS #
+# TURN ON TRIPOD LAMP MOMENTARILY DURING THE NIGHT IF COMING DOWNSTAIRS #
+
 - alias: "Turn on tripod lamp for 5 mins during the night if coming downstairs"
   trigger: 
     platform: state
@@ -596,16 +601,17 @@
     - service: light.turn_on
       data:
         entity_id: light.tripod_lamp
-        brightness_pct: 50
+        brightness_pct: 70
         kelvin: 2200
-        transition: 15
-    - delay: '00:04:00'
+        transition: 5
+    - delay: '00:10:00'
     - service: light.turn_off
       data:
         entity_id: light.tripod_lamp
         transition: 15
 
 # COMING HOME DURING THE NIGHT #
+
 - alias: "Turn on tripod lamp for 10 minutes when coming home during the night"
   trigger: 
     - platform: state
@@ -622,9 +628,9 @@
     - service: light.turn_on
       data:
         entity_id: light.tripod_lamp
-        brightness_pct: 50
+        brightness_pct: 70
         kelvin: 2200
-        transition: 15
+        transition: 5
     - delay: '00:10:00'
     - service: light.turn_off
       data:
