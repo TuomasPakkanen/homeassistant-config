@@ -21,3 +21,9 @@ sensor.travel_time_to_sulava_hq:
 
 media_player.spotify_tuomas_pakkanen:
   friendly_name: Spotify
+
+sensor.lightlevel_5:
+  friendly_name: Living room light level
+
+sensor.temperature_4:
+  friendly_name: Stairs temperature

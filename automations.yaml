@@ -227,6 +227,8 @@
     - service: media_player.turn_on
       data:
         entity_id: media_player.living_room
+    - service: automation.turn_on
+      entity_id: automation.turn_off_living_room_lights_when_going_to_bed
     
 
 # LIGHTS DURING THE EVENING/NIGHT #
@@ -574,6 +576,8 @@
       after: '21:00:00'
       before: '23:59:00'
   action:
+    - service: automation.turn_off
+      entity_id: automation.turn_off_living_room_lights_when_going_to_bed
     - service: light.turn_off
       data:
         entity_id: light.living_room
