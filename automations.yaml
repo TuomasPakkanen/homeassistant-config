@@ -11,7 +11,7 @@
       event: 1002
   action:
     service: light.toggle
-    entity_id: light.media_room
+    entity_id: light.media_room_lights
 
 - alias: 'Increase brightness of lamp from dimmer'
   trigger:
@@ -23,9 +23,9 @@
   action:
     - service: light.turn_on
       data_template:
-        entity_id: light.media_room
+        entity_id: light.media_room_lights
         brightness: >
-          {% set bri = state_attr('light.media_room', 'brightness') | int %}
+          {% set bri = state_attr('light.media_room_lights', 'brightness') | int %}
           {{ [bri+50, 255] | min }}
 
 - alias: 'Decrease brightness of lamp from dimmer'
@@ -38,9 +38,9 @@
   action:
     - service: light.turn_on
       data_template:
-        entity_id: light.media_room
+        entity_id: light.media_room_lights
         brightness: >
-          {% set bri = state_attr('light.media_room', 'brightness') | int %}
+          {% set bri = state_attr('light.media_room_lights', 'brightness') | int %}
           {{ [bri-50, 1] | max }}
 
 - alias: 'Set color temperature of lamps to warmer'
@@ -53,9 +53,9 @@
   action:
     - service: light.turn_on
       data_template:
-        entity_id: light.media_room
+        entity_id: light.media_room_lights
         color_temp: >
-          {% set mired = state_attr('light.media_room', 'color_temp') | int %}
+          {% set mired = state_attr('light.media_room_lights', 'color_temp') | int %}
           {% if mired < 251 %} 370
           {% elif mired > 250 and mired < 371 %} 455
           {% else %} 250 {% endif %}
@@ -70,9 +70,9 @@
   action:
     - service: light.turn_on
       data_template:
-        entity_id: light.media_room
+        entity_id: light.media_room_lights
         color_temp: >
-          {% set mired = state_attr('light.media_room', 'color_temp') | int %}
+          {% set mired = state_attr('light.media_room_lights', 'color_temp') | int %}
           {% if mired > 454 %} 370
           {% elif mired > 250 and mired < 371 %} 250
           {% else %} 455 {% endif %}
@@ -443,7 +443,7 @@
   action:
     service: light.turn_on
     data:
-      entity_id: light.living_room
+      entity_id: light.living_room_lights
       brightness_pct: 80
       kelvin: 2700
       transition: 5
@@ -487,6 +487,52 @@
       kelvin: 2700
       transition: 30
 
+# LIGHT AUTOMATIONS BASED ON LIGHT LEVEL (LUX) #
+
+- alias: "Turn on lights if dark during the day"
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.lightlevel_5
+    below: 50
+  condition:
+    - condition: state
+      entity_id: light.tripod_lamp
+      state: 'off'
+    - condition: time
+      after: '09:00:00'
+      before: '16:00:00'
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: person.tuomas_pakkanen
+          state: 'home'
+        - condition: state
+          entity_id: person.moona
+          state: 'home'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.tripod_lamp
+      transition: 30
+
+- alias: "Turn off lights if bright during the day"
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.lightlevel_5
+    above: 100
+  condition:
+    - condition: state
+      entity_id: light.tripod_lamp
+      state: 'on'
+    - condition: time
+      after: '09:00:00'
+      before: '20:00:00'
+  action:
+    service: light.turn_off
+    data:
+      entity_id: light.living_room_lights
+      transition: 30
+
 # MEDIA ROOM LIGHTS #
 
 - alias: "Set media room temperature and brightness in the morning and day"
@@ -519,11 +565,16 @@
         entity_id: sensor.daylight
         state: 'solar_noon'
   action:
-    service: light.turn_on
-    data:
-      entity_id: light.media_room
-      brightness_pct: 80
-      kelvin: 4000
+    - service: light.turn_on
+      data:
+        entity_id: light.media_room_lights
+        kelvin: 4000
+    - delay: '00:00:03'
+    - service: light.turn_on
+      data:
+        entity_id: light.media_room_lights
+        brightness_pct: 80
+
 
 - alias: "Set media room temperature and brightness in the evening"
   trigger:
@@ -555,11 +606,15 @@
         entity_id: sensor.daylight
         state: 'nadir'
   action:
-    service: light.turn_on
-    data:
-      entity_id: light.media_room
-      brightness_pct: 20
-      kelvin: 2200
+    - service: light.turn_on
+      data:
+        entity_id: light.media_room_lights
+        kelvin: 2200
+    - delay: '00:00:03'
+    - service: light.turn_on
+      data:
+        entity_id: light.media_room_lights
+        brightness_pct: 20
 
 # TURN OFF LIVING ROOM LIGHTS WHEN GOING TO BED #
 
@@ -580,7 +635,7 @@
       entity_id: automation.turn_off_living_room_lights_when_going_to_bed
     - service: light.turn_off
       data:
-        entity_id: light.living_room
+        entity_id: light.living_room_lights
         transition: 1800
     - service: sonos.set_sleep_timer
       data:
@@ -661,7 +716,7 @@
   action:
     service: light.turn_off
     data:
-      entity_id: light.living_room
+      entity_id: light.living_room_lights
 
 
 ### AIR CONDITIONER AUTOMATIONS ###

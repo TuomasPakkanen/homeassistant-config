@@ -1,0 +1,13 @@
+- platform: group
+  name: Living room lights
+  entities:
+    - light.tripod_lamp
+    - light.table_lamp
+    - light.feather_lamp
+
+- platform: group
+  name: Media room lights
+  entities:
+    - light.media_room_light_1
+    - light.media_room_light_2
+    - light.media_room_light_3

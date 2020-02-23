@@ -1,6 +1,5 @@
 system:
   name: System information
-  control: hidden
   entities:
     - sensor.disk_use_percent
     - sensor.last_boot

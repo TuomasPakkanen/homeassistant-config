@@ -12,6 +12,7 @@ homeassistant:
 
 group: !include groups.yaml
 automation: !include automations.yaml
+light: !include light.yaml
 #script: !include scripts.yaml # currently no active scripts in use
 
 frontend:
@@ -123,14 +124,14 @@ circadian_lighting:
 switch:
   - platform: circadian_lighting
     name: "Circadian lighting (living room)"
-    min_brightness: 50
+    min_brightness: 70
     lights_rgb:
       - light.table_lamp
       - light.tripod_lamp
       - light.feather_lamp
   - platform: circadian_lighting
     name: "Circadian lighting (media room)"
-    min_brightness: 50
+    min_brightness: 20
     lights_ct:
       - light.media_room_light_1
       - light.media_room_light_2

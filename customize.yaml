@@ -27,3 +27,9 @@ sensor.lightlevel_5:
 
 sensor.temperature_4:
   friendly_name: Stairs temperature
+
+person.tuomas_pakkanen:
+  entity_picture: "/local/tuomas.png"
+
+person.moona:
+  entity_picture: "/local/moona.png"
