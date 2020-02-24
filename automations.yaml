@@ -223,7 +223,7 @@
     - service: media_player.volume_set
       data:
         entity_id: media_player.living_room
-        volume_level: 0.20
+        volume_level: 0.15
     - service: media_player.turn_on
       data:
         entity_id: media_player.living_room
@@ -422,35 +422,10 @@
       entity_id: light.feather_lamp
       brightness_pct: 60
       transition: 15
-
-# TURN ON LIVING ROOM LIGHTS WHEN SUN STARTS TO SET #
-
-- alias: "Turn on living room lights automatically if home"
-  trigger:
-    platform: state
-    entity_id: sensor.daylight
-    to: 'golden_hour_2'
-    for: "00:40:00"
-  condition:
-    condition: or
-    conditions:
-      - condition: state
-        entity_id: person.moona
-        state: 'home'
-      - condition: state
-        entity_id: person.tuomas_pakkanen 
-        state: 'home'
-  action:
-    service: light.turn_on
-    data:
-      entity_id: light.living_room_lights
-      brightness_pct: 80
-      kelvin: 2700
-      transition: 5
     
 # TURN ON TRIPOD LAMP WHEN COMING HOME IF DARK OUTSIDE #
 
-- alias: "Turn on tripod lamp when coming home if it's dark outside"
+- alias: "Turn on tripod lamp when coming home if it's dark"
   trigger: 
     - platform: state
       entity_id: person.tuomas_pakkanen
@@ -459,33 +434,22 @@
       entity_id: person.moona
       to: 'home'
   condition:
-    condition: or
-    conditions:
-      - condition: state
-        entity_id: sensor.daylight
-        state: 'golden_hour_2'
-      - condition: state
-        entity_id: sensor.daylight
-        state: 'sunset_start'
-      - condition: state
-        entity_id: sensor.daylight
-        state: 'sunset_end'
-      - condition: state
-        entity_id: sensor.daylight
-        state: 'dusk'
-      - condition: state
-        entity_id: sensor.daylight
-        state: 'nautical_dusk'
-      - condition: state
-        entity_id: sensor.daylight
-        state: 'night_start'
+    - condition: state
+      entity_id: light.tripod_lamp
+      state: 'off'
+    - condition: numeric_state
+      entity_id: sensor.lightlevel_5
+      below: 50
+    - condition: time
+      after: '14:00:00'
+      before: '23:00:00'
   action:
     service: light.turn_on
     data:
       entity_id: light.tripod_lamp
       brightness_pct: 80
       kelvin: 2700
-      transition: 30
+      transition: 15
 
 # LIGHT AUTOMATIONS BASED ON LIGHT LEVEL (LUX) #
 
@@ -500,7 +464,7 @@
       state: 'off'
     - condition: time
       after: '09:00:00'
-      before: '16:00:00'
+      before: '20:00:00'
     - condition: or
       conditions:
         - condition: state
@@ -569,7 +533,7 @@
       data:
         entity_id: light.media_room_lights
         kelvin: 4000
-    - delay: '00:00:03'
+    - delay: '00:00:01'
     - service: light.turn_on
       data:
         entity_id: light.media_room_lights
@@ -610,7 +574,7 @@
       data:
         entity_id: light.media_room_lights
         kelvin: 2200
-    - delay: '00:00:03'
+    - delay: '00:00:01'
     - service: light.turn_on
       data:
         entity_id: light.media_room_lights
@@ -644,7 +608,7 @@
 
 # TURN ON TRIPOD LAMP MOMENTARILY DURING THE NIGHT IF COMING DOWNSTAIRS #
 
-- alias: "Turn on tripod lamp for 5 mins during the night if coming downstairs"
+- alias: "Turn on tripod lamp for a while during the night if coming downstairs"
   trigger: 
     platform: state
     entity_id: binary_sensor.presence_3
@@ -681,7 +645,7 @@
       to: 'home'
   condition:
     condition: time
-    after: '00:10:00'
+    after: '00:01:00'
     before: '05:00:00'
   action:
     - service: light.turn_on
@@ -843,6 +807,8 @@
       title: "System alert!"
       message: "Raspberry Pi free disk space running low!"
 
+# BATTERY WARNINGS #
+
 - alias: "Xiaomi temperature sensor battery low"
   trigger:
     platform: numeric_state
@@ -853,3 +819,25 @@
     data:
       title: '*Battery low alert!*'
       message: "Xiaomi Mijia temperature and humidity sensor battery is running low. Please replace the battery."
+
+- alias: "Hue motion sensor battery low"
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.motion_sensor_battery_level
+    below: 15
+  action:
+    service: notify.telegram
+    data:
+      title: '*Battery low alert!*'
+      message: "Hue motion sensor battery is running low. Please replace the battery."
+
+- alias: "Tradfri remote control battery low"
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.tradfri_remote_control_battery_level
+    below: 15
+  action:
+    service: notify.telegram
+    data:
+      title: '*Battery low alert!*'
+      message: "Tradfri remote control battery is running low. Please replace the battery."
