@@ -533,7 +533,7 @@
       data:
         entity_id: light.media_room_lights
         kelvin: 4000
-    - delay: '00:00:01'
+    #- delay: '00:00:01'
     - service: light.turn_on
       data:
         entity_id: light.media_room_lights
@@ -574,7 +574,7 @@
       data:
         entity_id: light.media_room_lights
         kelvin: 2200
-    - delay: '00:00:01'
+    #- delay: '00:00:01'
     - service: light.turn_on
       data:
         entity_id: light.media_room_lights
@@ -835,7 +835,7 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.tradfri_remote_control_battery_level
-    below: 15
+    below: 10
   action:
     service: notify.telegram
     data:
