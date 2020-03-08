@@ -376,6 +376,36 @@
       kelvin: 2700
       transition: 15
 
+# TURN ON TABLE LAMP ON SUNSET #
+
+- alias: "Turn on table lamp on sunset"
+  trigger: 
+    platform: state
+    entity_id: sun.sun
+    to: 'below_horizon'
+  condition:
+    - condition: state
+      entity_id: light.table_lamp
+      state: 'off'
+    - condition: time
+      after: '14:00:00'
+      before: '21:00:00'
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: person.tuomas_pakkanen
+          state: 'home'
+        - condition: state
+          entity_id: person.moona
+          state: 'home'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.table_lamp
+      kelvin: 2700
+      brightness_pct: 80
+      transition: 15
+
 # DIM LIGHTS AT 21:00 #
 
 - alias: "Dim table lamp in the evening if on"
@@ -442,7 +472,7 @@
       below: 50
     - condition: time
       after: '14:00:00'
-      before: '23:00:00'
+      before: '21:00:00'
   action:
     service: light.turn_on
     data:
@@ -477,6 +507,7 @@
     service: light.turn_on
     data:
       entity_id: light.tripod_lamp
+      brightness_pct: 90
       transition: 30
 
 - alias: "Turn off lights if bright during the day"
@@ -538,7 +569,6 @@
       data:
         entity_id: light.media_room_lights
         brightness_pct: 80
-
 
 - alias: "Set media room temperature and brightness in the evening"
   trigger:
@@ -645,7 +675,7 @@
       to: 'home'
   condition:
     condition: time
-    after: '00:01:00'
+    after: '21:00:00'
     before: '05:00:00'
   action:
     - service: light.turn_on
@@ -660,9 +690,9 @@
         entity_id: light.tripod_lamp
         transition: 15
 
-# TURN OFF LGIHTS WHEN LEAVING HOME #
+# TURN OFF LGIHTS AND MUSIC WHEN LEAVING HOME #
 
-- alias: "Turn off lights when nobody is home"
+- alias: "Turn off lights and music when leaving home"
   trigger:
     - platform: state
       entity_id: person.tuomas_pakkanen
@@ -678,9 +708,13 @@
       entity_id: person.moona
       state: 'not_home'
   action:
-    service: light.turn_off
-    data:
-      entity_id: light.living_room_lights
+    - service: light.turn_off
+      data:
+        entity_id: light.living_room_lights
+    - service: sonos.set_sleep_timer
+      data:
+        entity_id: media_player.living_room
+        sleep_time: 0
 
 
 ### AIR CONDITIONER AUTOMATIONS ###
