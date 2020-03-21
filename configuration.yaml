@@ -48,8 +48,6 @@ recorder:
   purge_keep_days: 7
   purge_interval: 1
   exclude:
-    domains:
-      - media_player
     entities:
       - binary_sensor.updater
       - sensor.last_boot

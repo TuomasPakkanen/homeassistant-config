@@ -211,15 +211,16 @@
         brightness_pct: 100
         kelvin: 4000
         transition: 15
-    - service: tts.cloud_say
+    - service: tts.google_translate_say
       entity_id: media_player.living_room
-      data: 
-        message: 'Good Morning'
+      data:
+        message: 'Hyvää huomenta!'
+        language: 'fi'
     - delay: '00:00:05'
     - service: media_player.select_source
       data: 
         entity_id: media_player.living_room
-        source: 'Radio Aalto 92.5 (Top 40 & Pop Music)'
+        source: 'Radio SuomiPop 98.1 (Adult Hits)'
     - service: media_player.volume_set
       data:
         entity_id: media_player.living_room
@@ -229,6 +230,8 @@
         entity_id: media_player.living_room
     - service: automation.turn_on
       entity_id: automation.turn_off_living_room_lights_when_going_to_bed
+    - service: automation.turn_off
+      entity_id: automation.morning_routine
     
 
 # LIGHTS DURING THE EVENING/NIGHT #
@@ -471,7 +474,7 @@
       entity_id: sensor.lightlevel_5
       below: 50
     - condition: time
-      after: '14:00:00'
+      after: '12:00:00'
       before: '21:00:00'
   action:
     service: light.turn_on
@@ -627,6 +630,8 @@
   action:
     - service: automation.turn_off
       entity_id: automation.turn_off_living_room_lights_when_going_to_bed
+    - service: automation.turn_on
+      entity_id: automation.morning_routine
     - service: light.turn_off
       data:
         entity_id: light.living_room_lights
@@ -690,16 +695,16 @@
         entity_id: light.tripod_lamp
         transition: 15
 
-# TURN OFF LGIHTS AND MUSIC WHEN LEAVING HOME #
+# TURN OFF LIGHTS AND MUSIC WHEN LEAVING HOME #
 
 - alias: "Turn off lights and music when leaving home"
   trigger:
     - platform: state
       entity_id: person.tuomas_pakkanen
-      to: 'not_home'
+      from: 'home'
     - platform: state
       entity_id: person.moona
-      to: 'not_home'
+      from: 'home'
   condition:
     - condition: state
       entity_id: person.tuomas_pakkanen
