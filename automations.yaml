@@ -207,6 +207,15 @@
   action:
     - service: light.turn_on
       data:
+        entity_id: light.hallway_upstairs_lights
+        brightness_pct: 100
+    - service: light.turn_on
+      data:
+        entity_id: light.hallway_lights
+        brightness_pct: 100
+        transition: 15
+    - service: light.turn_on
+      data:
         entity_id: light.tripod_lamp
         brightness_pct: 100
         kelvin: 4000
@@ -455,10 +464,40 @@
       entity_id: light.feather_lamp
       brightness_pct: 60
       transition: 15
+
+- alias: "Dim hallway lights in the evening if on"
+  trigger:
+    platform: time
+    at: '19:30'
+  condition:
+    condition: state
+    entity_id: light.hallway_lights
+    state: 'on'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.hallway_lights
+      brightness_pct: 60
+      transition: 15
+
+- alias: "Dim upstairs hallway lights in the evening if on"
+  trigger:
+    platform: time
+    at: '19:30'
+  condition:
+    condition: state
+    entity_id: light.hallway_upstairs_lights
+    state: 'on'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.hallway_upstairs_lights
+      brightness_pct: 60
+      transition: 15
     
 # TURN ON TRIPOD LAMP WHEN COMING HOME IF DARK OUTSIDE #
 
-- alias: "Turn on tripod lamp when coming home if it's dark"
+- alias: "Turn on lights when coming home if it's dark"
   trigger: 
     - platform: state
       entity_id: person.tuomas_pakkanen
@@ -477,12 +516,18 @@
       after: '12:00:00'
       before: '21:00:00'
   action:
-    service: light.turn_on
-    data:
-      entity_id: light.tripod_lamp
-      brightness_pct: 80
-      kelvin: 2700
-      transition: 15
+    - service: light.turn_on
+      data:
+        entity_id: light.tripod_lamp
+        brightness_pct: 80
+        kelvin: 2700
+        transition: 15
+    - service: light.turn_on
+      data:
+        entity_id: light.hallway_lights
+        brightness_pct: 80
+        kelvin: 2700
+        transition: 15
 
 # LIGHT AUTOMATIONS BASED ON LIGHT LEVEL (LUX) #
 
@@ -507,11 +552,22 @@
           entity_id: person.moona
           state: 'home'
   action:
-    service: light.turn_on
-    data:
-      entity_id: light.tripod_lamp
-      brightness_pct: 90
-      transition: 30
+    - service: light.turn_on
+      data:
+        entity_id: light.tripod_lamp
+        brightness_pct: 90
+        transition: 30
+    - service: light.turn_on
+      data:
+        entity_id: light.hallway_lights
+        brightness_pct: 90
+        transition: 30
+    - service: light.turn_on
+      data:
+        entity_id: light.hallway_upstairs_lights
+        brightness_pct: 90
+        transition: 30
+
 
 - alias: "Turn off lights if bright during the day"
   trigger:
@@ -526,10 +582,18 @@
       after: '09:00:00'
       before: '20:00:00'
   action:
-    service: light.turn_off
-    data:
-      entity_id: light.living_room_lights
-      transition: 30
+    - service: light.turn_off
+      data:
+        entity_id: light.living_room_lights
+        transition: 30
+    - service: light.turn_off
+      data:
+        entity_id: light.hallway_lights
+        transition: 30
+    - service: light.turn_off
+      data:
+        entity_id: light.hallway_upstairs_lights
+        transition: 30
 
 # MEDIA ROOM LIGHTS #
 
@@ -613,7 +677,7 @@
         entity_id: light.media_room_lights
         brightness_pct: 20
 
-# TURN OFF LIVING ROOM LIGHTS WHEN GOING TO BED #
+# TURN OFF LIGHTS WHEN GOING TO BED #
 
 - alias: "Turn off living room lights when going to bed"
   trigger: 
@@ -634,8 +698,16 @@
       entity_id: automation.morning_routine
     - service: light.turn_off
       data:
+        entity_id: light.hallway_lights
+        transition: 30
+    - service: light.turn_off
+      data:
         entity_id: light.living_room_lights
         transition: 1800
+    - service: light.turn_off
+      data:
+        entity_id: light.hallway_upstairs_lights
+        transition: 10800
     - service: sonos.set_sleep_timer
       data:
         entity_id: media_player.living_room
@@ -716,6 +788,12 @@
     - service: light.turn_off
       data:
         entity_id: light.living_room_lights
+    - service: light.turn_off
+      data:
+        entity_id: light.hallway_lights
+    - service: light.turn_off
+      data:
+        entity_id: light.hallway_upstairs_lights
     - service: sonos.set_sleep_timer
       data:
         entity_id: media_player.living_room

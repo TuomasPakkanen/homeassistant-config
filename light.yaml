@@ -11,3 +11,18 @@
     - light.media_room_light_1
     - light.media_room_light_2
     - light.media_room_light_3
+
+- platform: group
+  name: Hallway lights
+  entities:
+    - light.hallway_light_1
+    - light.hallway_light_2
+    - light.hallway_light_3
+    - light.hallway_light_4
+
+- platform: group
+  name: Hallway upstairs lights
+  entities:
+    - light.hallway_light_upstairs_1
+    - light.hallway_light_upstairs_2
+    - light.hallway_light_upstairs_3
