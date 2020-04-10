@@ -1,0 +1,36 @@
+- alias: "Turn on tripod lamp for 10 minutes when coming home during the night"
+  trigger: 
+    - platform: state
+      entity_id: person.tuomas_pakkanen
+      to: 'home'
+    - platform: state
+      entity_id: person.moona
+      to: 'home'
+  condition:
+    - condition: time
+      after: '21:00:00'
+      before: '05:00:00'
+    - condition: state
+      entity_id: light.tripod_lamp
+      state: 'off'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.tripod_lamp
+        brightness_pct: 70
+        kelvin: 2200
+        transition: 5
+    - service: light.turn_on
+      data:
+        entity_id: light.hallway_lights
+        brightness_pct: 50
+        transition: 5
+    - delay: '00:10:00'
+    - service: light.turn_off
+      data:
+        entity_id: light.tripod_lamp
+        transition: 15
+    - service: light.turn_off
+      data:
+        entity_id: light.hallway_lights
+        transition: 15

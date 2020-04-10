@@ -1,0 +1,56 @@
+# TURN ON AC #
+
+- alias: "Turn on AC when it's too hot or cold"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.mi_t_582d34345074
+      below: 22.6 #19
+      for: "00:10:00"
+    - platform: numeric_state
+      entity_id: sensor.mi_t_582d34345074
+      above: 30 # 25 degrees during Summer, hotter during winter due to fireplace
+      for: "00:10:00"
+  action:
+    - service: notify.discord
+      data:
+        message: "AC turning ON! Current temperature is {{ states('sensor.mi_t_582d34345074') }}°C"
+        target: ["645569766626689065"]
+    - service: climate.set_temperature
+      entity_id: climate.melcloud_living_room_177727
+      data:
+        temperature: '23'
+    - service: climate.set_fan_mode
+      entity_id: climate.melcloud_living_room_177727
+      data:
+        fan_mode: 'Speed Auto'
+    - service: climate.set_hvac_mode
+      data:
+        entity_id: climate.melcloud_living_room_177727
+        hvac_mode: 'auto'
+    - service: climate.set_swing_mode
+      entity_id: climate.melcloud_living_room_177727
+      data:
+        swing_mode: 'Auto'
+
+# TURN AC OFF #
+
+- alias: "Turn off AC when target temperature is reached"
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.mi_t_582d34345074
+    below: 26 #24
+    above: 23 #22
+    for: "01:00:00"
+  condition:
+    condition: state
+    entity_id: climate.melcloud_living_room_177727
+    state: 'auto'
+  action:
+    - service: climate.set_hvac_mode
+      data:
+        entity_id: climate.melcloud_living_room_177727
+        hvac_mode: 'off'
+    - service: notify.discord
+      data:
+        message: "AC turning OFF! Current temperature is {{ states('sensor.mi_t_582d34345074') }}°C"
+        target: ["645569766626689065"]

@@ -1,0 +1,49 @@
+- alias: "Morning routine"
+  trigger: 
+    platform: state
+    entity_id: binary_sensor.presence_3
+    to: 'on'
+  condition:
+    - condition: time
+      after: '07:00:00'
+      before: '09:30:00'
+    - condition: state
+      entity_id: light.tripod_lamp
+      state: 'off'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.hallway_upstairs_lights
+        brightness_pct: 100
+    - service: light.turn_on
+      data:
+        entity_id: light.hallway_lights
+        brightness_pct: 100
+        transition: 10
+    - service: light.turn_on
+      data:
+        entity_id: light.tripod_lamp
+        brightness_pct: 100
+        kelvin: 4000
+        transition: 15
+    - service: tts.google_translate_say
+      entity_id: media_player.living_room
+      data:
+        message: 'Hyvää huomenta!'
+        language: 'fi'
+    - delay: '00:00:05'
+    - service: media_player.select_source
+      data: 
+        entity_id: media_player.living_room
+        source: 'Yle Radio Suomi'
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.living_room
+        volume_level: 0.15
+    - service: media_player.turn_on
+      data:
+        entity_id: media_player.living_room
+    - service: automation.turn_on
+      entity_id: automation.turn_off_living_room_lights_when_going_to_bed
+    - service: automation.turn_off
+      entity_id: automation.morning_routine

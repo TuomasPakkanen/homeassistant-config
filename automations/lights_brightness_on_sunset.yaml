@@ -1,0 +1,47 @@
+- alias: "Change table lamp temperature in the evening"
+  trigger:
+    platform: state
+    entity_id: sensor.daylight
+    to: 'golden_hour_2'
+  condition:
+    condition: state
+    entity_id: light.table_lamp
+    state: 'on'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.table_lamp
+      kelvin: 2700
+      transition: 15
+
+- alias: "Change tripod lamp temperature in the evening"
+  trigger:
+    platform: state
+    entity_id: sensor.daylight
+    to: 'golden_hour_2'
+  condition:
+    condition: state
+    entity_id: light.tripod_lamp
+    state: 'on'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.tripod_lamp
+      kelvin: 2700
+      transition: 15
+
+- alias: "Change feather lamp temperature in the evening"
+  trigger:
+    platform: state
+    entity_id: sensor.daylight
+    to: 'golden_hour_2'
+  condition:
+    condition: state
+    entity_id: light.feather_lamp
+    state: 'on'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.feather_lamp
+      kelvin: 2700
+      transition: 15

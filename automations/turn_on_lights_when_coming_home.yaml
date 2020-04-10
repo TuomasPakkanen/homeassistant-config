@@ -1,0 +1,35 @@
+- alias: "Turn on lights when coming home if it's dark"
+  trigger: 
+    - platform: state
+      entity_id: person.tuomas_pakkanen
+      to: 'home'
+    - platform: state
+      entity_id: person.moona
+      to: 'home'
+  condition:
+    - condition: state
+      entity_id: light.tripod_lamp
+      state: 'off'
+    - condition: numeric_state
+      entity_id: sensor.lightlevel_5
+      below: 50
+    - condition: time
+      after: '12:00:00'
+      before: '21:00:00'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.tripod_lamp
+        brightness_pct: 80
+        kelvin: 2700
+        transition: 15
+    - service: light.turn_on
+      data:
+        entity_id: light.hallway_lights
+        brightness_pct: 80
+        transition: 15
+    - service: light.turn_on
+      data:
+        entity_id: light.hallway_lights_upstairs
+        brightness_pct: 80
+        transition: 15

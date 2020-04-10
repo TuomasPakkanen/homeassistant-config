@@ -9,3 +9,9 @@ system:
     - sensor.network_out_wlan0
     - sensor.processor_use
     - sensor.cpu_temperature
+
+people:
+  name: People
+  entities:
+    - person.tuomas_pakkanen
+    - person.moona

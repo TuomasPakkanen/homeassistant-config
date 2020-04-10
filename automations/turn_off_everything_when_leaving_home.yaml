@@ -1,0 +1,29 @@
+- alias: "Turn off lights and music when leaving home"
+  trigger:
+    - platform: state
+      entity_id: person.tuomas_pakkanen
+      from: 'home'
+    - platform: state
+      entity_id: person.moona
+      from: 'home'
+  condition:
+    - condition: state
+      entity_id: person.tuomas_pakkanen
+      state: 'not_home'
+    - condition: state
+      entity_id: person.moona
+      state: 'not_home'
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.living_room_lights
+    - service: light.turn_off
+      data:
+        entity_id: light.hallway_lights
+    - service: light.turn_off
+      data:
+        entity_id: light.hallway_upstairs_lights
+    - service: sonos.set_sleep_timer
+      data:
+        entity_id: media_player.living_room
+        sleep_time: 0

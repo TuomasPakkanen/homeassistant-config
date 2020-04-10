@@ -1,0 +1,86 @@
+# ROOMBA #
+
+- alias: "Roomba notifications"
+  trigger:
+    - platform: state
+      entity_id: vacuum.roomba
+      from: "off"
+      to: "on"
+      for: "00:02:00"
+    - platform: state
+      entity_id: vacuum.roomba
+      from: "on"
+      to: "off"
+      for: "00:02:00"
+  action:
+    - service: notify.discord
+      data:
+        message: "Roomba is now {{ states.vacuum.roomba.attributes.status }}"
+        target: ["645569708363481088"]
+
+# SYSTEM #
+
+- alias: "Health check"
+  trigger:
+    platform: time_pattern
+    minutes: "/15"
+  action:
+    service: rest_command.health_check
+
+- alias: "CPU Temperature too high"
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.cpu_temperature
+    above: 75
+    for: "00:02:00"
+  action:
+    service: notify.telegram
+    data:
+      title: "System alert!"
+      message: "Raspberry Pi CPU temperature critical! Current temperature is {{ states('sensor.cpu_temperature') }}°C"
+
+- alias: "Disk usage exceeded 80 percent"
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.disk_use_percent
+    above: 80.0
+  action:
+    service: notify.telegram
+    data:
+      title: "System alert!"
+      message: "Raspberry Pi free disk space running low!"
+
+# BATTERY WARNINGS #
+
+- alias: "Xiaomi temperature sensor battery low"
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.living_room_sensor_battery
+    below: 15
+  action:
+    service: notify.telegram
+    data:
+      title: '*Battery low alert!*'
+      message: "Xiaomi Mijia temperature and humidity sensor battery is running low. Please replace the battery."
+
+- alias: "Hue motion sensor battery low"
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.motion_sensor_battery_level
+    below: 15
+  action:
+    service: notify.telegram
+    data:
+      title: '*Battery low alert!*'
+      message: "Hue motion sensor battery is running low. Please replace the battery."
+
+- alias: "Tradfri remote control battery low"
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.tradfri_remote_control_battery_level
+    below: 10
+  action:
+    service: notify.telegram
+    data:
+      title: '*Battery low alert!*'
+      message: "Tradfri remote control battery is running low. Please replace the battery."
