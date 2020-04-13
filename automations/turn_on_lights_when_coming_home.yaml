@@ -30,6 +30,6 @@
         transition: 15
     - service: light.turn_on
       data:
-        entity_id: light.hallway_lights_upstairs
+        entity_id: light.hallway_upstairs_lights
         brightness_pct: 80
         transition: 15
