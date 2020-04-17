@@ -15,14 +15,19 @@
       entity_id: automation.turn_off_living_room_lights_when_going_to_bed
     - service: automation.turn_on
       entity_id: automation.morning_routine
+    - service: light.turn_on
+      data:
+        entity_id: light.hallway_lights
+        brightness_pct: 10
+        transition: 1
     - service: light.turn_off
       data:
         entity_id: light.hallway_lights
-        transition: 30
+        transition: 3600
     - service: light.turn_off
       data:
         entity_id: light.living_room_lights
-        transition: 1800
+        transition: 3600
     - service: light.turn_off
       data:
         entity_id: light.hallway_upstairs_lights

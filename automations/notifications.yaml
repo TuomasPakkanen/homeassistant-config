@@ -73,14 +73,3 @@
     data:
       title: '*Battery low alert!*'
       message: "Hue motion sensor battery is running low. Please replace the battery."
-
-- alias: "Tradfri remote control battery low"
-  trigger:
-    platform: numeric_state
-    entity_id: sensor.tradfri_remote_control_battery_level
-    below: 10
-  action:
-    service: notify.telegram
-    data:
-      title: '*Battery low alert!*'
-      message: "Tradfri remote control battery is running low. Please replace the battery."
