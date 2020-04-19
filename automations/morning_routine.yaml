@@ -45,6 +45,6 @@
       data:
         entity_id: media_player.living_room
     - service: automation.turn_on
-      entity_id: automation.turn_off_living_room_lights_when_going_to_bed
+      entity_id: automation.bedtime_routine
     - service: automation.turn_off
       entity_id: automation.morning_routine

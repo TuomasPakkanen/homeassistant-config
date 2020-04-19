@@ -12,7 +12,7 @@
       before: '23:59:00'
   action:
     - service: automation.turn_off
-      entity_id: automation.turn_off_living_room_lights_when_going_to_bed
+      entity_id: automation.bedtime_routine
     - service: automation.turn_on
       entity_id: automation.morning_routine
     - service: light.turn_on
