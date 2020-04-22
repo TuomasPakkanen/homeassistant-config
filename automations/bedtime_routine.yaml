@@ -20,6 +20,11 @@
         entity_id: light.hallway_lights
         brightness_pct: 10
         transition: 1
+    - service: light.turn_on
+      data:
+        entity_id: light.bedroom_lights
+        brightness_pct: 60
+        transition: 10
     - service: light.turn_off
       data:
         entity_id: light.hallway_lights

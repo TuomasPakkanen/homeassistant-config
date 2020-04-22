@@ -4,9 +4,7 @@
   trigger:
     platform: state
     entity_id: 
-      - light.table_lamp
       - light.tripod_lamp
-      - light.feather_lamp
       - light.hallway_light_1
       - light.hallway_light_2
       - light.hallway_light_3
@@ -57,9 +55,7 @@
   trigger:
     platform: state
     entity_id: 
-      - light.table_lamp
       - light.tripod_lamp
-      - light.feather_lamp
       - light.hallway_light_1
       - light.hallway_light_2
       - light.hallway_light_3

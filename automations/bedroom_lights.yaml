@@ -1,7 +1,7 @@
-- alias: "Set media room temperature and brightness in the morning and day"
+- alias: "Set bedroom temperature and brightness in the morning and day"
   trigger:
     platform: state
-    entity_id: light.media_room_light_1
+    entity_id: light.bedroom_light_1
     to: 'on'
   condition:
     condition: or
@@ -30,17 +30,17 @@
   action:
     - service: light.turn_on
       data:
-        entity_id: light.media_room_lights
+        entity_id: light.bedroom_lights
         kelvin: 4000
     - service: light.turn_on
       data:
-        entity_id: light.media_room_lights
+        entity_id: light.bedroom_lights
         brightness_pct: 80
 
-- alias: "Set media room temperature and brightness in the evening"
+- alias: "Set bedroom temperature and brightness in the evening"
   trigger:
     platform: state
-    entity_id: light.media_room_light_1
+    entity_id: light.bedroom_light_1
     to: 'on'
   condition:
     condition: or
@@ -69,9 +69,9 @@
   action:
     - service: light.turn_on
       data:
-        entity_id: light.media_room_lights
+        entity_id: light.bedroom_lights
         kelvin: 2200
     - service: light.turn_on
       data:
-        entity_id: light.media_room_lights
+        entity_id: light.bedroom_lights
         brightness_pct: 20
