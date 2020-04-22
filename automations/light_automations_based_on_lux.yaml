@@ -1,7 +1,7 @@
 - alias: "Turn on lights if dark during the day"
   trigger:
     platform: numeric_state
-    entity_id: sensor.lightlevel_5
+    entity_id: sensor.motion_sensor_2
     below: 50
   condition:
     - condition: state
@@ -10,14 +10,9 @@
     - condition: time
       after: '09:00:00'
       before: '20:00:00'
-    - condition: or
-      conditions:
-        - condition: state
-          entity_id: person.tuomas_pakkanen
-          state: 'home'
-        - condition: state
-          entity_id: person.moona
-          state: 'home'
+    - condition: state
+      entity_id: binary_sensor.occupancy
+      state: 'on'
   action:
     - service: light.turn_on
       data:
@@ -39,7 +34,7 @@
 - alias: "Turn off lights if bright during the day"
   trigger:
     platform: numeric_state
-    entity_id: sensor.lightlevel_5
+    entity_id: sensor.motion_sensor_2
     above: 100
   condition:
     - condition: state

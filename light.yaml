@@ -2,8 +2,13 @@
   name: Living room lights
   entities:
     - light.tripod_lamp
-    - light.table_lamp
-    - light.feather_lamp
+
+- platform: group
+  name: Bedroom lights
+  entities:
+    - light.bedroom_light_1
+    - light.bedroom_light_2
+    - light.bedroom_light_3
 
 - platform: group
   name: Media room lights
@@ -23,6 +28,6 @@
 - platform: group
   name: Hallway upstairs lights
   entities:
-    - light.hallway_light_upstairs_1
-    - light.hallway_light_upstairs_2
-    - light.hallway_light_upstairs_3
+    - light.hallway_upstairs_light_1
+    - light.hallway_upstairs_light_2
+    - light.hallway_upstairs_light_3

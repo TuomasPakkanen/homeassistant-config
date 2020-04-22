@@ -1,18 +1,3 @@
-- alias: "Dim table lamp in the evening if on"
-  trigger:
-    platform: time
-    at: '21:00'
-  condition:
-    condition: state
-    entity_id: light.table_lamp
-    state: 'on'
-  action:
-    service: light.turn_on
-    data:
-      entity_id: light.table_lamp
-      brightness_pct: 60
-      transition: 15
-
 - alias: "Dim tripod lamp in the evening if on"
   trigger:
     platform: time
@@ -25,21 +10,6 @@
     service: light.turn_on
     data:
       entity_id: light.tripod_lamp
-      brightness_pct: 60
-      transition: 15
-
-- alias: "Dim feather lamp in the evening if on"
-  trigger:
-    platform: time
-    at: '21:00'
-  condition:
-    condition: state
-    entity_id: light.feather_lamp
-    state: 'on'
-  action:
-    service: light.turn_on
-    data:
-      entity_id: light.feather_lamp
       brightness_pct: 60
       transition: 15
 

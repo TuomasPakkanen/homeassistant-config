@@ -11,7 +11,7 @@
       entity_id: light.tripod_lamp
       state: 'off'
     - condition: numeric_state
-      entity_id: sensor.lightlevel_5
+      entity_id: sensor.motion_sensor_2
       below: 50
     - condition: time
       after: '12:00:00'

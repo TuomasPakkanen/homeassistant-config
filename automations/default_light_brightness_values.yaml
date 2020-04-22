@@ -11,9 +11,12 @@
       - light.hallway_light_2
       - light.hallway_light_3
       - light.hallway_light_4
-      - light.hallway_light_upstairs_1
-      - light.hallway_light_upstairs_2
-      - light.hallway_light_upstairs_3
+      - light.hallway_upstairs_light_1
+      - light.hallway_upstairs_light_2
+      - light.hallway_upstairs_light_3
+      - light.bedroom_light_1
+      - light.bedroom_light_2
+      - light.bedroom_light_3
     from: 'unavailable'
     to: 'on'
   condition:
@@ -61,9 +64,12 @@
       - light.hallway_light_2
       - light.hallway_light_3
       - light.hallway_light_4
-      - light.hallway_light_upstairs_1
-      - light.hallway_light_upstairs_2
-      - light.hallway_light_upstairs_3
+      - light.hallway_upstairs_light_1
+      - light.hallway_upstairs_light_2
+      - light.hallway_upstairs_light_3
+      - light.bedroom_light_1
+      - light.bedroom_light_2
+      - light.bedroom_light_3
     from: 'unavailable'
     to: 'on'
   condition:

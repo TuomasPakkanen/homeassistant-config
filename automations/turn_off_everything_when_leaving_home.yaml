@@ -8,21 +8,12 @@
       from: 'home'
   condition:
     - condition: state
-      entity_id: person.tuomas_pakkanen
-      state: 'not_home'
-    - condition: state
-      entity_id: person.moona
-      state: 'not_home'
+      entity_id: binary_sensor.occupancy
+      state: 'off'
   action:
     - service: light.turn_off
       data:
-        entity_id: light.living_room_lights
-    - service: light.turn_off
-      data:
-        entity_id: light.hallway_lights
-    - service: light.turn_off
-      data:
-        entity_id: light.hallway_upstairs_lights
+        entity_id: all
     - service: sonos.set_sleep_timer
       data:
         entity_id: media_player.living_room
