@@ -31,7 +31,7 @@
     - service: light.turn_on
       data:
         entity_id: light.bedroom_lights
-        kelvin: 4000
+        kelvin: 2700
     - service: light.turn_on
       data:
         entity_id: light.bedroom_lights
