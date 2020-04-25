@@ -13,6 +13,7 @@ homeassistant:
 group: !include groups.yaml
 automation: !include_dir_merge_list automations/ #!include automations.yaml
 light: !include light.yaml
+scene: !include scenes.yaml
 #script: !include scripts.yaml # currently no active scripts in use
 
 frontend:
