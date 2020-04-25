@@ -1,0 +1,15 @@
+- name: Sleeping
+  entities:
+    light.bedroom_lights:
+      state: 'off'
+    light.hallway_lights:
+      state: 'off'
+    light.hallway_upstairs_lights:
+      state: 'off'
+    light.living_room_lights:
+      state: 'off'
+    light.media_room_lights:
+      state: 'off'
+    media_player.living_room:
+      state: paused
+      volume_level: 0.15
