@@ -3,19 +3,19 @@
 - alias: "Roomba notifications"
   trigger:
     - platform: state
-      entity_id: vacuum.roomba
+      entity_id: vacuum.watson
       from: "off"
       to: "on"
       for: "00:02:00"
     - platform: state
-      entity_id: vacuum.roomba
+      entity_id: vacuum.watson
       from: "on"
       to: "off"
       for: "00:02:00"
   action:
     - service: notify.discord
       data:
-        message: "Roomba is now {{ states.vacuum.roomba.attributes.status }}"
+        message: "Watson is now {{ states.vacuum.watson.attributes.status }}"
         target: ["645569708363481088"]
 
 # SYSTEM #

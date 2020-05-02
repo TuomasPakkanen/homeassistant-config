@@ -103,13 +103,6 @@ climate:
     email: !secret email
     password: !secret melcloud
 
-# iRobot Roomba: https://www.home-assistant.io/components/roomba/
-vacuum:
-  - platform: roomba
-    host: !secret roomba_host
-    username: !secret roomba_username
-    password: !secret roomba_password
-
 # Spotify
 spotify:
   client_id: !secret spotify_clientid
@@ -163,13 +156,13 @@ switch:
             hvac_mode: 'off'
       roomba:
         friendly_name: "Roomba"
-        value_template: "{{ is_state('vacuum.roomba', 'on') }}"
+        value_template: "{{ is_state('vacuum.watson', 'on') }}"
         turn_on:
           service: vacuum.turn_on
-          entity_id: vacuum.roomba
+          entity_id: vacuum.watson
         turn_off:
           service: vacuum.turn_off
-          entity_id: vacuum.roomba
+          entity_id: vacuum.watson
 
 ### SENSORS ###
 binary_sensor:
