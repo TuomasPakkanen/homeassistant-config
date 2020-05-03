@@ -13,3 +13,33 @@
     media_player.living_room:
       state: paused
       volume_level: 0.15
+
+- name: Evening
+  entities:
+    light.hallway_lights:
+      state: 'on'
+      brightness_pct: 60
+    light.hallway_upstairs_lights:
+      state: 'on'
+      brightness_pct: 60
+    light.living_room_lights:
+      state: 'on'
+      brightness_pct: 60
+      kelvin: 2700
+    light.bedroom_lights:
+      state: 'on'
+      brightness_pct: 20
+      rgb_color: [255,182,109]
+
+- name: Daytime
+  entities:
+    light.hallway_lights:
+      state: 'on'
+      brightness_pct: 100
+    light.hallway_upstairs_lights:
+      state: 'on'
+      brightness_pct: 100
+    light.living_room_lights:
+      state: 'on'
+      brightness_pct: 100
+      kelvin: 4000

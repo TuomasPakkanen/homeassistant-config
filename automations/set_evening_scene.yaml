@@ -1,0 +1,13 @@
+- alias: "Set evening scene"
+  trigger:
+    platform: time
+    at: '20:00:00'
+  condition:
+    condition: state
+    entity_id: binary_sensor.occupancy
+    state: 'on'
+  action:
+    service: scene.turn_on
+    data:
+      entity_id: scene.evening
+      transition: 15

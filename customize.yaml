@@ -2,7 +2,7 @@ climate.melcloud_living_room_177727:
   friendly_name: Air Conditioner
 
 weather.home:
-  friendly_name: Weather in Vantaa
+  friendly_name: Weather
 
 media_player.living_room:
   friendly_name: Sonos
