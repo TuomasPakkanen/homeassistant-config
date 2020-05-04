@@ -70,8 +70,5 @@
     - service: light.turn_on
       data:
         entity_id: light.bedroom_lights
-        kelvin: 2200
-    - service: light.turn_on
-      data:
-        entity_id: light.bedroom_lights
         brightness_pct: 20
+        kelvin: 2200

@@ -12,9 +12,6 @@
       - light.hallway_upstairs_light_1
       - light.hallway_upstairs_light_2
       - light.hallway_upstairs_light_3
-      - light.bedroom_light_1
-      - light.bedroom_light_2
-      - light.bedroom_light_3
     from: 'unavailable'
     to: 'on'
   condition:
@@ -63,9 +60,6 @@
       - light.hallway_upstairs_light_1
       - light.hallway_upstairs_light_2
       - light.hallway_upstairs_light_3
-      - light.bedroom_light_1
-      - light.bedroom_light_2
-      - light.bedroom_light_3
     from: 'unavailable'
     to: 'on'
   condition:

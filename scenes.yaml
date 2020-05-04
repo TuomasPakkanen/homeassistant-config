@@ -43,3 +43,12 @@
       state: 'on'
       brightness_pct: 100
       kelvin: 4000
+
+- name: Daytime bright
+  entities:
+    light.hallway_lights:
+      state: 'off'
+    light.hallway_upstairs_lights:
+      state: 'off'
+    light.living_room_lights:
+      state: 'off'
