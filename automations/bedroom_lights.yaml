@@ -1,7 +1,13 @@
-- alias: "Set bedroom temperature and brightness in the morning and day"
+# DURING THE DAY
+
+- alias: "Set bedroom lights brightness to max when turned on during the day"
   trigger:
     platform: state
-    entity_id: light.bedroom_light_1
+    entity_id: 
+      - light.bedroom_light_1
+      - light.bedroom_light_2
+      - light.bedroom_light_3
+    from: 'unavailable'
     to: 'on'
   condition:
     condition: or
@@ -28,19 +34,23 @@
         entity_id: sensor.daylight
         state: 'solar_noon'
   action:
-    - service: light.turn_on
-      data:
-        entity_id: light.bedroom_lights
-        kelvin: 2700
-    - service: light.turn_on
-      data:
-        entity_id: light.bedroom_lights
-        brightness_pct: 80
+    service: light.turn_on
+    data_template:
+      entity_id: '{{trigger.entity_id}}'
+      brightness_pct: 80
+      kelvin: 2700
 
-- alias: "Set bedroom temperature and brightness in the evening"
+
+# DURING THE EVENING
+
+- alias: "Set bedroom lights brightness when turned on during the evening"
   trigger:
     platform: state
-    entity_id: light.bedroom_light_1
+    entity_id: 
+      - light.bedroom_light_1
+      - light.bedroom_light_2
+      - light.bedroom_light_3
+    from: 'unavailable'
     to: 'on'
   condition:
     condition: or
@@ -59,16 +69,10 @@
         state: 'dusk'
       - condition: state
         entity_id: sensor.daylight
-        state: 'night_start'
-      - condition: state
-        entity_id: sensor.daylight
         state: 'nautical_dusk'
-      - condition: state
-        entity_id: sensor.daylight
-        state: 'nadir'
   action:
-    - service: light.turn_on
-      data:
-        entity_id: light.bedroom_lights
-        brightness_pct: 20
-        kelvin: 2200
+    service: light.turn_on
+    data:
+      entity_id: '{{trigger.entity_id}}'
+      brightness_pct: 20
+      kelvin: 2200
