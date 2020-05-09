@@ -1,22 +1,14 @@
-# ROOMBA #
+# SAUNA #
 
-- alias: "Roomba notifications"
+- alias: "Notify when Sauna is warm"
   trigger:
-    - platform: state
-      entity_id: vacuum.watson
-      from: "off"
-      to: "on"
-      for: "00:02:00"
-    - platform: state
-      entity_id: vacuum.watson
-      from: "on"
-      to: "off"
-      for: "00:02:00"
+    platform: numeric_state
+    entity_id: sensor.temperature_5
+    above: 50
   action:
-    - service: notify.discord
-      data:
-        message: "Watson is now {{ states.vacuum.watson.attributes.status }}"
-        target: ["645569708363481088"]
+    service: notify.telegram
+    data:
+      message: "Sauna is ready!"
 
 # SYSTEM #
 

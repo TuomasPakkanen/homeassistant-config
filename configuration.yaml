@@ -113,20 +113,6 @@ circadian_lighting:
 
 ### SWITCHES ###
 switch:
-  - platform: circadian_lighting
-    name: "Circadian lighting (living room)"
-    min_brightness: 70
-    lights_rgb:
-      - light.table_lamp
-      - light.tripod_lamp
-      - light.feather_lamp
-  - platform: circadian_lighting
-    name: "Circadian lighting (media room)"
-    min_brightness: 20
-    lights_ct:
-      - light.media_room_light_1
-      - light.media_room_light_2
-      - light.media_room_light_3
   - platform: template
     switches:
       ac:
@@ -156,12 +142,12 @@ switch:
             hvac_mode: 'off'
       roomba:
         friendly_name: "Roomba"
-        value_template: "{{ is_state('vacuum.watson', 'on') }}"
+        value_template: "{{ is_state('vacuum.watson', 'cleaning') }}"
         turn_on:
-          service: vacuum.turn_on
+          service: vacuum.start
           entity_id: vacuum.watson
         turn_off:
-          service: vacuum.turn_off
+          service: vacuum.return_to_base
           entity_id: vacuum.watson
 
 ### SENSORS ###

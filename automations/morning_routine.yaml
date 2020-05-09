@@ -15,7 +15,7 @@
         - light.hallway_lights
         transition: 5
         brightness_pct: >
-          {% if states('sensor.motion_sensor_2') | float < 100 %}
+          {% if states('sensor.motion_sensor_2') | float < 80 %}
             100
           {% else %}
             0
@@ -26,7 +26,7 @@
         transition: 5
         kelvin: 4000
         brightness_pct: >
-          {% if states('sensor.motion_sensor_2') | float < 100 %}
+          {% if states('sensor.motion_sensor_2') | float < 80 %}
             100
           {% else %}
             0

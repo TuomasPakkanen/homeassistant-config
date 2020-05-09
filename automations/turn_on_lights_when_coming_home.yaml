@@ -1,18 +1,15 @@
 - alias: "Turn on lights when coming home if it's dark"
   trigger: 
     - platform: state
-      entity_id: person.tuomas_pakkanen
-      to: 'home'
-    - platform: state
-      entity_id: person.moona
-      to: 'home'
+      entity_id: binary_sensor.occupancy
+      to: 'on'
   condition:
     - condition: state
       entity_id: light.tripod_lamp
       state: 'off'
     - condition: numeric_state
       entity_id: sensor.motion_sensor_2
-      below: 50
+      below: 80
     - condition: time
       after: '12:00:00'
       before: '21:00:00'
