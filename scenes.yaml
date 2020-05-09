@@ -18,30 +18,30 @@
   entities:
     light.hallway_lights:
       state: 'on'
-      brightness_pct: 60
+      brightness: 153
     light.hallway_upstairs_lights:
       state: 'on'
-      brightness_pct: 60
+      brightness: 153
     light.living_room_lights:
       state: 'on'
-      brightness_pct: 60
+      brightness: 153
       kelvin: 2700
     light.bedroom_lights:
       state: 'on'
-      brightness_pct: 20
+      brightness: 51
       rgb_color: [255,182,109]
 
 - name: Daytime
   entities:
     light.hallway_lights:
       state: 'on'
-      brightness_pct: 100
+      brightness: 255
     light.hallway_upstairs_lights:
       state: 'on'
-      brightness_pct: 100
+      brightness: 255
     light.living_room_lights:
       state: 'on'
-      brightness_pct: 100
+      brightness: 255
       kelvin: 4000
 
 - name: Daytime bright

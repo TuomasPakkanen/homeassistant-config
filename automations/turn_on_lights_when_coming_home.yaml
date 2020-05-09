@@ -3,6 +3,9 @@
     - platform: state
       entity_id: binary_sensor.occupancy
       to: 'on'
+    - platform: state
+      entity_id: binary_sensor.openclose_14
+      to: 'on'
   condition:
     - condition: state
       entity_id: light.tripod_lamp
@@ -14,19 +17,12 @@
       after: '12:00:00'
       before: '21:00:00'
   action:
-    - service: light.turn_on
-      data:
-        entity_id: light.tripod_lamp
-        brightness_pct: 80
-        kelvin: 2700
-        transition: 15
-    - service: light.turn_on
-      data:
-        entity_id: light.hallway_lights
-        brightness_pct: 80
-        transition: 15
-    - service: light.turn_on
-      data:
-        entity_id: light.hallway_upstairs_lights
-        brightness_pct: 80
-        transition: 15
+    service: scene.turn_on
+    data_template:
+      entity_id: >
+        {%-if 12 <= now().hour < 19 %}
+          scene.daytime
+        {%- else %}
+          scene.evening
+        {%- endif %}
+      transition: 5

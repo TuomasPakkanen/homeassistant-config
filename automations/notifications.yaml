@@ -10,6 +10,25 @@
     data:
       message: "Sauna is ready!"
 
+# BURGLAR ALARM
+
+- alias: "Burglar alarm"
+  trigger: 
+    platform: state
+    entity_id:
+      - binary_sensor.openclose_14
+      - binary_sensor.openclose_15
+    to: 'on'
+  condition:
+    condition: state
+    entity_id: binary_sensor.occupancy
+    state: 'off'
+  action:
+    service: notify.telegram
+    data:
+      title: "Burglar alarm triggered!"
+      message: "{{trigger.entity_id}} has been opened"
+
 # SYSTEM #
 
 - alias: "Health check"

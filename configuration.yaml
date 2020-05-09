@@ -11,7 +11,7 @@ homeassistant:
   customize: !include customize.yaml
 
 group: !include groups.yaml
-automation: !include_dir_merge_list automations/ #!include automations.yaml
+automation: !include_dir_merge_list automations/
 light: !include light.yaml
 scene: !include scenes.yaml
 #script: !include scripts.yaml # currently no active scripts in use
@@ -90,9 +90,6 @@ telegram_bot:
 
 # Notify components
 notify:
-  - name: discord
-    platform: discord
-    token: !secret discord_bot_token
   - name: telegram
     platform: telegram
     chat_id: !secret telegram_chatid
@@ -108,8 +105,8 @@ spotify:
   client_id: !secret spotify_clientid
   client_secret: !secret spotify_clientsecret
 
-# Circadian lightning for lights (HACS custom component)
-circadian_lighting:
+# Circadian lightning for lights (HACS custom component), currently not used
+# circadian_lighting:
 
 ### SWITCHES ###
 switch:
