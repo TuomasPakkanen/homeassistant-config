@@ -25,7 +25,7 @@
     light.living_room_lights:
       state: 'on'
       brightness: 153
-      hs_color: [0.46,0.41]
+      xy_color: [0.46,0.41]
     light.bedroom_lights:
       state: 'on'
       brightness: 51
@@ -42,7 +42,7 @@
     light.living_room_lights:
       state: 'on'
       brightness: 255
-      hs_color: [0.38,0.38]
+      xy_color: [0.38,0.38]
 
 - name: Daytime bright
   entities:
