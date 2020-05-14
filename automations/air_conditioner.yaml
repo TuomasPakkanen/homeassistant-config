@@ -8,7 +8,7 @@
       for: "00:10:00"
     - platform: numeric_state
       entity_id: sensor.mi_t_582d34345074
-      above: 25 # 30 degrees during Winter, hotter during winter due to fireplace
+      above: 27 # 30 degrees during Winter, hotter during winter due to fireplace
       for: "00:10:00"
   action:
     - service: climate.set_temperature

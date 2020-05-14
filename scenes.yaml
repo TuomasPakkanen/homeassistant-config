@@ -25,7 +25,7 @@
     light.living_room_lights:
       state: 'on'
       brightness: 153
-      kelvin: 2700
+      rgb_color: [255, 169, 87]
     light.bedroom_lights:
       state: 'on'
       brightness: 51
@@ -42,7 +42,7 @@
     light.living_room_lights:
       state: 'on'
       brightness: 255
-      kelvin: 4000
+      rgb_color: [255, 209, 163]
 
 - name: Daytime bright
   entities:
