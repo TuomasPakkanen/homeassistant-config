@@ -4,9 +4,6 @@
     entity_id: sensor.motion_sensor_2
     below: 80
   condition:
-    - condition: state
-      entity_id: light.tripod_lamp
-      state: 'off'
     - condition: time
       after: '09:00:00'
       before: '20:00:00'
@@ -17,7 +14,7 @@
     service: scene.turn_on
     data:
       entity_id: scene.daytime
-      transition: 30
+      transition: 15
 
 
 - alias: "Turn off lights if bright during the day"
@@ -26,9 +23,6 @@
     entity_id: sensor.motion_sensor_2
     above: 110
   condition:
-    - condition: state
-      entity_id: light.tripod_lamp
-      state: 'on'
     - condition: time
       after: '09:00:00'
       before: '20:00:00'
@@ -36,4 +30,4 @@
     service: scene.turn_on
     data:
       entity_id: scene.daytime_bright
-      transition: 30
+      transition: 15
