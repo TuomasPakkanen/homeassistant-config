@@ -4,7 +4,7 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.temperature_5
-    above: 50
+    above: 44
   action:
     service: notify.telegram
     data:
