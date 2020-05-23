@@ -3,9 +3,12 @@
     platform: time
     at: '19:00:00'
   condition:
-    condition: state
-    entity_id: binary_sensor.occupancy
-    state: 'on'
+    - condition: state
+      entity_id: binary_sensor.occupancy
+      state: 'on'
+    - condition: numeric_state
+      entity_id: sensor.motion_sensor_2
+      below: 80
   action:
     service: scene.turn_on
     data:

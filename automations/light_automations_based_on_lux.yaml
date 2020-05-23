@@ -12,8 +12,13 @@
       state: 'on'
   action:
     service: scene.turn_on
-    data:
-      entity_id: scene.daytime
+    data_template:
+      entity_id: >
+        {%-if 9 <= now().hour < 19 %}
+          scene.daytime
+        {%- else %}
+          scene.evening
+        {%- endif %}
       transition: 15
 
 
