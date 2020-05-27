@@ -25,7 +25,7 @@
     state: 'off'
   action:
     service: notify.telegram
-    data:
+    data_template:
       title: "Burglar alarm triggered!"
       message: "{{trigger.entity_id}} has been opened"
 

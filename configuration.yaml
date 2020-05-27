@@ -147,6 +147,12 @@ switch:
           service: vacuum.return_to_base
           entity_id: vacuum.watson
 
+### INPUT BOOLEANS ###
+input_boolean:
+  guest_mode:
+    name: "Guest mode"
+    icon: mdi:account-multiple
+
 ### SENSORS ###
 binary_sensor:
   - platform: template
