@@ -3,6 +3,7 @@
     platform: numeric_state
     entity_id: sensor.motion_sensor_2
     below: 80
+    for: "00:01:00"
   condition:
     - condition: time
       after: '09:00:00'
@@ -27,6 +28,7 @@
     platform: numeric_state
     entity_id: sensor.motion_sensor_2
     above: 110
+    for: "00:03:00"
   condition:
     - condition: time
       after: '09:00:00'

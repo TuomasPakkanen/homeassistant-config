@@ -27,7 +27,7 @@
     service: notify.telegram
     data_template:
       title: "Burglar alarm triggered!"
-      message: "{{trigger.entity_id}} has been opened"
+      message: "{{ trigger.to_state.attributes.friendly_name }} has been opened!"
 
 # SYSTEM #
 
