@@ -26,10 +26,10 @@
       state: 'on'
       brightness: 153
       xy_color: [0.46,0.41]
-    light.bedroom_lights:
-      state: 'on'
-      brightness: 51
-      rgb_color: [255,182,109]
+    #light.bedroom_lights:
+    #  state: 'on'
+    #  brightness: 51
+    #  rgb_color: [255,182,109]
 
 - name: Daytime
   entities:

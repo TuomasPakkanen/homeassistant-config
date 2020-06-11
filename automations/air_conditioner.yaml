@@ -1,15 +1,11 @@
-# TURN ON AC #
+# TURN ON AC COLD #
 
-- alias: "Turn on AC when it's too hot or cold"
+- alias: "Turn on AC when it's too cold"
   trigger:
-    - platform: numeric_state
-      entity_id: sensor.mi_t_582d34345074
-      below: 22.6 #19
-      for: "00:10:00"
-    - platform: numeric_state
-      entity_id: sensor.mi_t_582d34345074
-      above: 25.5 # 30 degrees during Winter, hotter during winter due to fireplace
-      for: "00:10:00"
+    platform: numeric_state
+    entity_id: sensor.mi_t_582d34345074
+    below: 22.6 #19
+    for: "00:10:00"
   action:
     - service: climate.set_temperature
       entity_id: climate.melcloud_living_room_177727
@@ -22,7 +18,33 @@
     - service: climate.set_hvac_mode
       data:
         entity_id: climate.melcloud_living_room_177727
-        hvac_mode: 'auto'
+        hvac_mode: 'heat'
+    - service: climate.set_swing_mode
+      entity_id: climate.melcloud_living_room_177727
+      data:
+        swing_mode: 'Auto'
+
+# TURN ON AC HOT #
+
+- alias: "Turn on AC when it's too hot"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.mi_t_582d34345074
+      above: 25.5 # 30 degrees during Winter, due to fireplace
+      for: "00:10:00"
+  action:
+    - service: climate.set_temperature
+      entity_id: climate.melcloud_living_room_177727
+      data:
+        temperature: '22'
+    - service: climate.set_fan_mode
+      entity_id: climate.melcloud_living_room_177727
+      data:
+        fan_mode: 'Speed Auto'
+    - service: climate.set_hvac_mode
+      data:
+        entity_id: climate.melcloud_living_room_177727
+        hvac_mode: 'cool'
     - service: climate.set_swing_mode
       entity_id: climate.melcloud_living_room_177727
       data:
@@ -35,12 +57,14 @@
     platform: numeric_state
     entity_id: sensor.mi_t_582d34345074
     below: 24 #26
-    above: 23 #22?
-    for: "01:00:00"
+    above: 23
+    for: "00:30:00"
   condition:
-    condition: state
-    entity_id: climate.melcloud_living_room_177727
-    state: 'auto'
+    - condition: not
+      conditions:
+        - condition: state
+          entity_id: climate.melcloud_living_room_177727
+          state: 'off'
   action:
     - service: climate.set_hvac_mode
       data:

@@ -1,8 +1,11 @@
 - alias: "Turn on lights when coming home if it's dark"
   trigger: 
     - platform: state
-      entity_id: binary_sensor.occupancy
-      to: 'on'
+      entity_id: person.tuomas_pakkanen
+      to: 'home'
+    - platform: state
+      entity_id: person.moona
+      to: 'home'
     - platform: state
       entity_id: binary_sensor.openclose_14
       to: 'on'
@@ -13,14 +16,11 @@
     - condition: numeric_state
       entity_id: sensor.motion_sensor_2
       below: 80
-    - condition: time
-      after: '12:00:00'
-      before: '21:00:00'
   action:
     service: scene.turn_on
     data_template:
       entity_id: >
-        {%-if 12 <= now().hour < 19 %}
+        {%-if 7 <= now().hour < 19 %}
           scene.daytime
         {%- else %}
           scene.evening

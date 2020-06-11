@@ -26,8 +26,8 @@
     - service: sonos.set_sleep_timer
       data:
         entity_id: media_player.living_room
-        sleep_time: 5400
-    - delay: '01:00:00'
+        sleep_time: 7200
+    - delay: '02:00:00'
     - service: light.turn_off
       data:
         entity_id: light.hallway_lights
@@ -35,9 +35,4 @@
     - service: light.turn_off
       data:
         entity_id: light.living_room_lights
-        transition: 30
-    - delay: '02:00:00'
-    - service: light.turn_off
-      data:
-        entity_id: light.hallway_upstairs_lights
         transition: 30
