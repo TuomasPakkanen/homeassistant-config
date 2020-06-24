@@ -22,12 +22,15 @@
         entity_id: light.bedroom_lights
         transition: 10
 
-# SLEEPING MODEE!!! TODO AND TEST
+
 - alias: "Flash bedroom lights if either door is opened during the night"
   trigger: 
-    platform: state
-    entity_id: binary_sensor.openclose_14
-    to: 'on'
+    - platform: state
+      entity_id: binary_sensor.openclose_14
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.openclose_15
+      to: 'on'
   condition:
     - condition: time
       after: '23:00:00'
@@ -38,10 +41,14 @@
   action: 
     - service: light.turn_on
       data:
-        entity_id: light.living_room
-        brightness: 255
-        rgb_color: [255, 0, 0]
+        entity_id: light.bedroom_lights
+        brightness: 100
         flash: long
+    - service: tts.google_translate_say
+      entity_id: media_player.google_home
+      data:
+        message: 'Joku avasi ulko-oven!'
+        language: 'fi'
 
 # DURING THE DAY
 

@@ -1,3 +1,18 @@
+- alias: "Turn off media room lights when TV turned off"
+  trigger:
+    platform: state
+    entity_id: media_player.sony_bravia_tv
+    to: 'off'
+  condition:
+    condition: time
+    after: '20:00:00'
+    before: '03:00:00'
+  action:
+    service: light.turn_off
+    data:
+      entity_id: light.media_room_lights
+      transition: 10
+
 - alias: "Set media room temperature and brightness in the morning and day"
   trigger:
     platform: state
