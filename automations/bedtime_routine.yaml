@@ -7,6 +7,9 @@
     - condition: time
       after: '21:00:00'
       before: '23:59:00'
+    - condition: state
+      entity_id: input_boolean.vacation_mode
+      state: 'off'
   action:
     - service: automation.turn_off
       entity_id: automation.bedtime_routine

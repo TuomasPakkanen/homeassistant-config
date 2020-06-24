@@ -6,6 +6,10 @@
     entity_id: sensor.mi_t_582d34345074
     below: 22.6 #19
     for: "00:10:00"
+  condition:
+    condition: state
+    entity_id: input_boolean.vacation_mode
+    state: 'off'
   action:
     - service: climate.set_temperature
       entity_id: climate.melcloud_living_room_177727
@@ -32,11 +36,15 @@
       entity_id: sensor.mi_t_582d34345074
       above: 25.5 # 30 degrees during Winter, due to fireplace
       for: "00:10:00"
+  condition:
+    condition: state
+    entity_id: input_boolean.vacation_mode
+    state: 'off'
   action:
     - service: climate.set_temperature
       entity_id: climate.melcloud_living_room_177727
       data:
-        temperature: '22'
+        temperature: '23'
     - service: climate.set_fan_mode
       entity_id: climate.melcloud_living_room_177727
       data:
@@ -56,7 +64,7 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.mi_t_582d34345074
-    below: 24 #26
+    below: 24 #26 winter
     above: 23
     for: "00:30:00"
   condition:

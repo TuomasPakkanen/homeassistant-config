@@ -152,6 +152,12 @@ input_boolean:
   guest_mode:
     name: "Guest mode"
     icon: mdi:account-multiple
+  vacation_mode:
+    name: "Vacation mode"
+    icon: mdi:beach
+  sleeping:
+    name: "Sleeping"
+    icon: mdi:sleep
 
 ### SENSORS ###
 binary_sensor:
