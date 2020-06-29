@@ -15,8 +15,8 @@
       data:
         entity_id: light.bedroom_lights
         brightness_pct: 20
-        kelvin: 2200
-    - delay: '00:10:00'
+        rgb_color: [255,182,109]
+    - delay: '00:15:00'
     - service: light.turn_off
       data:
         entity_id: light.bedroom_lights

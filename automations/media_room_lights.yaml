@@ -3,6 +3,7 @@
     platform: state
     entity_id: media_player.sony_bravia_tv
     to: 'off'
+    for: '00:01:00'
   condition:
     condition: time
     after: '20:00:00'
