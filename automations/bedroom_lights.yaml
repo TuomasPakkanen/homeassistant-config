@@ -7,21 +7,31 @@
     - condition: numeric_state
       entity_id: sensor.motion_sensor_2
       below: 80
-    - condition: time
-      after: '21:00:00'
-      before: '23:59:00'
+    - condition: state
+      entity_id: input_boolean.sleeping
+      state: 'off'
   action:
     - service: light.turn_on
       data:
         entity_id: light.bedroom_lights
         brightness_pct: 20
         rgb_color: [255,182,109]
-    - delay: '00:15:00'
-    - service: light.turn_off
-      data:
-        entity_id: light.bedroom_lights
-        transition: 10
 
+- alias: "Turn off bedroom lights 10 minutes after last movement"
+  trigger: 
+    platform: state
+    entity_id: binary_sensor.motion_sensor
+    to: 'off'
+    for: '00:10:00'
+  condition:
+    - condition: state
+      entity_id: input_boolean.sleeping
+      state: 'off'
+  action:
+    service: light.turn_off
+    data:
+      entity_id: light.bedroom_lights
+      transition: 10
 
 - alias: "Flash bedroom lights if either door is opened during the night"
   trigger: 
@@ -32,12 +42,9 @@
       entity_id: binary_sensor.openclose_15
       to: 'on'
   condition:
-    - condition: time
-      after: '23:00:00'
-      before: '07:00:00'
-    - condition: state
-      entity_id: input_boolean.sleeping
-      state: 'on'
+    condition: state
+    entity_id: input_boolean.sleeping
+    state: 'on'
   action: 
     - service: light.turn_on
       data:
@@ -52,7 +59,7 @@
 
 # DURING THE DAY
 
-- alias: "Set bedroom lights brightness to max when turned on during the day"
+- alias: "Set bedroom lights brightness when turned on during the day"
   trigger:
     platform: state
     entity_id: light.bedroom_light_1

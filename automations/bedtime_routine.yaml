@@ -20,12 +20,6 @@
         entity_id: light.hallway_lights
         brightness_pct: 30
         transition: 1
-    - service: light.turn_on
-      data:
-        entity_id: light.bedroom_lights
-        brightness_pct: 20
-        rgb_color: [255,182,109]
-        transition: 10
     - service: sonos.set_sleep_timer
       data:
         entity_id: media_player.living_room
