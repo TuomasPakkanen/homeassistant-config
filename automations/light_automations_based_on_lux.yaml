@@ -2,12 +2,11 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.motion_sensor_2
-    below: 80
-    for: "00:01:00"
+    below: 100
   condition:
-    - condition: time
-      after: '09:00:00'
-      before: '20:00:00'
+    - condition: state
+      entity_id: input_boolean.sleeping
+      state: 'off'
     - condition: state
       entity_id: binary_sensor.occupancy
       state: 'on'
@@ -27,12 +26,12 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.motion_sensor_2
-    above: 110
+    above: 130
     for: "00:03:00"
   condition:
-    - condition: time
-      after: '09:00:00'
-      before: '20:00:00'
+    condition: state
+    entity_id: input_boolean.sleeping
+    state: 'off'
   action:
     service: scene.turn_on
     data:
