@@ -11,6 +11,9 @@
       - condition: state
         entity_id: input_boolean.guest_mode
         state: 'on'
+      - condition: state
+        entity_id: input_boolean.vacation_mode
+        state: 'off'
   action:
     service: scene.turn_on
     data:

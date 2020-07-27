@@ -10,6 +10,9 @@
     - condition: state
       entity_id: binary_sensor.occupancy
       state: 'on'
+    - condition: state
+      entity_id: input_boolean.vacation_mode
+      state: 'off'
   action:
     service: scene.turn_on
     data_template:
