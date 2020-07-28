@@ -1,0 +1,39 @@
+- alias: "Turn on lights during the night"
+  trigger: 
+    platform: state
+    entity_id: binary_sensor.motion_sensor
+    to: 'on'
+  condition:
+    - condition: state
+      entity_id: light.tripod_lamp
+      state: 'off'
+    - condition: time
+      after: '03:00:00'
+      before: '07:00:00'
+  action:
+    - service: scene.turn_on
+      data:
+        entity_id: scene.evening
+        transition: 5
+
+- alias: "Turn off lights when gone upstairs or left home during the night"
+  trigger: 
+    - platform: state
+      entity_id: binary_sensor.motion_sensor
+      to: 'on'
+      for: '00:10:00'
+    - platform: state
+      entity_id: binary_sensor.openclose_14
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: light.tripod_lamp
+      state: 'on'
+    - condition: time
+      after: '03:00:00'
+      before: '07:00:00'
+  action:
+    - service: scene.turn_on
+      data:
+        entity_id: scene.sleeping
+        transition: 30
