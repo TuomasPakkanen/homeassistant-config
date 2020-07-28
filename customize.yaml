@@ -1,6 +1,3 @@
-climate.melcloud_living_room_177727:
-  friendly_name: Air Conditioner
-
 weather.home:
   friendly_name: Weather
 
@@ -13,8 +10,8 @@ sensor.mi_h_582d34345074:
 sensor.mi_t_582d34345074:
   friendly_name: Living room temperature
 
-sensor.travel_time_to_hott:
-  icon: mdi:office-building
+sensor.travel_time_to_airport:
+  icon: mdi:airplane
 
 sensor.travel_time_to_sulava_hq:
   icon: mdi:cloud

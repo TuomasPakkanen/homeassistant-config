@@ -38,7 +38,6 @@ logger:
     homeassistant.loader: error
     roomba.roomba.Roomba: warning
     pychromecast.socket_client: error
-    custom_components.climate.melcloud_living_room_177727: fatal
     homeassistant.components.cast: error
     homeassistant.components.cast.media_player: error
     pychromecast: error
@@ -94,11 +93,11 @@ notify:
     platform: telegram
     chat_id: !secret telegram_chatid
 
-# MelCloud: https://github.com/o0Zz/ha-melcloud/
-climate:
-  - platform: melcloud
-    email: !secret email
-    password: !secret melcloud
+# MelCloud: old oozz integration https://github.com/o0Zz/ha-melcloud/
+#climate:
+#  - platform: melcloud
+#    email: !secret email
+#    password: !secret melcloud
 
 # Spotify
 spotify:
@@ -114,28 +113,28 @@ switch:
     switches:
       ac:
         friendly_name: "AC"
-        value_template: "{{ is_state('climate.melcloud_living_room_177727', 'auto') or is_state('climate.melcloud_living_room_177727', 'heat') or is_state('climate.melcloud_living_room_177727', 'dry') or is_state('climate.melcloud_living_room_177727', 'fan_only') or is_state('climate.melcloud_living_room_177727', 'cool') }}"
+        value_template: "{{ is_state('climate.air_conditioner', 'heat_cool') or is_state('climate.air_conditioner', 'heat') or is_state('climate.air_conditioner', 'dry') or is_state('climate.air_conditioner', 'fan_only') or is_state('climate.air_conditioner', 'cool') }}"
         turn_on:
           - service: climate.set_temperature
-            entity_id: climate.melcloud_living_room_177727
+            entity_id: climate.air_conditioner
             data:
               temperature: '23'
           - service: climate.set_fan_mode
-            entity_id: climate.melcloud_living_room_177727
+            entity_id: climate.air_conditioner
             data:
-              fan_mode: 'Speed Auto'
+              fan_mode: 'auto'
           - service: climate.set_hvac_mode
             data:
-              entity_id: climate.melcloud_living_room_177727
-              hvac_mode: 'auto'
-          - service: climate.set_swing_mode
-            entity_id: climate.melcloud_living_room_177727
+              entity_id: climate.air_conditioner
+              hvac_mode: 'heat_cool'
+          - service: melcloud.set_vane_vertical
+            entity_id: climate.air_conditioner
             data:
-              swing_mode: 'Auto'
+              position: '2'
         turn_off:
           service: climate.set_hvac_mode
           data:
-            entity_id: climate.melcloud_living_room_177727
+            entity_id: climate.air_conditioner
             hvac_mode: 'off'
       roomba:
         friendly_name: "Roomba"
@@ -179,9 +178,9 @@ sensor:
       - type: load_15m
       - type: processor_use
       - type: network_in
-        arg: wlan0
+        arg: eth0
       - type: network_out
-        arg: wlan0
+        arg: eth0
       - type: last_boot
   - platform: template
     sensors:
@@ -192,7 +191,7 @@ sensor:
       ac_state:
         friendly_name: "Air Conditioner state"
         #unit_of_measurement: 'Mode'
-        value_template: "{{states.climate.melcloud_living_room_177727.state}}"
+        value_template: "{{states.climate.air_conditioner.state}}"
       living_room_sensor_battery:
         friendly_name: Xiaomi Mijia battery
         unit_of_measurement: '%'
@@ -211,7 +210,7 @@ sensor:
     options:
       mode: transit
   - platform: google_travel_time
-    name: "Travel time to HoTT"
+    name: "Travel time to Airport"
     api_key: !secret googlemaps_apikey
     origin: zone.home
     destination: zone.hott

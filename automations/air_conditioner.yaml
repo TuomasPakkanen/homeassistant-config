@@ -12,21 +12,21 @@
     state: 'off'
   action:
     - service: climate.set_temperature
-      entity_id: climate.melcloud_living_room_177727
+      entity_id: climate.air_conditioner
       data:
         temperature: '23'
     - service: climate.set_fan_mode
-      entity_id: climate.melcloud_living_room_177727
+      entity_id: climate.air_conditioner
       data:
-        fan_mode: 'Speed Auto'
+        fan_mode: 'auto'
+    - service: melcloud.set_vane_vertical
+      entity_id: climate.air_conditioner
+      data:
+        position: '2'
     - service: climate.set_hvac_mode
       data:
-        entity_id: climate.melcloud_living_room_177727
+        entity_id: climate.air_conditioner
         hvac_mode: 'heat'
-    - service: climate.set_swing_mode
-      entity_id: climate.melcloud_living_room_177727
-      data:
-        swing_mode: 'Auto'
 
 # TURN ON AC HOT #
 
@@ -42,21 +42,21 @@
     state: 'off'
   action:
     - service: climate.set_temperature
-      entity_id: climate.melcloud_living_room_177727
+      entity_id: climate.air_conditioner
       data:
         temperature: '23'
     - service: climate.set_fan_mode
-      entity_id: climate.melcloud_living_room_177727
+      entity_id: climate.air_conditioner
       data:
-        fan_mode: 'Speed Auto'
+        fan_mode: 'auto'
+    - service: melcloud.set_vane_vertical
+      entity_id: climate.air_conditioner
+      data:
+        position: '2'
     - service: climate.set_hvac_mode
       data:
-        entity_id: climate.melcloud_living_room_177727
+        entity_id: climate.air_conditioner
         hvac_mode: 'cool'
-    - service: climate.set_swing_mode
-      entity_id: climate.melcloud_living_room_177727
-      data:
-        swing_mode: 'Auto'
 
 # TURN AC OFF #
 
@@ -71,10 +71,10 @@
     - condition: not
       conditions:
         - condition: state
-          entity_id: climate.melcloud_living_room_177727
+          entity_id: climate.air_conditioner
           state: 'off'
   action:
     - service: climate.set_hvac_mode
       data:
-        entity_id: climate.melcloud_living_room_177727
+        entity_id: climate.air_conditioner
         hvac_mode: 'off'
