@@ -127,10 +127,10 @@ switch:
             data:
               entity_id: climate.air_conditioner
               hvac_mode: 'heat_cool'
-          - service: melcloud.set_vane_vertical
+          - service: climate.set_swing_mode
             entity_id: climate.air_conditioner
             data:
-              position: '2'
+              swing_mode: '3'
         turn_off:
           service: climate.set_hvac_mode
           data:

@@ -19,10 +19,10 @@
       entity_id: climate.air_conditioner
       data:
         fan_mode: 'auto'
-    - service: melcloud.set_vane_vertical
+    - service: climate.set_swing_mode
       entity_id: climate.air_conditioner
       data:
-        position: '2'
+        swing_mode: '5_down'
     - service: climate.set_hvac_mode
       data:
         entity_id: climate.air_conditioner
@@ -49,10 +49,10 @@
       entity_id: climate.air_conditioner
       data:
         fan_mode: 'auto'
-    - service: melcloud.set_vane_vertical
+    - service: climate.set_swing_mode
       entity_id: climate.air_conditioner
       data:
-        position: '2'
+        swing_mode: '1_up'
     - service: climate.set_hvac_mode
       data:
         entity_id: climate.air_conditioner
