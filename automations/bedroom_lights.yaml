@@ -10,6 +10,9 @@
     - condition: state
       entity_id: input_boolean.sleeping
       state: 'off'
+    - condition: state
+      entity_id: input_boolean.guest_mode
+      state: 'off'
   action:
     - service: light.turn_on
       data:

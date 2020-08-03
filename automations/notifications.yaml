@@ -10,7 +10,19 @@
     data:
       message: "Sauna is ready!"
 
-# BURGLAR ALARM
+# MOONA TO HOME #
+
+- alias: "Notify when Moona left the airport"
+  trigger:
+    platform: state
+    entity_id: person.moona
+    from: 'Airport'
+  action:
+    service: notify.telegram
+    data:
+      message: "Moona is coming home"
+
+# BURGLAR ALARM #
 
 - alias: "Burglar alarm"
   trigger: 
