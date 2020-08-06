@@ -17,5 +17,5 @@
     - service: tts.google_translate_say
       entity_id: media_player.living_room
       data:
-        message: 'Hyvää huomenta!'
+        message: 'Hyvää yötä!'
         language: 'fi'
