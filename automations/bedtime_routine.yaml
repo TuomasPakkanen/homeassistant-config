@@ -10,7 +10,12 @@
       entity_id: input_boolean.sleeping
       state: 'off'
   action:
-    service: scene.turn_on
-    data:
-      entity_id: scene.sleeping
-      transition: 10
+    - service: scene.turn_on
+      data:
+        entity_id: scene.sleeping
+        transition: 10
+    - service: tts.google_translate_say
+      entity_id: media_player.living_room
+      data:
+        message: 'Hyvää huomenta!'
+        language: 'fi'
