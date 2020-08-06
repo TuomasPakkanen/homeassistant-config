@@ -1,0 +1,15 @@
+- alias: "Turn off living room lights 30 minutes after last movement"
+  trigger: 
+    platform: state
+    entity_id: binary_sensor.presence_20
+    to: 'off'
+    for: '00:30:00'
+  condition:
+    - condition: state
+      entity_id: input_boolean.sleeping
+      state: 'off'
+  action:
+    service: light.turn_off
+    data:
+      entity_id: light.living_room_lights
+      transition: 10
