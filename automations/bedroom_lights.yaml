@@ -1,7 +1,7 @@
 - alias: "Turn on bedroom lights when motion sensor triggered"
   trigger: 
     platform: state
-    entity_id: binary_sensor.motion_sensor
+    entity_id: binary_sensor.presence_23
     to: 'on'
   condition:
     - condition: numeric_state
@@ -23,9 +23,9 @@
 - alias: "Turn off bedroom lights 10 minutes after last movement"
   trigger: 
     platform: state
-    entity_id: binary_sensor.motion_sensor
+    entity_id: binary_sensor.presence_23
     to: 'off'
-    for: '00:10:00'
+    for: '00:05:00'
   condition:
     - condition: state
       entity_id: input_boolean.sleeping

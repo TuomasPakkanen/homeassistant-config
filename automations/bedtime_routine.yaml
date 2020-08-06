@@ -1,35 +1,16 @@
 - alias: "Bedtime routine"
-  trigger: 
-    platform: state
-    entity_id: binary_sensor.motion_sensor
-    to: 'on'
+  trigger:
+    platform: event
+    event_type: deconz_event
+    event_data:
+      id: bedroom_button
+      event: 1001
   condition:
-    - condition: time
-      after: '21:00:00'
-      before: '23:59:00'
     - condition: state
-      entity_id: input_boolean.vacation_mode
+      entity_id: input_boolean.sleeping
       state: 'off'
   action:
-    - service: automation.turn_off
-      entity_id: automation.bedtime_routine
-    - service: automation.turn_on
-      entity_id: automation.morning_routine
-    - service: light.turn_on
-      data:
-        entity_id: light.hallway_lights
-        brightness_pct: 30
-        transition: 1
-    - service: sonos.set_sleep_timer
-      data:
-        entity_id: media_player.living_room
-        sleep_time: 7200
-    - delay: '02:00:00'
-    - service: light.turn_off
-      data:
-        entity_id: light.hallway_lights
-        transition: 30
-    - service: light.turn_off
-      data:
-        entity_id: light.living_room_lights
-        transition: 30
+    service: scene.turn_on
+    data:
+      entity_id: scene.sleeping
+      transition: 10

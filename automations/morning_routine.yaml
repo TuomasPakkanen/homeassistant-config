@@ -4,9 +4,12 @@
     entity_id: binary_sensor.motion_sensor
     to: 'on'
   condition:
-    condition: time
-    after: '07:00:00'
-    before: '12:00:00'
+    - condition: time
+      after: '07:00:00'
+      before: '12:00:00'
+    - condition: state
+      entity_id: input_boolean.sleeping
+      state: 'on'
   action:
     - service: scene.turn_on
       data_template:
@@ -30,11 +33,7 @@
     - service: media_player.volume_set
       data:
         entity_id: media_player.living_room
-        volume_level: 0.15
+        volume_level: 0.20
     - service: media_player.turn_on
       data:
         entity_id: media_player.living_room
-    - service: automation.turn_on
-      entity_id: automation.bedtime_routine
-    - service: automation.turn_off
-      entity_id: automation.morning_routine
