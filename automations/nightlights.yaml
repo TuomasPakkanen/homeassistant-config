@@ -1,30 +1,39 @@
 - alias: "Turn on lights during the night"
-  trigger: 
-    platform: state
-    entity_id: binary_sensor.motion_sensor
-    to: 'on'
+  trigger:
+    platform: event
+    event_type: deconz_event
+    event_data:
+      id: bedroom_button
+      event: 1002
   condition:
     - condition: state
       entity_id: light.tripod_lamp
       state: 'off'
     - condition: time
-      after: '03:00:00'
+      after: '01:00:00'
       before: '07:00:00'
   action:
     - service: scene.turn_on
       data:
         entity_id: scene.evening
         transition: 5
+    - service: media_player.select_source
+      data: 
+        entity_id: media_player.living_room
+        source: 'Yle Radio Suomi'
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.living_room
+        volume_level: 0.15
+    - service: media_player.turn_on
+      data:
+        entity_id: media_player.living_room
 
-- alias: "Turn off lights when gone upstairs or left home during the night"
+- alias: "Turn off lights when left home during the night"
   trigger: 
-    - platform: state
-      entity_id: binary_sensor.motion_sensor
-      to: 'off'
-      for: '00:45:00'
-    - platform: state
-      entity_id: binary_sensor.openclose_14
-      to: 'on'
+    platform: state
+    entity_id: binary_sensor.openclose_14
+    from: 'on'
   condition:
     - condition: state
       entity_id: light.tripod_lamp
