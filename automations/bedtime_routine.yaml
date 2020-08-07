@@ -15,7 +15,7 @@
         entity_id: scene.sleeping
         transition: 10
     - service: tts.google_translate_say
-      entity_id: media_player.living_room
+      entity_id: media_player.google_home
       data:
         message: 'Hyvää yötä!'
         language: 'fi'
