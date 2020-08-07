@@ -6,12 +6,9 @@
   condition:
     - condition: numeric_state
       entity_id: sensor.motion_sensor_2
-      below: 80
+      below: 150
     - condition: state
       entity_id: input_boolean.sleeping
-      state: 'off'
-    - condition: state
-      entity_id: input_boolean.guest_mode
       state: 'off'
   action:
     - service: light.turn_on
