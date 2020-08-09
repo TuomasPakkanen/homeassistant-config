@@ -11,7 +11,10 @@
       state: 'off'
   action:
     - service: automation.turn_off
-      entity_id: automation.turn_on_bedroom_lights_when_motion_sensor_triggered
+      entity_id: 
+        - automation.turn_on_bedroom_lights_when_motion_sensor_triggered
+        - automation.set_bedroom_lights_brightness_when_turned_on_during_the_day
+        - automation.set_bedroom_lights_brightness_when_turned_on_during_the_evening
     - service: scene.turn_on
       data:
         entity_id: scene.sleeping
@@ -23,4 +26,7 @@
         language: 'fi'
     - delay: '00:00:15'
     - service: automation.turn_on
-      entity_id: automation.turn_on_bedroom_lights_when_motion_sensor_triggered
+      entity_id: 
+        - automation.turn_on_bedroom_lights_when_motion_sensor_triggered
+        - automation.set_bedroom_lights_brightness_when_turned_on_during_the_day
+        - automation.set_bedroom_lights_brightness_when_turned_on_during_the_evening
