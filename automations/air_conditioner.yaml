@@ -38,7 +38,7 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.mi_t_582d34345074
-      above: 25.8 # 30 degrees during Winter, due to fireplace
+      above: 25 # 30 degrees during Winter, due to fireplace
       for: "00:10:00"
   condition:
     condition: state
