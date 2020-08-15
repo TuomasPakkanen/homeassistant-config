@@ -10,6 +10,9 @@
     - condition: state
       entity_id: input_boolean.sleeping
       state: 'off'
+    - condition: time
+      before: '02:00:00'
+      after: '07:00:00'
   action:
     - service: light.turn_on
       data_template:
