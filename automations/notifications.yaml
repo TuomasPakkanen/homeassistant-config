@@ -18,9 +18,14 @@
     entity_id: person.moona
     from: 'Airport'
   action:
-    service: notify.telegram
-    data:
-      message: "Moona is coming home"
+    - service: notify.telegram
+      data:
+        message: "Moona is coming home"
+    - service: automation.turn_off
+      entity_id: automation.flash_bedroom_lights_if_either_door_is_opened_during_the_night
+    - delay: '00:30:00'
+    - service: automation.turn_on
+      entity_id: automation.flash_bedroom_lights_if_either_door_is_opened_during_the_night
 
 # BURGLAR ALARM #
 
