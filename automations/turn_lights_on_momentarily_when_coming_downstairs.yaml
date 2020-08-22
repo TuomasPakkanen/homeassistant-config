@@ -22,6 +22,12 @@
         entity_id: light.hallway_lights
         brightness_pct: 10
         transition: 5
+    - service: light.turn_on
+      data:
+        entity_id: light.kitchen_lights
+        brightness_pct: 40
+        kelvin: 2200
+        transition: 5
     - delay: '00:10:00'
     - service: light.turn_off
       data:
@@ -30,4 +36,8 @@
     - service: light.turn_off
       data:
         entity_id: light.hallway_lights
+        transition: 15
+    - service: light.turn_off
+      data:
+        entity_id: light.kitchen_lights
         transition: 15

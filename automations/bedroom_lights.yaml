@@ -33,7 +33,6 @@
           {% else %}
             2200
           {% endif %}
-        # rgb_color: [255,182,109]
 
 - alias: "Turn off bedroom lights 5 minutes after last movement"
   trigger: 

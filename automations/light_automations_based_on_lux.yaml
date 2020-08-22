@@ -24,7 +24,6 @@
         {%- endif %}
       transition: 15
 
-
 - alias: "Turn off lights if bright during the day"
   trigger:
     platform: numeric_state

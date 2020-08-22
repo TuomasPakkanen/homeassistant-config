@@ -10,6 +10,8 @@
       state: 'off'
     light.media_room_lights:
       state: 'off'
+    light.kitchen_lights:
+      state: 'off'
     media_player.living_room:
       state: paused
       volume_level: 0.15
@@ -28,6 +30,10 @@
       state: 'on'
       brightness: 153
       xy_color: [0.46,0.41]
+    light.kitchen_lights:
+      state: 'on'
+      brightness: 153
+      xy_color: [0.46,0.41]
     input_boolean.sleeping:
       state: 'off'
 
@@ -43,6 +49,10 @@
       state: 'on'
       brightness: 255
       xy_color: [0.38,0.38]
+    light.kitchen_lights:
+      state: 'on'
+      brightness: 255
+      xy_color: [0.38,0.38]
     input_boolean.sleeping:
       state: 'off'
 
@@ -53,6 +63,8 @@
     light.hallway_upstairs_lights:
       state: 'off'
     light.living_room_lights:
+      state: 'off'
+    light.kitchen_lights:
       state: 'off'
     input_boolean.sleeping:
       state: 'off'
