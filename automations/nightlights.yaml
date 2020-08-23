@@ -3,12 +3,15 @@
     platform: event
     event_type: deconz_event
     event_data:
-      id: bedroom_button
-      event: 1002
+      id: bedroom_remote
+      event: 1001
   condition:
     - condition: state
       entity_id: light.tripod_lamp
       state: 'off'
+    - condition: state
+      entity_id: input_boolean.sleeping
+      state: 'on'
     - condition: time
       after: '01:00:00'
       before: '07:00:00'

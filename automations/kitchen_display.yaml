@@ -1,0 +1,19 @@
+- alias: "Kitchen display"
+  trigger:
+    platform: event
+    event_type: deconz_event
+    event_data:
+      id: downstairs_button
+      event: 1002
+  action:
+    - service: cast.show_lovelace_view
+      data: 
+        entity_id: media_player.kitchen_display
+        view_path: tablet
+        dashboard_path: lovelace
+    - delay: '00:00:05'
+    - service: cast.show_lovelace_view
+      data: 
+        entity_id: media_player.kitchen_display
+        view_path: tablet
+        dashboard_path: lovelace

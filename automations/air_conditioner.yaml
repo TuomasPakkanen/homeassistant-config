@@ -72,12 +72,15 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.mi_h_582d34345074
-      above: 55
-      for: "00:10:00"
+      above: 60
+      for: "00:05:00"
   condition:
-    condition: state
-    entity_id: input_boolean.vacation_mode
-    state: 'off'
+    - condition: state
+      entity_id: input_boolean.vacation_mode
+      state: 'off'
+    - condition: time
+      after: '06:00:00'
+      before: '23:00:00'
   action:
     - service: climate.set_temperature
       entity_id: climate.air_conditioner
@@ -102,14 +105,25 @@
 
 # TURN AC OFF #
 
-- alias: "Turn off AC when target temperature is reached"
+- alias: "Turn off AC when target temperature and humidity is reached"
   trigger:
-    platform: numeric_state
-    entity_id: sensor.mi_t_582d34345074
-    below: 24.4 #26 winter
-    above: 23
-    for: "00:30:00"
+    - platform: numeric_state
+      entity_id: sensor.mi_t_582d34345074
+      below: 24.4 #26 winter
+      above: 23
+      for: "00:30:00"
+    - platform: numeric_state
+      entity_id: sensor.mi_h_582d34345074
+      below: 55
+      for: "00:30:00"
   condition:
+    - condition: numeric_state
+      entity_id: sensor.mi_t_582d34345074
+      below: 24.4 #26 winter
+      above: 23
+    - condition: numeric_state
+      entity_id: sensor.mi_h_582d34345074
+      below: 55
     - condition: not
       conditions:
         - condition: state

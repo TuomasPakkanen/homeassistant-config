@@ -17,6 +17,9 @@
     platform: state
     entity_id: person.moona
     from: 'Airport'
+  condition: 
+    condition: template
+    value_template: '{{ is_state_attr("sensor.iphone_moona_geocoded_location", "Country", "Suomi") }}'
   action:
     - service: notify.telegram
       data:
@@ -45,6 +48,21 @@
     data_template:
       title: "Burglar alarm triggered!"
       message: "{{ trigger.to_state.attributes.friendly_name }} has been opened!"
+
+# AIR CONDITIONER ENERGY USAGE MONTHLY REPORTING
+
+- alias: "Report AC energy usage"
+  trigger:
+    platform: time
+    at: '17:00:00'
+  condition:
+    condition: template
+    value_template: "{{ now().day == 1 }}"
+  action:
+    service: notify.telegram
+    data_template:
+      title: "Here's the cumulative air conditioner energy usage"
+      message: "{{ states('sensor.air_conditioner_energy') }} kWh"
 
 # SYSTEM #
 

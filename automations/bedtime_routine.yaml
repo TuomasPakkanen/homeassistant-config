@@ -3,7 +3,7 @@
     platform: event
     event_type: deconz_event
     event_data:
-      id: bedroom_button
+      id: bedroom_remote
       event: 1001
   condition:
     - condition: state

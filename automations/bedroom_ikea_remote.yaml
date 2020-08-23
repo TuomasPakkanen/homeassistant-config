@@ -6,8 +6,20 @@
       id: bedroom_remote
       event: 1002
   action:
-    service: light.toggle
-    entity_id: light.bedroom_lights
+    - service: light.toggle
+      entity_id: light.bedroom_lights
+    - service: automation.turn_off
+      entity_id: automation.turn_off_bedroom_lights_5_minutes_after_last_movement
+
+- alias: 'Restore bedroom motion sensor automation'
+  trigger:
+    platform: state
+    entity_id: automation.turn_off_bedroom_lights_5_minutes_after_last_movement
+    to: 'off'
+    for: '02:00:00'
+  action:
+    service: automation.turn_on
+    entity_id: automation.turn_off_bedroom_lights_5_minutes_after_last_movement
 
 - alias: 'Increase brightness of bedroom lights from dimmer'
   trigger:
