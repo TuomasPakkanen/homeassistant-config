@@ -10,16 +10,20 @@
       entity_id: light.bedroom_lights
     - service: automation.turn_off
       entity_id: automation.turn_off_bedroom_lights_5_minutes_after_last_movement
+    - service: automation.turn_off
+      entity_id: automation.turn_on_bedroom_lights_when_motion_sensor_triggered
 
-- alias: 'Restore bedroom motion sensor automation'
+- alias: 'Restore bedroom motion sensor automations'
   trigger:
     platform: state
     entity_id: automation.turn_off_bedroom_lights_5_minutes_after_last_movement
     to: 'off'
-    for: '02:00:00'
+    for: '03:00:00'
   action:
-    service: automation.turn_on
-    entity_id: automation.turn_off_bedroom_lights_5_minutes_after_last_movement
+    - service: automation.turn_on
+      entity_id: automation.turn_off_bedroom_lights_5_minutes_after_last_movement
+    - service: automation.turn_on
+      entity_id: automation.turn_on_bedroom_lights_when_motion_sensor_triggered
 
 - alias: 'Increase brightness of bedroom lights from dimmer'
   trigger:
