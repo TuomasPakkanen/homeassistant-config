@@ -3,7 +3,7 @@
     platform: event
     event_type: deconz_event
     event_data:
-      id: tradfri_remote_control
+      id: media_room_remote
       event: 1002
   action:
     service: light.toggle
@@ -14,7 +14,7 @@
     platform: event
     event_type: deconz_event
     event_data:
-      id: tradfri_remote_control
+      id: media_room_remote
       event: 2002
   action:
     - service: light.turn_on
@@ -29,7 +29,7 @@
     platform: event
     event_type: deconz_event
     event_data:
-      id: tradfri_remote_control
+      id: media_room_remote
       event: 3002
   action:
     - service: light.turn_on
@@ -44,7 +44,7 @@
     platform: event
     event_type: deconz_event
     event_data:
-      id: tradfri_remote_control
+      id: media_room_remote
       event: 5002
   action:
     - service: light.turn_on
@@ -61,7 +61,7 @@
     platform: event
     event_type: deconz_event
     event_data:
-      id: tradfri_remote_control
+      id: media_room_remote
       event: 4002
   action:
     - service: light.turn_on
