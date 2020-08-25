@@ -37,6 +37,25 @@
     input_boolean.sleeping:
       state: 'off'
 
+- name: Night
+  entities:
+    light.hallway_lights:
+      state: 'on'
+      brightness: 80
+    light.hallway_upstairs_lights:
+      state: 'on'
+      brightness: 80
+    light.living_room_lights:
+      state: 'on'
+      brightness: 80
+      xy_color: [0.46,0.41]
+    light.kitchen_lights:
+      state: 'on'
+      brightness: 80
+      xy_color: [0.46,0.41]
+    input_boolean.sleeping:
+      state: 'off'
+
 - name: Daytime
   entities:
     light.hallway_lights:

@@ -6,9 +6,11 @@
     entity_id: sensor.temperature_5
     above: 44
   action:
-    service: notify.telegram
+    service: tts.google_translate_say
+    entity_id: media_player.kitchen_display
     data:
-      message: "Sauna is ready!"
+      message: 'Sauna on lämmin!'
+      language: 'fi'
 
 # MOONA TO HOME #
 

@@ -17,11 +17,13 @@
     service: scene.turn_on
     data_template:
       entity_id: >
-        {%-if 9 <= now().hour < 19 %}
+        {% if 7 <= now().hour < 19 %}
           scene.daytime
-        {%- else %}
+        {% elif 19 <= now().hour < 21 %}
           scene.evening
-        {%- endif %}
+        {% else %}
+          scene.night
+        {% endif %}
       transition: 15
 
 - alias: "Turn off lights if bright during the day"
