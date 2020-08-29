@@ -2,7 +2,7 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.motion_sensor_2
-    below: 100
+    below: 80
   condition:
     - condition: state
       entity_id: input_boolean.sleeping
@@ -30,7 +30,7 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.motion_sensor_2
-    above: 130
+    above: 110
     for: "00:03:00"
   condition:
     condition: state

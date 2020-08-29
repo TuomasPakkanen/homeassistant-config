@@ -20,7 +20,7 @@
         brightness_pct: >
           {% if 5 <= now().hour < 18 %}
             99
-          {% elif 18 <= now().hour < 22 %}
+          {% elif 18 <= now().hour < 21 %}
             75
           {% else %}
             40
@@ -28,7 +28,7 @@
         kelvin: >
           {% if 5 <= now().hour < 18 %}
             4000
-          {% elif 18 <= now().hour < 22 %}
+          {% elif 18 <= now().hour < 21 %}
             2700
           {% else %}
             2200
