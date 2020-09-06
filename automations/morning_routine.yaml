@@ -19,7 +19,7 @@
           {%- else %}
             scene.daytime_bright
           {%- endif %}
-        transition: 5
+        #transition: 5
     - service: tts.google_translate_say
       entity_id: media_player.living_room
       data:

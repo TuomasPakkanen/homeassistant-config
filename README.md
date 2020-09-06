@@ -2,5 +2,5 @@
 
 ### Screenshots of the frontend UI
 
-![Lovelace UI](screenshots/07032020.png)
+![Lovelace UI](screenshots/06092020.png)
 iOS Dark Mode Theme

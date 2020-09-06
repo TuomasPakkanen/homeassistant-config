@@ -8,6 +8,10 @@
       state: 'off'
     light.living_room_lights:
       state: 'off'
+    light.table_lamp:
+      state: 'off'
+    light.tripod_lamp:
+      state: 'off'
     light.media_room_lights:
       state: 'off'
     light.kitchen_lights:
@@ -26,6 +30,13 @@
     light.hallway_upstairs_lights:
       state: 'on'
       brightness: 153
+    light.table_lamp:
+      state: 'on'
+      brightness: 153
+    light.tripod_lamp:
+      state: 'on'
+      brightness: 153
+      xy_color: [0.46,0.41]
     light.living_room_lights:
       state: 'on'
       brightness: 153
@@ -45,10 +56,14 @@
     light.hallway_upstairs_lights:
       state: 'on'
       brightness: 80
-    light.living_room_lights:
+    light.table_lamp:
+      state: 'off'
+    light.tripod_lamp:
       state: 'on'
       brightness: 80
       xy_color: [0.46,0.41]
+    light.living_room_lights:
+      state: 'off'
     light.kitchen_lights:
       state: 'on'
       brightness: 80
@@ -68,6 +83,10 @@
       state: 'on'
       brightness: 255
       xy_color: [0.38,0.38]
+    light.tripod_lamp:
+      state: 'on'
+      brightness: 255
+      xy_color: [0.38,0.38]
     light.kitchen_lights:
       state: 'on'
       brightness: 255
@@ -82,6 +101,8 @@
     light.hallway_upstairs_lights:
       state: 'off'
     light.living_room_lights:
+      state: 'off'
+    light.tripod_lamp:
       state: 'off'
     light.kitchen_lights:
       state: 'off'

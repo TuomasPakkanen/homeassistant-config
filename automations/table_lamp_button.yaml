@@ -1,0 +1,26 @@
+- alias: 'Table lamp button'
+  trigger:
+    platform: event
+    event_type: deconz_event
+    event_data:
+      id: table_lamp_button
+  action:
+    - choose:
+      # Turn on/off table lamp (dim)
+      - conditions:
+        - condition: template
+          value_template: "{{ trigger.event.data.event == 1002 }}"
+        sequence:
+          - service: light.toggle
+            data:
+              entity_id: light.table_lamp
+              brightness_pct: 60
+      # Long press turn on table lamp (bright)
+      - conditions:
+        - condition: template
+          value_template: "{{ trigger.event.data.event == 1001 }}"
+        sequence:
+          - service: light.turn_on
+            data:
+              entity_id: light.table_lamp
+              brightness_pct: 100

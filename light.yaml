@@ -1,7 +1,6 @@
 - platform: group
   name: Living room lights
   entities:
-    - light.tripod_lamp
     - light.living_room_light_1
     - light.living_room_light_2
     - light.living_room_light_3

@@ -1,0 +1,74 @@
+- alias: '1st floor dimmer'
+  trigger:
+    platform: event
+    event_type: deconz_event
+    event_data:
+      id: dimmer_switch
+  action:
+    - choose:
+      # Turn on living room lights
+      - conditions:
+        - condition: template
+          value_template: "{{ trigger.event.data.event == 1002 }}"
+        sequence:
+          - service: light.turn_on
+            data:
+              entity_id:
+                - light.living_room_lights
+              brightness_pct: 80
+      # Long press turn on all downstairs lights
+      - conditions:
+        - condition: template
+          value_template: "{{ trigger.event.data.event == 1001 }}"
+        sequence:
+          - service: light.turn_on
+            data:
+              entity_id:
+                - light.living_room_lights
+                - light.kitchen_lights
+                - light.table_lamp
+                - light.hallway_lights
+              brightness_pct: 80
+      # Increase
+      - conditions:
+        - condition: template
+          value_template: "{{ trigger.event.data.event == 2002 }}"
+        sequence:
+          - service: light.turn_on
+            data_template:
+              entity_id: light.living_room_lights
+              brightness: >
+                {% set bri = state_attr('light.living_room_lights', 'brightness') | int %}
+                {{ [bri+50, 255] | min }}
+      # Decrease
+      - conditions:
+        - condition: template
+          value_template: "{{ trigger.event.data.event == 3002 }}"
+        sequence:
+          - service: light.turn_on
+            data_template:
+              entity_id: light.living_room_lights
+              brightness: >
+                {% set bri = state_attr('light.living_room_lights', 'brightness') | int %}
+                {{ [bri-50, 1] | max }}
+      # Off
+      - conditions:
+        - condition: template
+          value_template: "{{ trigger.event.data.event == 4002 }}"
+        sequence:
+          - service: light.turn_off
+            data:
+              entity_id:
+                - light.living_room_lights
+      # Off long press
+      - conditions:
+        - condition: template
+          value_template: "{{ trigger.event.data.event == 4001 }}"
+        sequence:
+          - service: light.turn_off
+            data:
+              entity_id:
+                - light.living_room_lights
+                - light.kitchen_lights
+                - light.table_lamp
+                - light.hallway_lights
