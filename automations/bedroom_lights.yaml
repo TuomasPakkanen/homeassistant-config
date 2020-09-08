@@ -1,4 +1,5 @@
 - alias: "Turn on bedroom lights when motion sensor triggered"
+  initial_state: true
   trigger: 
     platform: state
     entity_id: binary_sensor.presence_23
@@ -34,12 +35,13 @@
             2200
           {% endif %}
 
-- alias: "Turn off bedroom lights 5 minutes after last movement"
+- alias: "Turn off bedroom lights 10 minutes after last movement"
+  initial_state: true
   trigger: 
     platform: state
     entity_id: binary_sensor.presence_23
     to: 'off'
-    for: '00:05:00'
+    for: '00:10:00'
   condition:
     - condition: state
       entity_id: input_boolean.sleeping
@@ -73,3 +75,82 @@
       data:
         message: 'Joku avasi ulko-oven!'
         language: 'fi'
+
+  
+- alias: "Set bedroom temperature and brightness in the morning and day"
+  trigger:
+    platform: state
+    entity_id: light.bedroom_light_1
+    to: 'on'
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'night_end'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'nautical_dawn'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'dawn'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'sunrise_start'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'sunrise_end'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'golden_hour_1'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'solar_noon'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.bedroom_lights
+        kelvin: 4000
+    - service: light.turn_on
+      data:
+        entity_id: light.bedroom_lights
+        brightness_pct: 80
+
+- alias: "Set bedroom temperature and brightness in the evening"
+  trigger:
+    platform: state
+    entity_id: light.bedroom_light_1
+    to: 'on'
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'golden_hour_2'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'sunset_start'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'sunset_end'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'dusk'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'night_start'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'nautical_dusk'
+      - condition: state
+        entity_id: sensor.daylight
+        state: 'nadir'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.bedroom_lights
+        kelvin: 2200
+    - service: light.turn_on
+      data:
+        entity_id: light.bedroom_lights
+        brightness_pct: 20
