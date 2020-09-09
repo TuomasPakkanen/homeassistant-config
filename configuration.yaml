@@ -12,7 +12,7 @@ homeassistant:
 
 group: !include groups.yaml
 automation: !include_dir_merge_list automations/
-light: !include light.yaml
+#light: !include light.yaml # light groups managed in Deconz
 scene: !include scenes.yaml
 #script: !include scripts.yaml # currently no active scripts in use
 

@@ -15,6 +15,7 @@
             data:
               entity_id:
                 - light.living_room_lights
+                - light.tripod_lamp
               brightness_pct: 80
       # Long press turn on all downstairs lights
       - conditions:
@@ -60,6 +61,7 @@
             data:
               entity_id:
                 - light.living_room_lights
+                - light.tripod_lamp
       # Off long press
       - conditions:
         - condition: template
@@ -72,3 +74,4 @@
                 - light.kitchen_lights
                 - light.table_lamp
                 - light.hallway_lights
+                - light.tripod_lamp

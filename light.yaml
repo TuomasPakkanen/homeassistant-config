@@ -1,3 +1,5 @@
+# NOT IN USE. LIGHT GROUPS CREATED IN DECONZ! FILE EXCLUDED FROM CONFIGURATION.YAML
+
 - platform: group
   name: Living room lights
   entities:
