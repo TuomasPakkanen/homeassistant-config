@@ -1,19 +1,26 @@
-- alias: "Kitchen display"
-  trigger:
-    platform: event
-    event_type: deconz_event
-    event_data:
-      id: downstairs_button
-      event: 1002
-  action:
-    - service: cast.show_lovelace_view
-      data: 
-        entity_id: media_player.kitchen_display
-        view_path: tablet
-        dashboard_path: lovelace
-    - delay: '00:00:05'
-    - service: cast.show_lovelace_view
-      data: 
-        entity_id: media_player.kitchen_display
-        view_path: tablet
-        dashboard_path: lovelace
+# does not work reliably so not in use atm.
+
+#- alias: "Kitchen display"
+#  trigger:
+#    platform: event
+#    event_type: deconz_event
+#    event_data:
+#      id: downstairs_button
+#      event: 1002
+#  action:
+#    - service: media_player.turn_off
+#      entity_id: media_player.kitchen_display
+#    - delay: '00:00:01'
+#    - service: media_player.turn_on
+#      entity_id: media_player.kitchen_display
+#    - service: cast.show_lovelace_view
+#      data: 
+#        entity_id: media_player.kitchen_display
+#        view_path: tablet
+#        #dashboard_path: lovelace
+#    - delay: '00:00:05'
+#    - service: cast.show_lovelace_view
+#      data: 
+#        entity_id: media_player.kitchen_display
+#        view_path: tablet
+#        dashboard_path: lovelace

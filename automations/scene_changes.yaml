@@ -45,3 +45,27 @@
     data:
       entity_id: scene.night
       transition: 15
+
+- alias: 'Fireplace scene activated'
+  trigger:
+    platform: event
+    event_type: call_service
+    event_data:
+      service_data:
+        entity_id: [scene.fireplace]
+      domain: scene
+      service: turn_on
+  action:
+    - service: automation.turn_off
+      entity_id: automation.set_evening_scene
+    - service: automation.turn_off
+      entity_id: automation.set_night_scene
+    - service: automation.turn_off
+      entity_id: automation.Turn_on_lights_if_dark_during_the_day
+    - delay: '03:00:00'
+    - service: automation.turn_on
+      entity_id: automation.set_evening_scene
+    - service: automation.turn_on
+      entity_id: automation.set_night_scene
+    - service: automation.turn_on
+      entity_id: automation.Turn_on_lights_if_dark_during_the_day

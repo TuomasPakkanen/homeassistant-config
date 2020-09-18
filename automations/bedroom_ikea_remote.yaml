@@ -72,7 +72,7 @@
     platform: state
     entity_id: automation.turn_off_bedroom_lights_5_minutes_after_last_movement
     to: 'off'
-    for: '03:00:00'
+    for: '02:00:00'
   action:
     - service: automation.turn_on
       entity_id: automation.turn_off_bedroom_lights_5_minutes_after_last_movement

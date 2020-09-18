@@ -3,8 +3,8 @@
     platform: event
     event_type: deconz_event
     event_data:
-      id: bedroom_remote
-      event: 1001
+      id: bedroom_button
+      event: 1002
   condition:
     - condition: state
       entity_id: input_boolean.sleeping

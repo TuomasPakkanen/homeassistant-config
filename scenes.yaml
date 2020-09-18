@@ -1,110 +1,437 @@
-- name: Sleeping
+- id: 0936afe09b3047efba0d4b5e92046162
+  name: Sleeping
   entities:
+    input_boolean.sleeping:
+      editable: false
+      friendly_name: Sleeping
+      icon: mdi:sleep
+      state: 'on'
     light.bedroom_lights:
+      all_on: false
+      effect_list:
+      - colorloop
+      friendly_name: Bedroom lights
+      is_deconz_group: true
+      max_mireds: 500
+      min_mireds: 153
       state: 'off'
+      supported_features: 63
     light.hallway_lights:
+      all_on: false
+      effect_list:
+      - colorloop
+      friendly_name: Hallway lights
+      is_deconz_group: true
       state: 'off'
+      supported_features: 45
     light.hallway_upstairs_lights:
+      all_on: false
+      effect_list:
+      - colorloop
+      friendly_name: Hallway upstairs lights
+      is_deconz_group: true
       state: 'off'
+      supported_features: 45
+    light.kitchen_lights:
+      all_on: false
+      effect_list:
+      - colorloop
+      friendly_name: Kitchen lights
+      is_deconz_group: true
+      max_mireds: 500
+      min_mireds: 153
+      state: 'off'
+      supported_features: 47
     light.living_room_lights:
+      all_on: false
+      effect_list:
+      - colorloop
+      friendly_name: Living room lights
+      is_deconz_group: true
+      max_mireds: 500
+      min_mireds: 153
       state: 'off'
-    light.table_lamp:
-      state: 'off'
-    light.tripod_lamp:
-      state: 'off'
+      supported_features: 47
     light.media_room_lights:
+      all_on: false
+      effect_list:
+      - colorloop
+      friendly_name: Media room lights
+      is_deconz_group: true
+      max_mireds: 500
+      min_mireds: 153
       state: 'off'
-    light.kitchen_lights:
+      supported_features: 47
+    light.table_lamp:
+      friendly_name: Table lamp
+      is_deconz_group: false
       state: 'off'
+      supported_features: 41
+    light.tripod_lamp:
+      effect_list:
+      - colorloop
+      friendly_name: Tripod lamp
+      is_deconz_group: false
+      max_mireds: 65535
+      min_mireds: 153
+      state: 'off'
+      supported_features: 63
     media_player.living_room:
-      state: paused
+      friendly_name: Sonos
+      is_volume_muted: false
+      media_content_type: music
+      media_title: TV
+      night_sound: false
+      shuffle: false
+      sonos_group:
+      - media_player.living_room
+      source: TV
+      source_list:
+      - Bassoradio 102.8 (Dance & Electronic)
+      - Groove FM 91.1 (Classic Hits)
+      - NRJ Suomihitit (Euro Hits)
+      - Radio Aalto 92.5 (Top 40 & Pop Music)
+      - Radio City 99.4 (Rock Music)
+      - Radio NRJ Finland 96.8 (Top 40 & Pop Music)
+      - Radio Rock 94.9 (Rock Music)
+      - Radio SuomiPop 98.1 (Adult Hits)
+      - Yle Radio Suomi
+      - TV
+      speech_enhance: false
+      state: playing
+      supported_features: 64063
       volume_level: 0.15
-    input_boolean.sleeping:
-      state: 'on'
-
-- name: Evening
+  icon: mdi:sleep
+- id: aed3e9bec3d3483dbc4c8512a7d2442e
+  name: Evening
   entities:
+    input_boolean.sleeping:
+      editable: false
+      friendly_name: Sleeping
+      icon: mdi:sleep
+      state: 'off'
     light.hallway_lights:
-      state: 'on'
+      all_on: true
       brightness: 153
+      effect_list:
+      - colorloop
+      friendly_name: Hallway lights
+      is_deconz_group: true
+      state: 'on'
+      supported_features: 45
     light.hallway_upstairs_lights:
-      state: 'on'
+      all_on: true
       brightness: 153
+      effect_list:
+      - colorloop
+      friendly_name: Hallway upstairs lights
+      is_deconz_group: true
+      state: 'on'
+      supported_features: 45
+    light.kitchen_lights:
+      all_on: true
+      brightness: 153
+      effect_list:
+      - colorloop
+      friendly_name: Kitchen lights
+      is_deconz_group: true
+      max_mireds: 500
+      min_mireds: 153
+      state: 'on'
+      supported_features: 47
+    light.living_room_lights:
+      all_on: true
+      brightness: 153
+      effect_list:
+      - colorloop
+      friendly_name: Living room lights
+      is_deconz_group: true
+      max_mireds: 500
+      min_mireds: 153
+      state: 'on'
+      supported_features: 47
     light.table_lamp:
-      state: 'on'
       brightness: 153
+      friendly_name: Table lamp
+      is_deconz_group: false
+      state: 'on'
+      supported_features: 41
     light.tripod_lamp:
-      state: 'on'
       brightness: 153
-      xy_color: [0.46,0.41]
-    light.living_room_lights:
+      effect_list:
+      - colorloop
+      friendly_name: Tripod lamp
+      hs_color:
+      - 37.941
+      - 53.333
+      is_deconz_group: false
+      max_mireds: 65535
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 204
+      - 119
       state: 'on'
-      brightness: 153
-      xy_color: [0.46,0.41]
-    light.kitchen_lights:
-      state: 'on'
-      brightness: 153
-      xy_color: [0.46,0.41]
-    input_boolean.sleeping:
-      state: 'off'
-
-- name: Night
+      supported_features: 63
+      xy_color:
+      - 0.461
+      - 0.407
+  icon: mdi:weather-sunset
+- id: ea1a2e069f944ecebc3d9b99d0794cba
+  name: Night
   entities:
+    input_boolean.sleeping:
+      editable: false
+      friendly_name: Sleeping
+      icon: mdi:sleep
+      state: 'off'
     light.hallway_lights:
-      state: 'on'
+      all_on: true
       brightness: 80
+      effect_list:
+      - colorloop
+      friendly_name: Hallway lights
+      is_deconz_group: true
+      state: 'on'
+      supported_features: 45
     light.hallway_upstairs_lights:
-      state: 'on'
+      all_on: true
       brightness: 80
+      effect_list:
+      - colorloop
+      friendly_name: Hallway upstairs lights
+      is_deconz_group: true
+      state: 'on'
+      supported_features: 45
+    light.kitchen_lights:
+      all_on: true
+      brightness: 21
+      effect_list:
+      - colorloop
+      friendly_name: Kitchen lights
+      is_deconz_group: true
+      max_mireds: 500
+      min_mireds: 153
+      state: 'on'
+      supported_features: 47
+    light.living_room_lights:
+      all_on: false
+      effect_list:
+      - colorloop
+      friendly_name: Living room lights
+      is_deconz_group: true
+      max_mireds: 500
+      min_mireds: 153
+      state: 'off'
+      supported_features: 47
     light.table_lamp:
+      friendly_name: Table lamp
+      is_deconz_group: false
       state: 'off'
+      supported_features: 41
     light.tripod_lamp:
-      state: 'on'
       brightness: 80
-      xy_color: [0.46,0.41]
-    light.living_room_lights:
-      state: 'off'
-    light.kitchen_lights:
+      effect_list:
+      - colorloop
+      friendly_name: Tripod lamp
+      hs_color:
+      - 37.941
+      - 53.333
+      is_deconz_group: false
+      max_mireds: 65535
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 204
+      - 119
       state: 'on'
-      brightness: 80
-      xy_color: [0.46,0.41]
+      supported_features: 63
+      xy_color:
+      - 0.461
+      - 0.407
+  icon: mdi:weather-night
+- id: 5489257b11514fada4fec8dd53799af2
+  name: Daytime
+  entities:
     input_boolean.sleeping:
+      editable: false
+      friendly_name: Sleeping
+      icon: mdi:sleep
       state: 'off'
-
-- name: Daytime
+    light.hallway_lights:
+      all_on: true
+      brightness: 254
+      effect_list:
+      - colorloop
+      friendly_name: Hallway lights
+      is_deconz_group: true
+      state: 'on'
+      supported_features: 45
+    light.hallway_upstairs_lights:
+      all_on: true
+      brightness: 254
+      effect_list:
+      - colorloop
+      friendly_name: Hallway upstairs lights
+      is_deconz_group: true
+      state: 'on'
+      supported_features: 45
+    light.kitchen_lights:
+      all_on: true
+      brightness: 68
+      effect_list:
+      - colorloop
+      friendly_name: Kitchen lights
+      is_deconz_group: true
+      max_mireds: 500
+      min_mireds: 153
+      state: 'on'
+      supported_features: 47
+    light.living_room_lights:
+      all_on: true
+      brightness: 68
+      effect_list:
+      - colorloop
+      friendly_name: Living room lights
+      is_deconz_group: true
+      max_mireds: 500
+      min_mireds: 153
+      state: 'on'
+      supported_features: 47
+    light.tripod_lamp:
+      brightness: 254
+      effect_list:
+      - colorloop
+      friendly_name: Tripod lamp
+      hs_color:
+      - 44.348
+      - 27.059
+      is_deconz_group: false
+      max_mireds: 65535
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 237
+      - 185
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.382
+      - 0.382
+  icon: mdi:weather-partly-cloudy
+- id: 5442ea7a11874814b812a60c6c2d7514
+  name: Daytime bright
+  entities:
+    input_boolean.sleeping:
+      editable: false
+      friendly_name: Sleeping
+      icon: mdi:sleep
+      state: 'off'
+    light.hallway_lights:
+      all_on: false
+      effect_list:
+      - colorloop
+      friendly_name: Hallway lights
+      is_deconz_group: true
+      state: 'off'
+      supported_features: 45
+    light.hallway_upstairs_lights:
+      all_on: false
+      effect_list:
+      - colorloop
+      friendly_name: Hallway upstairs lights
+      is_deconz_group: true
+      state: 'off'
+      supported_features: 45
+    light.kitchen_lights:
+      all_on: false
+      effect_list:
+      - colorloop
+      friendly_name: Kitchen lights
+      is_deconz_group: true
+      max_mireds: 500
+      min_mireds: 153
+      state: 'off'
+      supported_features: 47
+    light.living_room_lights:
+      all_on: false
+      effect_list:
+      - colorloop
+      friendly_name: Living room lights
+      is_deconz_group: true
+      max_mireds: 500
+      min_mireds: 153
+      state: 'off'
+      supported_features: 47
+    light.tripod_lamp:
+      effect_list:
+      - colorloop
+      friendly_name: Tripod lamp
+      is_deconz_group: false
+      max_mireds: 65535
+      min_mireds: 153
+      state: 'off'
+      supported_features: 63
+  icon: mdi:weather-sunny
+- id: '1600357633839'
+  name: Fireplace
   entities:
     light.hallway_lights:
+      all_on: true
+      brightness: 108
+      effect_list:
+      - colorloop
+      friendly_name: Hallway lights
+      is_deconz_group: true
       state: 'on'
-      brightness: 255
+      supported_features: 45
     light.hallway_upstairs_lights:
+      all_on: true
+      brightness: 75
+      effect_list:
+      - colorloop
+      friendly_name: Hallway upstairs lights
+      is_deconz_group: true
       state: 'on'
-      brightness: 255
-    light.living_room_lights:
-      state: 'on'
-      brightness: 255
-      xy_color: [0.38,0.38]
-    light.tripod_lamp:
-      state: 'on'
-      brightness: 255
-      xy_color: [0.38,0.38]
+      supported_features: 45
     light.kitchen_lights:
-      state: 'on'
-      brightness: 255
-      xy_color: [0.38,0.38]
-    input_boolean.sleeping:
+      all_on: false
+      effect_list:
+      - colorloop
+      friendly_name: Kitchen lights
+      is_deconz_group: true
+      max_mireds: 500
+      min_mireds: 153
       state: 'off'
-
-- name: Daytime bright
-  entities:
-    light.hallway_lights:
-      state: 'off'
-    light.hallway_upstairs_lights:
-      state: 'off'
+      supported_features: 47
     light.living_room_lights:
+      all_on: false
+      effect_list:
+      - colorloop
+      friendly_name: Living room lights
+      is_deconz_group: true
+      max_mireds: 500
+      min_mireds: 153
       state: 'off'
+      supported_features: 47
     light.tripod_lamp:
-      state: 'off'
-    light.kitchen_lights:
-      state: 'off'
-    input_boolean.sleeping:
-      state: 'off'
+      brightness: 254
+      effect_list:
+      - colorloop
+      friendly_name: Tripod lamp
+      hs_color:
+      - 26.725
+      - 89.804
+      is_deconz_group: false
+      max_mireds: 65535
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 128
+      - 25
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.606
+      - 0.372
+  icon: mdi:fireplace
