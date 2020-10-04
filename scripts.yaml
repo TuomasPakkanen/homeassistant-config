@@ -1,0 +1,227 @@
+sleeping_scene:
+  alias: "Sleeping scene"
+  icon: mdi:sleep
+  sequence:
+    - service: light.turn_off
+      data:
+        entity_id: all
+        transition: 10
+    - service: sonos.set_sleep_timer
+      data:
+        entity_id: media_player.living_room
+        sleep_time: 0
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.sleeping
+
+evening_scene:
+  alias: "Evening scene"
+  icon: mdi:weather-sunset
+  sequence: 
+    - service: light.turn_on
+      data: 
+        entity_id: light.living_room_lights
+        brightness: 153
+        xy_color: [0.46,0.41]
+        transition: 15
+    - delay:
+        milliseconds: 500
+    - service: light.turn_on
+      data: 
+        entity_id: light.tripod_lamp
+        brightness: 153
+        xy_color: [0.46,0.41]
+        transition: 15
+    - delay:
+        milliseconds: 500
+    - service: light.turn_on
+      data: 
+        entity_id: light.kitchen_lights
+        brightness: 153
+        xy_color: [0.46,0.41]
+        transition: 15
+    - delay:
+        milliseconds: 500
+    - service: light.turn_on
+      data: 
+        entity_id: light.table_lamp
+        brightness: 153
+        transition: 15
+    - delay:
+        milliseconds: 500
+    - service: light.turn_on
+      data: 
+        entity_id: light.hallway_lights
+        brightness: 153
+        transition: 15
+    - delay:
+        milliseconds: 500
+    - service: light.turn_on
+      data: 
+        entity_id: light.hallway_upstairs_lights
+        brightness: 153
+        transition: 15
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.sleeping
+
+night_scene:
+  alias: "Night scene"
+  icon: mdi:weather-night
+  sequence:
+    - service: light.turn_on
+      data: 
+        entity_id: light.hallway_lights
+        brightness: 80
+        transition: 15
+    - delay:
+        milliseconds: 500
+    - service: light.turn_on
+      data: 
+        entity_id: light.hallway_upstairs_lights
+        brightness: 80
+        transition: 15
+    - delay:
+        milliseconds: 500
+    - service: light.turn_off
+      data: 
+        entity_id: light.table_lamp
+        transition: 15
+    - delay:
+        milliseconds: 500
+    - service: light.turn_off
+      data: 
+        entity_id: light.living_room_lights
+        transition: 15
+    - delay:
+        milliseconds: 500
+    - service: light.turn_on
+      data: 
+        entity_id: light.tripod_lamp
+        brightness: 80
+        xy_color: [0.46,0.41]
+        transition: 15
+    - delay:
+        milliseconds: 500
+    - service: light.turn_on
+      data: 
+        entity_id: light.kitchen_lights
+        brightness: 80
+        xy_color: [0.46,0.41]
+        transition: 15
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.sleeping
+
+daytime_scene:
+  alias: "Daytime scene"
+  icon: mdi:weather-partly-cloudy
+  sequence:
+    - service: light.turn_on
+      data: 
+        entity_id: light.hallway_upstairs_lights
+        brightness: 255
+        transition: 5
+    - delay:
+        milliseconds: 500
+    - service: light.turn_on
+      data: 
+        entity_id: light.tripod_lamp
+        brightness: 255
+        xy_color: [0.38,0.38]
+        transition: 5
+    - service: light.turn_on
+      data: 
+        entity_id: light.living_room_lights
+        brightness: 255
+        xy_color: [0.38,0.38]
+        transition: 5
+    - delay:
+        milliseconds: 500
+    - service: light.turn_on
+      data: 
+        entity_id: light.hallway_lights
+        brightness: 255
+        transition: 5
+    - delay:
+        milliseconds: 500
+    - service: light.turn_on
+      data: 
+        entity_id: light.kitchen_lights
+        brightness: 255
+        xy_color: [0.38,0.38]
+        transition: 5
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.sleeping
+
+daytime_bright_scene:
+  alias: "Daytime bright scene"
+  icon: mdi:weather-sunny
+  sequence:
+    - service: light.turn_off
+      data: 
+        entity_id: light.hallway_lights
+        transition: 15
+    - delay:
+        milliseconds: 500
+    - service: light.turn_off
+      data: 
+        entity_id: light.hallway_upstairs_lights
+        transition: 15
+    - delay:
+        milliseconds: 500
+    - service: light.turn_off
+      data: 
+        entity_id: light.living_room_lights
+        transition: 15
+    - delay:
+        milliseconds: 500
+    - service: light.turn_off
+      data: 
+        entity_id: light.tripod_lamp
+        transition: 15
+    - delay:
+        milliseconds: 500
+    - service: light.turn_off
+      data: 
+        entity_id: light.kitchen_lights
+        transition: 15
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.sleeping
+
+fireplace_scene:
+  alias: "Fireplace scene"
+  icon: mdi:fireplace
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.tripod_lamp
+        brightness: 254
+        rgb_color:
+        - 255
+        - 128
+        - 25
+        transition: 10
+    - delay:
+        milliseconds: 500
+    - service: light.turn_off
+      data:
+        entity_id: light.living_room_lights
+        transition: 10
+    - delay:
+        milliseconds: 500
+    - service: light.turn_on
+      data:
+        entity_id: light.hallway_lights
+        brightness: 108
+        transition: 10
+    - delay:
+        milliseconds: 500
+    - service: light.turn_on
+      data:
+        entity_id: light.hallway_upstairs_lights
+        brightness: 75
+        transition: 10
+    - delay:
+        milliseconds: 500
+    - service: light.turn_off
+      data:
+        entity_id: light.kitchen_lights
+        transition: 10

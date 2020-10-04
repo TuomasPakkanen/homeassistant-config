@@ -9,8 +9,7 @@
     state: 'off'
   action:
     - service: light.turn_off
-      data:
-        entity_id: all
+      entity_id: all
     - service: sonos.set_sleep_timer
       data:
         entity_id: media_player.living_room

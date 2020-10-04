@@ -14,15 +14,15 @@
       entity_id: input_boolean.vacation_mode
       state: 'off'
   action:
-    service: scene.turn_on
-    data_template:
+    service: script.turn_on
+    data:
       entity_id: >
-        {% if 7 <= now().hour < 19 %}
-          scene.daytime
-        {% elif 19 <= now().hour < 21 %}
-          scene.evening
+        {% if 7 <= now().hour < state_attr('input_datetime.evening_start', 'hour') %}
+          script.daytime_scene
+        {% elif state_attr('input_datetime.evening_start', 'hour') <= now().hour < state_attr('input_datetime.night_start', 'hour') %}
+          script.evening_scene
         {% else %}
-          scene.night
+          script.night_scene
         {% endif %}
       transition: 15
 
@@ -37,7 +37,7 @@
     entity_id: input_boolean.sleeping
     state: 'off'
   action:
-    service: scene.turn_on
+    service: script.turn_on
     data:
-      entity_id: scene.daytime_bright
+      entity_id: script.daytime_bright_scene
       transition: 15

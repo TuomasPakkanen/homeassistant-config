@@ -14,11 +14,11 @@
       state: 'on'
     - condition: time
       after: '01:00:00'
-      before: '07:00:00'
+      before: '07:30:00'
   action:
-    - service: scene.turn_on
+    - service: script.turn_on
       data:
-        entity_id: scene.evening
+        entity_id: script.evening_scene
         transition: 5
     - service: media_player.select_source
       data: 
@@ -46,9 +46,9 @@
       state: 'on'
     - condition: time
       after: '03:00:00'
-      before: '07:00:00'
+      before: '07:30:00'
   action:
-    - service: scene.turn_on
+    - service: script.turn_on
       data:
-        entity_id: scene.sleeping
+        entity_id: script.sleeping_scene
         transition: 30

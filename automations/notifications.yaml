@@ -5,6 +5,7 @@
     platform: numeric_state
     entity_id: sensor.temperature_5
     above: 44
+    for: '00:02:00'
   action:
     service: tts.google_translate_say
     entity_id: media_player.kitchen_display
@@ -46,10 +47,14 @@
     entity_id: binary_sensor.occupancy
     state: 'off'
   action:
-    service: notify.telegram
-    data_template:
-      title: "Burglar alarm triggered!"
-      message: "{{ trigger.to_state.attributes.friendly_name }} has been opened!"
+    - delay: '00:02:00'
+    - condition: state
+      entity_id: binary_sensor.occupancy
+      state: 'off'
+    - service: notify.telegram
+      data:
+        title: "Burglar alarm triggered!"
+        message: "{{ trigger.to_state.attributes.friendly_name }} has been opened!"
 
 # AIR CONDITIONER ENERGY USAGE MONTHLY REPORTING
 

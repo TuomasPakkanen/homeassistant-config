@@ -1,7 +1,7 @@
 - alias: "Set evening scene"
   trigger:
     platform: time
-    at: '19:00:00'
+    at: input_datetime.evening_start
   condition:
     condition: and
     conditions:
@@ -17,15 +17,15 @@
             entity_id: input_boolean.guest_mode
             state: 'on'
   action:
-    service: scene.turn_on
+    service: script.turn_on
     data:
-      entity_id: scene.evening
+      entity_id: script.evening_scene
       transition: 15
 
 - alias: "Set night scene"
   trigger:
     platform: time
-    at: '21:00:00'
+    at: input_datetime.night_start
   condition:
     condition: and
     conditions:
@@ -41,9 +41,9 @@
             entity_id: input_boolean.guest_mode
             state: 'on'
   action:
-    service: scene.turn_on
+    service: script.turn_on
     data:
-      entity_id: scene.night
+      entity_id: script.night_scene
       transition: 15
 
 - alias: 'Fireplace scene activated'
@@ -52,8 +52,8 @@
     event_type: call_service
     event_data:
       service_data:
-        entity_id: [scene.fireplace]
-      domain: scene
+        entity_id: [script.fireplace_scene]
+      domain: script
       service: turn_on
   action:
     - service: automation.turn_off
