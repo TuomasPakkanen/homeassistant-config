@@ -11,27 +11,9 @@
         - condition: template
           value_template: "{{ trigger.event.data.event == 1002 }}"
         sequence:
-          - service: light.turn_on
-            data_template:
+          - service: light.toggle
+            data:
               entity_id: light.bedroom_lights
-              brightness_pct: >
-                {% if is_state('light.bedroom_lights', 'on') %}
-                  0
-                {% elif 5 <= now().hour < 19 %}
-                  80
-                {% else %}
-                  20
-                {% endif %}
-              kelvin: >
-                {% if 5 <= now().hour < 19 %}
-                  4000
-                {% else %}
-                  2200
-                {% endif %}
-          - service: automation.turn_off
-            entity_id: automation.turn_off_bedroom_lights_5_minutes_after_last_movement
-          - service: automation.turn_off
-            entity_id: automation.turn_on_bedroom_lights_when_motion_sensor_triggered
       # Increase brightness of bedroom lights
       - conditions:
         - condition: template
@@ -80,15 +62,3 @@
                 {% if mired > 454 %} 370
                 {% elif mired > 250 and mired < 371 %} 250
                 {% else %} 455 {% endif %}
-
-- alias: 'Restore bedroom motion sensor automations'
-  trigger:
-    platform: state
-    entity_id: automation.turn_off_bedroom_lights_5_minutes_after_last_movement
-    to: 'off'
-    for: '01:30:00'
-  action:
-    - service: automation.turn_on
-      entity_id: automation.turn_off_bedroom_lights_5_minutes_after_last_movement
-    - service: automation.turn_on
-      entity_id: automation.turn_on_bedroom_lights_when_motion_sensor_triggered

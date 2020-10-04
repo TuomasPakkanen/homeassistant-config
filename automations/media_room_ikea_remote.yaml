@@ -11,30 +11,16 @@
         - condition: template
           value_template: "{{ trigger.event.data.event == 1002 }}"
         sequence:
-          - service: light.turn_on
-            data_template:
+          - service: light.toggle
+            data:
               entity_id: light.media_room_lights
-              brightness_pct: >
-                {% if is_state('light.media_room_lights', 'on') %}
-                  0
-                {% elif 5 <= now().hour < 19 %}
-                  80
-                {% else %}
-                  20
-                {% endif %}
-              kelvin: >
-                {% if 5 <= now().hour < 19 %}
-                  4000
-                {% else %}
-                  2200
-                {% endif %}
       # Increase brightness of media room lights
       - conditions:
         - condition: template
           value_template: "{{ trigger.event.data.event == 2002 }}"
         sequence:
           - service: light.turn_on
-            data_template:
+            data:
               entity_id: light.media_room_lights
               brightness: >
                 {% set bri = state_attr('light.media_room_lights', 'brightness') | int %}
@@ -45,7 +31,7 @@
           value_template: "{{ trigger.event.data.event == 3002 }}"
         sequence:
           - service: light.turn_on
-            data_template:
+            data:
               entity_id: light.media_room_lights
               brightness: >
                 {% set bri = state_attr('light.media_room_lights', 'brightness') | int %}
@@ -56,7 +42,7 @@
           value_template: "{{ trigger.event.data.event == 5002 }}"
         sequence:
           - service: light.turn_on
-            data_template:
+            data:
               entity_id: light.media_room_lights
               color_temp: >
                 {% set mired = state_attr('light.media_room_lights', 'color_temp') | int %}
@@ -69,7 +55,7 @@
           value_template: "{{ trigger.event.data.event == 4002 }}"
         sequence:
           - service: light.turn_on
-            data_template:
+            data:
               entity_id: light.media_room_lights
               color_temp: >
                 {% set mired = state_attr('light.media_room_lights', 'color_temp') | int %}

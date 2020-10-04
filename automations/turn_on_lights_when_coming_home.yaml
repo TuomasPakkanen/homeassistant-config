@@ -18,13 +18,12 @@
       below: 80
   action:
     service: script.turn_on
-    data_template:
+    data:
       entity_id: >
-        {% if 7 <= now().hour < 19 %}
+        {% if 7 <= now().hour < input_datetime.evening_start %}
           script.daytime_scene
-        {% elif 19 <= now().hour < 21 %}
+        {% elif input_datetime.evening_start <= now().hour < input_datetime.night_start %}
           script.evening_scene
         {% else %}
           script.night_scene
         {% endif %}
-      transition: 5
