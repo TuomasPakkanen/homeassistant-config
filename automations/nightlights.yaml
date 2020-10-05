@@ -19,7 +19,6 @@
     - service: script.turn_on
       data:
         entity_id: script.evening_scene
-        transition: 5
     - service: media_player.select_source
       data: 
         entity_id: media_player.living_room
@@ -51,4 +50,3 @@
     - service: script.turn_on
       data:
         entity_id: script.sleeping_scene
-        transition: 30

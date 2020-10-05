@@ -24,7 +24,6 @@
         {% else %}
           script.night_scene
         {% endif %}
-      transition: 15
 
 - alias: "Turn off lights if bright during the day"
   trigger:
@@ -40,4 +39,3 @@
     service: script.turn_on
     data:
       entity_id: script.daytime_bright_scene
-      transition: 15

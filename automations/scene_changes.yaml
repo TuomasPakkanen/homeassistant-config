@@ -20,7 +20,6 @@
     service: script.turn_on
     data:
       entity_id: script.evening_scene
-      transition: 15
 
 - alias: "Set night scene"
   trigger:
@@ -44,7 +43,6 @@
     service: script.turn_on
     data:
       entity_id: script.night_scene
-      transition: 15
 
 - alias: 'Fireplace scene activated'
   trigger:

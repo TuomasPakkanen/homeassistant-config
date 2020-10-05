@@ -4,8 +4,42 @@ sleeping_scene:
   sequence:
     - service: light.turn_off
       data:
-        entity_id: all
+        entity_id: light.living_room_lights
+        transition: 15
+    - service: light.turn_off
+      data:
+        entity_id: light.tripod_lamp
+        transition: 14
+    - delay: "00:00:01"
+    - service: light.turn_off
+      data:
+        entity_id: light.kitchen_lights
+        transition: 13
+    - delay: "00:00:01"
+    - service: light.turn_off
+      data:
+        entity_id: light.hallway_lights
+        transition: 12
+    - delay: "00:00:01"
+    - service: light.turn_off
+      data:
+        entity_id: light.hallway_upstairs_lights
+        transition: 11
+    - delay: "00:00:01"
+    - service: light.turn_off
+      data:
+        entity_id: light.table_lamp
         transition: 10
+    - delay: "00:00:01"
+    - service: light.turn_off
+      data:
+        entity_id: light.media_room_lights
+        transition: 9
+    - delay: "00:00:01"
+    - service: light.turn_off
+      data:
+        entity_id: light.bedroom_lights
+        transition: 8
     - service: sonos.set_sleep_timer
       data:
         entity_id: media_player.living_room
@@ -23,38 +57,33 @@ evening_scene:
         brightness: 153
         xy_color: [0.46,0.41]
         transition: 15
-    - delay:
-        milliseconds: 500
+    - delay: "00:00:01"
     - service: light.turn_on
       data: 
         entity_id: light.tripod_lamp
         brightness: 153
         xy_color: [0.46,0.41]
         transition: 15
-    - delay:
-        milliseconds: 500
+    - delay: "00:00:01"
     - service: light.turn_on
       data: 
         entity_id: light.kitchen_lights
         brightness: 153
         xy_color: [0.46,0.41]
         transition: 15
-    - delay:
-        milliseconds: 500
+    - delay: "00:00:01"
     - service: light.turn_on
       data: 
         entity_id: light.table_lamp
         brightness: 153
         transition: 15
-    - delay:
-        milliseconds: 500
+    - delay: "00:00:01"
     - service: light.turn_on
       data: 
         entity_id: light.hallway_lights
         brightness: 153
         transition: 15
-    - delay:
-        milliseconds: 500
+    - delay: "00:00:01"
     - service: light.turn_on
       data: 
         entity_id: light.hallway_upstairs_lights
@@ -72,35 +101,30 @@ night_scene:
         entity_id: light.hallway_lights
         brightness: 80
         transition: 15
-    - delay:
-        milliseconds: 500
+    - delay: "00:00:01"
     - service: light.turn_on
       data: 
         entity_id: light.hallway_upstairs_lights
         brightness: 80
         transition: 15
-    - delay:
-        milliseconds: 500
+    - delay: "00:00:01"
     - service: light.turn_off
       data: 
         entity_id: light.table_lamp
         transition: 15
-    - delay:
-        milliseconds: 500
+    - delay: "00:00:01"
     - service: light.turn_off
       data: 
         entity_id: light.living_room_lights
         transition: 15
-    - delay:
-        milliseconds: 500
+    - delay: "00:00:01"
     - service: light.turn_on
       data: 
         entity_id: light.tripod_lamp
         brightness: 80
         xy_color: [0.46,0.41]
         transition: 15
-    - delay:
-        milliseconds: 500
+    - delay: "00:00:01"
     - service: light.turn_on
       data: 
         entity_id: light.kitchen_lights
@@ -119,29 +143,27 @@ daytime_scene:
         entity_id: light.hallway_upstairs_lights
         brightness: 255
         transition: 5
-    - delay:
-        milliseconds: 500
+    - delay: "00:00:01"
     - service: light.turn_on
       data: 
         entity_id: light.tripod_lamp
         brightness: 255
         xy_color: [0.38,0.38]
         transition: 5
+    - delay: "00:00:01"
     - service: light.turn_on
       data: 
         entity_id: light.living_room_lights
         brightness: 255
         xy_color: [0.38,0.38]
         transition: 5
-    - delay:
-        milliseconds: 500
+    - delay: "00:00:01"
     - service: light.turn_on
       data: 
         entity_id: light.hallway_lights
         brightness: 255
         transition: 5
-    - delay:
-        milliseconds: 500
+    - delay: "00:00:01"
     - service: light.turn_on
       data: 
         entity_id: light.kitchen_lights
@@ -159,26 +181,22 @@ daytime_bright_scene:
       data: 
         entity_id: light.hallway_lights
         transition: 15
-    - delay:
-        milliseconds: 500
+    - delay: "00:00:01"
     - service: light.turn_off
       data: 
         entity_id: light.hallway_upstairs_lights
         transition: 15
-    - delay:
-        milliseconds: 500
+    - delay: "00:00:01"
     - service: light.turn_off
       data: 
         entity_id: light.living_room_lights
         transition: 15
-    - delay:
-        milliseconds: 500
+    - delay: "00:00:01"
     - service: light.turn_off
       data: 
         entity_id: light.tripod_lamp
         transition: 15
-    - delay:
-        milliseconds: 500
+    - delay: "00:00:01"
     - service: light.turn_off
       data: 
         entity_id: light.kitchen_lights
@@ -199,28 +217,24 @@ fireplace_scene:
         - 128
         - 25
         transition: 10
-    - delay:
-        milliseconds: 500
+    - delay: "00:00:01"
     - service: light.turn_off
       data:
         entity_id: light.living_room_lights
         transition: 10
-    - delay:
-        milliseconds: 500
+    - delay: "00:00:01"
     - service: light.turn_on
       data:
         entity_id: light.hallway_lights
         brightness: 108
         transition: 10
-    - delay:
-        milliseconds: 500
+    - delay: "00:00:01"
     - service: light.turn_on
       data:
         entity_id: light.hallway_upstairs_lights
         brightness: 75
         transition: 10
-    - delay:
-        milliseconds: 500
+    - delay: "00:00:01"
     - service: light.turn_off
       data:
         entity_id: light.kitchen_lights
