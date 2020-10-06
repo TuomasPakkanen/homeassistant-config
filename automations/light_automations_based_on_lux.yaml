@@ -5,6 +5,9 @@
     below: 80
   condition:
     - condition: state
+      entity_id: sun.sun
+      state: 'above_horizon'
+    - condition: state
       entity_id: input_boolean.sleeping
       state: 'off'
     - condition: state
