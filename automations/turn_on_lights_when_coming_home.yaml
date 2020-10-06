@@ -20,9 +20,9 @@
     service: script.turn_on
     data:
       entity_id: >
-        {% if 7 <= now().hour < input_datetime.evening_start %}
+        {% if 7 <= now().hour < state_attr('input_datetime.evening_start', 'hour') %}
           script.daytime_scene
-        {% elif input_datetime.evening_start <= now().hour < input_datetime.night_start %}
+        {% elif state_attr('input_datetime.evening_start', 'hour') <= now().hour < state_attr('input_datetime.night_start', 'hour') %}
           script.evening_scene
         {% else %}
           script.night_scene
