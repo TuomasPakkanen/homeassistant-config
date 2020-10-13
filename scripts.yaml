@@ -44,6 +44,10 @@ sleeping_scene:
       data:
         entity_id: media_player.living_room
         sleep_time: 0
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.living_room
+        volume_level: 0.17
     - service: input_boolean.turn_on
       entity_id: input_boolean.sleeping
 
@@ -54,8 +58,13 @@ evening_scene:
     - service: light.turn_on
       data: 
         entity_id: light.living_room_lights
-        brightness: 153
         xy_color: [0.46,0.41]
+        transition: 15
+    - delay: "00:00:01"
+    - service: light.turn_on # double
+      data: 
+        entity_id: light.living_room_lights
+        brightness: 153
         transition: 15
     - delay: "00:00:01"
     - service: light.turn_on
@@ -68,8 +77,13 @@ evening_scene:
     - service: light.turn_on
       data: 
         entity_id: light.kitchen_lights
-        brightness: 153
         xy_color: [0.46,0.41]
+        transition: 15
+    - delay: "00:00:01"
+    - service: light.turn_on # double
+      data: 
+        entity_id: light.kitchen_lights
+        brightness: 153
         transition: 15
     - delay: "00:00:01"
     - service: light.turn_on
@@ -121,15 +135,20 @@ night_scene:
     - service: light.turn_on
       data: 
         entity_id: light.tripod_lamp
-        brightness: 80
+        brightness: 130
         xy_color: [0.46,0.41]
         transition: 15
     - delay: "00:00:01"
     - service: light.turn_on
       data: 
         entity_id: light.kitchen_lights
-        brightness: 80
         xy_color: [0.46,0.41]
+        transition: 15
+    - delay: "00:00:01"
+    - service: light.turn_on # double
+      data: 
+        entity_id: light.kitchen_lights
+        brightness: 80
         transition: 15
     - service: input_boolean.turn_off
       entity_id: input_boolean.sleeping
@@ -154,8 +173,13 @@ daytime_scene:
     - service: light.turn_on
       data: 
         entity_id: light.living_room_lights
-        brightness: 255
         xy_color: [0.38,0.38]
+        transition: 5
+    - delay: "00:00:01"
+    - service: light.turn_on # double
+      data: 
+        entity_id: light.living_room_lights
+        brightness: 255
         transition: 5
     - delay: "00:00:01"
     - service: light.turn_on
@@ -167,8 +191,13 @@ daytime_scene:
     - service: light.turn_on
       data: 
         entity_id: light.kitchen_lights
-        brightness: 255
         xy_color: [0.38,0.38]
+        transition: 5
+    - delay: "00:00:01"
+    - service: light.turn_on # double
+      data: 
+        entity_id: light.kitchen_lights
+        brightness: 255
         transition: 5
     - service: input_boolean.turn_off
       entity_id: input_boolean.sleeping

@@ -111,11 +111,11 @@
       entity_id: sensor.mi_t_582d34345074
       below: 24.4 #26 winter
       above: 23
-      for: "00:30:00"
+      for: "02:00:00"
     - platform: numeric_state
       entity_id: sensor.mi_h_582d34345074
       below: 55
-      for: "00:30:00"
+      for: "02:00:00"
   condition:
     - condition: numeric_state
       entity_id: sensor.mi_t_582d34345074

@@ -1,3 +1,13 @@
+- alias: "Set evening start time"
+  trigger: 
+    platform: sun
+    event: sunset
+  action:
+    - service: input_datetime.set_datetime
+      entity_id: input_datetime.evening_start
+      data:
+        time: "{{ now().strftime('%H:%M:%S') }}"
+
 - alias: "Set evening scene"
   trigger:
     platform: time
@@ -8,6 +18,9 @@
       - condition: state
         entity_id: input_boolean.vacation_mode
         state: 'off'
+      - condition: time
+        after: "14:00:00"
+        before: input_datetime.night_start
       - condition: or
         conditions:
           - condition: state
