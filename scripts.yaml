@@ -2,6 +2,8 @@ sleeping_scene:
   alias: "Sleeping scene"
   icon: mdi:sleep
   sequence:
+    - service: automation.turn_off
+      entity_id: automation.set_bedroom_color_temperature_and_brightness
     - service: light.turn_off
       data:
         entity_id: light.living_room_lights
@@ -50,6 +52,9 @@ sleeping_scene:
         volume_level: 0.17
     - service: input_boolean.turn_on
       entity_id: input_boolean.sleeping
+    - delay: "00:00:15"
+    - service: automation.turn_on
+      entity_id: automation.set_bedroom_color_temperature_and_brightness
 
 evening_scene:
   alias: "Evening scene"
@@ -144,7 +149,7 @@ night_scene:
         entity_id: light.kitchen_lights
         xy_color: [0.46,0.41]
         transition: 15
-    - delay: "00:00:01"
+    - delay: "00:00:02"
     - service: light.turn_on # double
       data: 
         entity_id: light.kitchen_lights
@@ -175,7 +180,7 @@ daytime_scene:
         entity_id: light.living_room_lights
         xy_color: [0.38,0.38]
         transition: 5
-    - delay: "00:00:01"
+    - delay: "00:00:02"
     - service: light.turn_on # double
       data: 
         entity_id: light.living_room_lights
@@ -193,7 +198,7 @@ daytime_scene:
         entity_id: light.kitchen_lights
         xy_color: [0.38,0.38]
         transition: 5
-    - delay: "00:00:01"
+    - delay: "00:00:02"
     - service: light.turn_on # double
       data: 
         entity_id: light.kitchen_lights
