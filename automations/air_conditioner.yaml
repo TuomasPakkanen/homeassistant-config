@@ -66,43 +66,6 @@
         entity_id: climate.air_conditioner
         hvac_mode: 'cool'
 
-# TURN ON AC DRY MODE #
-
-- alias: "Turn on AC when it's too humid"
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.mi_h_582d34345074
-      above: 60
-      for: "00:05:00"
-  condition:
-    - condition: state
-      entity_id: input_boolean.vacation_mode
-      state: 'off'
-    - condition: time
-      after: '06:00:00'
-      before: '23:00:00'
-  action:
-    - service: climate.set_temperature
-      entity_id: climate.air_conditioner
-      data:
-        temperature: '23'
-    - service: climate.set_fan_mode
-      entity_id: climate.air_conditioner
-      data:
-        fan_mode: 'auto'
-    - service: melcloud.set_vane_horizontal
-      entity_id: climate.air_conditioner
-      data:
-        position: '3'
-    - service: melcloud.set_vane_vertical
-      entity_id: climate.air_conditioner
-      data:
-        position: '1_up'
-    - service: climate.set_hvac_mode
-      data:
-        entity_id: climate.air_conditioner
-        hvac_mode: 'dry'
-
 # TURN AC OFF #
 
 - alias: "Turn off AC when target temperature and humidity is reached"
@@ -112,18 +75,11 @@
       below: 24.4 #26 winter
       above: 23
       for: "02:00:00"
-    - platform: numeric_state
-      entity_id: sensor.mi_h_582d34345074
-      below: 55
-      for: "02:00:00"
   condition:
     - condition: numeric_state
       entity_id: sensor.mi_t_582d34345074
       below: 24.4 #26 winter
       above: 23
-    - condition: numeric_state
-      entity_id: sensor.mi_h_582d34345074
-      below: 55
     - condition: not
       conditions:
         - condition: state

@@ -4,12 +4,29 @@
     entity_id: binary_sensor.motion_sensor
     to: 'on'
   condition:
-    - condition: time
-      after: '07:00:00'
-      before: '12:00:00'
-    - condition: state
-      entity_id: input_boolean.sleeping
-      state: 'on'
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.sleeping
+        state: 'on'
+      - condition: or
+        conditions:
+          - condition: time
+            after: '07:00:00'
+            before: '12:00:00'
+            weekday:
+              - mon
+              - tue
+              - wed
+              - thu
+              - fri
+          - condition: time
+            after: '08:15:00'
+            before: '12:00:00'
+            weekday:
+              - sat
+              - sun
+    
   action:
     - service: script.turn_on
       data_template:
