@@ -1,7 +1,7 @@
 - alias: "Turn on lights for a while during the night if coming downstairs"
   trigger: 
     platform: state
-    entity_id: binary_sensor.motion_sensor
+    entity_id: binary_sensor.stairs_motion_sensor
     to: 'on'
   condition:
     - condition: state

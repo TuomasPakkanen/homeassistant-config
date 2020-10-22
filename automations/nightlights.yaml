@@ -34,10 +34,10 @@
 - alias: "Turn off lights when left home during the night"
   trigger: 
     - platform: state
-      entity_id: binary_sensor.openclose_14
+      entity_id: binary_sensor.frontdoor
       from: 'on'
     - platform: state
-      entity_id: binary_sensor.openclose_15
+      entity_id: binary_sensor.backdoor
       from: 'on'
   condition:
     - condition: state

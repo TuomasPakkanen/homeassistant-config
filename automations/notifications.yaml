@@ -3,7 +3,7 @@
 - alias: "Notify when Sauna is warm"
   trigger:
     platform: numeric_state
-    entity_id: sensor.temperature_5
+    entity_id: sensor.sauna
     above: 44
     for: '00:02:00'
   action:
@@ -39,8 +39,8 @@
   trigger: 
     platform: state
     entity_id:
-      - binary_sensor.openclose_14
-      - binary_sensor.openclose_15
+      - binary_sensor.frontdoor
+      - binary_sensor.backdoor
     to: 'on'
   condition:
     condition: state
@@ -119,7 +119,7 @@
 - alias: "Hue motion sensor battery low"
   trigger:
     platform: numeric_state
-    entity_id: sensor.motion_sensor_battery_level
+    entity_id: sensor.stairs_motion_sensor_battery_level
     below: 15
   action:
     service: notify.telegram

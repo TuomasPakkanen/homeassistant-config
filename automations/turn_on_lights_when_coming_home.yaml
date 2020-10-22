@@ -7,14 +7,14 @@
       entity_id: person.moona
       to: 'home'
     - platform: state
-      entity_id: binary_sensor.openclose_14
+      entity_id: binary_sensor.frontdoor
       to: 'on'
   condition:
     - condition: state
       entity_id: light.tripod_lamp
       state: 'off'
     - condition: numeric_state
-      entity_id: sensor.motion_sensor_2
+      entity_id: sensor.stairs_motion_sensor_2
       below: 80
   action:
     service: script.turn_on

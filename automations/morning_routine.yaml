@@ -1,7 +1,7 @@
 - alias: "Morning routine"
   trigger: 
     platform: state
-    entity_id: binary_sensor.motion_sensor
+    entity_id: binary_sensor.stairs_motion_sensor
     to: 'on'
   condition:
     condition: and
@@ -26,7 +26,6 @@
             weekday:
               - sat
               - sun
-    
   action:
     - service: script.turn_on
       data_template:

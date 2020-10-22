@@ -1,7 +1,7 @@
 - alias: "Turn on lights if dark during the day"
   trigger:
     platform: numeric_state
-    entity_id: sensor.motion_sensor_2
+    entity_id: sensor.stairs_motion_sensor_2
     below: 80
   condition:
     - condition: state
@@ -31,7 +31,7 @@
 - alias: "Turn off lights if bright during the day"
   trigger:
     platform: numeric_state
-    entity_id: sensor.motion_sensor_2
+    entity_id: sensor.stairs_motion_sensor_2
     above: 110
     for: "00:03:00"
   condition:

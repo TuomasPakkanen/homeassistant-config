@@ -179,8 +179,8 @@ daytime_scene:
       data: 
         entity_id: light.living_room_lights
         xy_color: [0.38,0.38]
-        transition: 5
-    - delay: "00:00:02"
+        transition: 4
+    - delay: "00:00:05"
     - service: light.turn_on # double
       data: 
         entity_id: light.living_room_lights
@@ -197,8 +197,8 @@ daytime_scene:
       data: 
         entity_id: light.kitchen_lights
         xy_color: [0.38,0.38]
-        transition: 5
-    - delay: "00:00:02"
+        transition: 4
+    - delay: "00:00:05"
     - service: light.turn_on # double
       data: 
         entity_id: light.kitchen_lights
