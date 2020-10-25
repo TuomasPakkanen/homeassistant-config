@@ -1,49 +1,17 @@
-# TURN ON AC COLD #
+### SUMMER / COOL ###
 
-- alias: "Turn on AC when it's too cold"
-  trigger:
-    platform: numeric_state
-    entity_id: sensor.mi_t_582d34345074
-    below: 22.6 #19 summer
-    for: "00:15:00"
-  condition:
-    condition: state
-    entity_id: input_boolean.vacation_mode
-    state: 'off'
-  action:
-    - service: climate.set_temperature
-      entity_id: climate.air_conditioner
-      data:
-        temperature: '23'
-    - service: climate.set_fan_mode
-      entity_id: climate.air_conditioner
-      data:
-        fan_mode: 'auto'
-    - service: melcloud.set_vane_horizontal
-      entity_id: climate.air_conditioner
-      data:
-        position: '3'
-    - service: melcloud.set_vane_vertical
-      entity_id: climate.air_conditioner
-      data:
-        position: '5_down'
-    - service: climate.set_hvac_mode
-      data:
-        entity_id: climate.air_conditioner
-        hvac_mode: 'heat'
-
-# TURN ON AC HOT #
-
-- alias: "Turn on AC when it's too hot"
+- alias: "AC to cool mode"
   trigger:
     - platform: numeric_state
       entity_id: sensor.mi_t_582d34345074
-      above: 30 # 25 during summer, 30 degrees during Winter, due to fireplace
-      for: "00:10:00"
+      above: 25
+      for: "00:15:00"
   condition:
-    condition: state
-    entity_id: input_boolean.vacation_mode
-    state: 'off'
+    - condition: template
+      value_template: '{{ now().month >= 5 or now().month <= 9 }}'
+    - condition: state
+      entity_id: input_boolean.vacation_mode
+      state: 'off'
   action:
     - service: climate.set_temperature
       entity_id: climate.air_conditioner
@@ -66,23 +34,158 @@
         entity_id: climate.air_conditioner
         hvac_mode: 'cool'
 
-# TURN AC OFF #
-
-- alias: "Turn off AC when target temperature and humidity is reached"
+- alias: "AC off when target temperature reached"
   trigger:
     - platform: numeric_state
       entity_id: sensor.mi_t_582d34345074
-      below: 26 #24.4 summer
-      above: 23
+      below: 24.4
       for: "02:00:00"
   condition:
-    - condition: not
-      conditions:
-        - condition: state
-          entity_id: climate.air_conditioner
-          state: 'off'
+    - condition: template
+      value_template: '{{ now().month >= 5 or now().month <= 9 }}'
+    - condition: state
+      entity_id: switch.ac
+      state: 'on'
   action:
     - service: climate.set_hvac_mode
       data:
         entity_id: climate.air_conditioner
         hvac_mode: 'off'
+
+
+### WINTER / HEAT ###
+
+- alias: "AC to comfort heat occupancy"
+  trigger: 
+    platform: state
+    entity_id: binary_sensor.occupancy
+    to: 'on'
+  condition:
+    condition: template
+    value_template: '{{ now().month >= 10 or now().month <= 4 }}'
+  action:
+    - service: climate.set_temperature
+      entity_id: climate.air_conditioner
+      data:
+        temperature: '23'
+    - service: climate.set_fan_mode
+      entity_id: climate.air_conditioner
+      data:
+        fan_mode: 'auto'
+    - service: melcloud.set_vane_horizontal
+      entity_id: climate.air_conditioner
+      data:
+        position: '3'
+    - service: melcloud.set_vane_vertical
+      entity_id: climate.air_conditioner
+      data:
+        position: '4'
+    - service: climate.set_hvac_mode
+      data:
+        entity_id: climate.air_conditioner
+        hvac_mode: 'heat'
+
+- alias: "AC to comfort heat in the morning"
+  trigger: 
+    platform: time
+    at: '07:00:00'
+  condition:
+    - condition: and
+      conditions:
+        - condition: template
+          value_template: '{{ now().month >= 10 or now().month <= 4 }}'
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id: binary_sensor.occupancy
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.guest_mode
+              state: 'on'
+  action:
+    - service: climate.set_temperature
+      entity_id: climate.air_conditioner
+      data:
+        temperature: '23'
+    - service: climate.set_fan_mode
+      entity_id: climate.air_conditioner
+      data:
+        fan_mode: 'auto'
+    - service: melcloud.set_vane_horizontal
+      entity_id: climate.air_conditioner
+      data:
+        position: '3'
+    - service: melcloud.set_vane_vertical
+      entity_id: climate.air_conditioner
+      data:
+        position: '4'
+    - service: climate.set_hvac_mode
+      data:
+        entity_id: climate.air_conditioner
+        hvac_mode: 'heat'
+    
+- alias: "AC to economical heat occupancy"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.occupancy
+      to: 'off'
+      for: '02:00:00'
+    - platform: state
+      entity_id: input_boolean.vacation_mode
+      to: 'on'
+  condition: 
+    - condition: template
+      value_template: '{{ now().month >= 10 or now().month <= 4 }}'
+    - condition: state
+      entity_id: input_boolean.guest_mode
+      state: 'off'
+  action:
+    - service: climate.set_temperature
+      entity_id: climate.air_conditioner
+      data:
+        temperature: '20'
+    - service: climate.set_fan_mode
+      entity_id: climate.air_conditioner
+      data:
+        fan_mode: 'auto'
+    - service: melcloud.set_vane_horizontal
+      entity_id: climate.air_conditioner
+      data:
+        position: '3'
+    - service: melcloud.set_vane_vertical
+      entity_id: climate.air_conditioner
+      data:
+        position: '4'
+    - service: climate.set_hvac_mode
+      data:
+        entity_id: climate.air_conditioner
+        hvac_mode: 'heat'
+
+- alias: "AC to economical heat for the night"
+  trigger:
+    platform: time
+    at: '00:00:00'
+  condition: 
+    condition: template
+    value_template: '{{ now().month >= 10 or now().month <= 4 }}'
+  action: 
+    - service: climate.set_temperature
+      entity_id: climate.air_conditioner
+      data:
+        temperature: '20'
+    - service: climate.set_fan_mode
+      entity_id: climate.air_conditioner
+      data:
+        fan_mode: 'auto'
+    - service: melcloud.set_vane_horizontal
+      entity_id: climate.air_conditioner
+      data:
+        position: '3'
+    - service: melcloud.set_vane_vertical
+      entity_id: climate.air_conditioner
+      data:
+        position: '4'
+    - service: climate.set_hvac_mode
+      data:
+        entity_id: climate.air_conditioner
+        hvac_mode: 'heat'
