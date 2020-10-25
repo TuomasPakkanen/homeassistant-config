@@ -8,7 +8,7 @@
       for: "00:15:00"
   condition:
     - condition: template
-      value_template: '{{ now().month >= 5 or now().month <= 9 }}'
+      value_template: '{{ now().month >= 5 and now().month <= 9 }}'
     - condition: state
       entity_id: input_boolean.vacation_mode
       state: 'off'
@@ -42,7 +42,7 @@
       for: "02:00:00"
   condition:
     - condition: template
-      value_template: '{{ now().month >= 5 or now().month <= 9 }}'
+      value_template: '{{ now().month >= 5 and now().month <= 9 }}'
     - condition: state
       entity_id: switch.ac
       state: 'on'
@@ -129,7 +129,7 @@
     - platform: state
       entity_id: binary_sensor.occupancy
       to: 'off'
-      for: '02:00:00'
+      for: '01:00:00'
     - platform: state
       entity_id: input_boolean.vacation_mode
       to: 'on'
@@ -143,7 +143,7 @@
     - service: climate.set_temperature
       entity_id: climate.air_conditioner
       data:
-        temperature: '20'
+        temperature: '21'
     - service: climate.set_fan_mode
       entity_id: climate.air_conditioner
       data:
