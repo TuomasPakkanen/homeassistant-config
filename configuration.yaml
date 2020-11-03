@@ -94,16 +94,14 @@ notify:
     platform: telegram
     chat_id: !secret telegram_chatid
 
-# MelCloud: old oozz integration https://github.com/o0Zz/ha-melcloud/
-#climate:
-#  - platform: melcloud
-#    email: !secret email
-#    password: !secret melcloud
-
 # Spotify
 spotify:
   client_id: !secret spotify_clientid
   client_secret: !secret spotify_clientsecret
+
+spotcast:
+  sp_dc: !secret sp_dc
+  sp_key: !secret sp_key
 
 # Circadian lightning for lights (HACS custom component), currently not used
 # circadian_lighting:
@@ -183,6 +181,10 @@ sensor:
       - type: network_out
         arg: eth0
       - type: last_boot
+  - platform: time_date
+    display_options:
+      - 'time'
+      - 'date'
   - platform: template
     sensors:
       outside_temperature:
@@ -202,19 +204,3 @@ sensor:
     command: "cat /sys/class/thermal/thermal_zone0/temp"
     unit_of_measurement: '°C'
     value_template: '{{ value | multiply(0.001) | round(1) }}'
-  - platform: google_travel_time
-    name: "Travel time to Sulava HQ"
-    api_key: !secret googlemaps_apikey
-    origin: zone.home
-    destination: zone.sulava_hq
-    scan_interval: 1800
-    options:
-      mode: transit
-  - platform: google_travel_time
-    name: "Travel time to Airport"
-    api_key: !secret googlemaps_apikey
-    origin: zone.home
-    destination: zone.hott
-    scan_interval: 1800
-    options:
-      mode: driving
