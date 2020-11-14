@@ -9,7 +9,7 @@
       state: 'off'
     - condition: time
       after: '21:00:00'
-      before: '03:00:00'
+      before: '06:00:00'
   action:
     - service: light.turn_on
       data:

@@ -1,3 +1,23 @@
+# SAMPO WOKE UP #
+
+- alias: "Notify when Sampo woke up"
+  trigger:
+    platform: state
+    entity_id: binary_sensor.sampos_room
+    to: 'on'
+  condition:
+    condition: time
+    after: "07:00:00"
+    before: "9:30:00"
+  action:
+    - service: tts.google_translate_say
+      entity_id: media_player.google_home
+      data:
+        message: 'Sampo on hereillä!'
+        language: 'fi'
+    - service: automation.turn_off
+      entity_id: automation.notify_when_sampo_woke_up
+
 # SAUNA #
 
 - alias: "Notify when Sauna is warm"

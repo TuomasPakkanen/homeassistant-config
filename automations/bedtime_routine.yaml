@@ -18,3 +18,5 @@
       data:
         message: 'Hyvää yötä!'
         language: 'fi'
+    - service: automation.turn_on
+      entity_id: automation.notify_when_sampo_woke_up

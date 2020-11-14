@@ -35,13 +35,8 @@ sleeping_scene:
     - delay: "00:00:01"
     - service: light.turn_off
       data:
-        entity_id: light.media_room_lights
-        transition: 9
-    - delay: "00:00:01"
-    - service: light.turn_off
-      data:
         entity_id: light.bedroom_lights
-        transition: 8
+        transition: 9
     - service: sonos.set_sleep_timer
       data:
         entity_id: media_player.living_room
