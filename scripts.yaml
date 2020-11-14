@@ -107,6 +107,7 @@ evening_scene:
       data: 
         entity_id: light.hallway_upstairs_lights
         brightness: 153
+        xy_color: [0.46,0.41]
         transition: 15
     - service: input_boolean.turn_off
       entity_id: input_boolean.sleeping
@@ -125,6 +126,7 @@ night_scene:
       data: 
         entity_id: light.hallway_upstairs_lights
         brightness: 80
+        xy_color: [0.46,0.41]
         transition: 15
     - delay: "00:00:01"
     - service: light.turn_off
@@ -166,6 +168,7 @@ daytime_scene:
       data: 
         entity_id: light.hallway_upstairs_lights
         brightness: 255
+        xy_color: [0.38,0.38]
         transition: 5
     - delay: "00:00:01"
     - service: light.turn_on
@@ -267,6 +270,10 @@ fireplace_scene:
       data:
         entity_id: light.hallway_upstairs_lights
         brightness: 75
+        rgb_color:
+          - 255
+          - 128
+          - 25
         transition: 10
     - delay: "00:00:01"
     - service: light.turn_off
