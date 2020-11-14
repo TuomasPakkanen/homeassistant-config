@@ -30,6 +30,17 @@
   action:
     - service: light.turn_on
       data:
+        entity_id: light.bedroom_lights
+        brightness_pct: >
+          {% if 7 <= now().hour < state_attr('input_datetime.evening_start', 'hour') %}
+            80
+          {% elif state_attr('input_datetime.evening_start', 'hour') <= now().hour < state_attr('input_datetime.night_start', 'hour') %}
+            60
+          {% else %}
+            20
+          {% endif %}
+    - service: light.turn_on
+      data:
         entity_id: light.bedroom_spotlights
         kelvin: > 
           {% if 7 <= now().hour < state_attr('input_datetime.evening_start', 'hour') %}
@@ -38,17 +49,6 @@
             2700
           {% else %}
             2200
-          {% endif %}
-    - service: light.turn_on
-      data:
-        entity_id: light.bedroom_spotlights
-        brightness_pct: >
-          {% if 7 <= now().hour < state_attr('input_datetime.evening_start', 'hour') %}
-            80
-          {% elif state_attr('input_datetime.evening_start', 'hour') <= now().hour < state_attr('input_datetime.night_start', 'hour') %}
-            60
-          {% else %}
-            20
           {% endif %}
     - delay: "00:00:01"
     - service: light.turn_on
@@ -62,3 +62,4 @@
           {% else %}
             20
           {% endif %}
+    
