@@ -156,6 +156,9 @@ input_boolean:
   sleeping:
     name: "Sleeping"
     icon: mdi:sleep
+  bedroom_presence:
+    name: "Bedroom presence"
+    icon: mdi:bed
 
 ### SENSORS ###
 binary_sensor:

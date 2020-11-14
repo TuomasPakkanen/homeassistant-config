@@ -1,3 +1,19 @@
+- alias: "Turn off bedroom lights automatically"
+  trigger: 
+    platform: state
+    entity_id: binary_sensor.bedroom_motion_sensor
+    to: 'off'
+    for: '00:10:00'
+  condition:
+    condition: state
+    entity_id: input_boolean.bedroom_presence
+    state: 'off'
+  action:
+    service: light.turn_off
+    data:
+      entity_id: light.bedroom_lights
+      transition: 15
+    
 - alias: "Flash bedroom lights if either door is opened during the night"
   trigger: 
     - platform: state
