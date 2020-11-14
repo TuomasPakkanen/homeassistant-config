@@ -56,27 +56,3 @@
     service: script.turn_on
     data:
       entity_id: script.night_scene
-
-- alias: 'Fireplace scene activated'
-  trigger:
-    platform: event
-    event_type: call_service
-    event_data:
-      service_data:
-        entity_id: [script.fireplace_scene]
-      domain: script
-      service: turn_on
-  action:
-    - service: automation.turn_off
-      entity_id: automation.set_evening_scene
-    - service: automation.turn_off
-      entity_id: automation.set_night_scene
-    - service: automation.turn_off
-      entity_id: automation.Turn_on_lights_if_dark_during_the_day
-    - delay: '03:00:00'
-    - service: automation.turn_on
-      entity_id: automation.set_evening_scene
-    - service: automation.turn_on
-      entity_id: automation.set_night_scene
-    - service: automation.turn_on
-      entity_id: automation.Turn_on_lights_if_dark_during_the_day

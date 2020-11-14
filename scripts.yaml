@@ -280,3 +280,20 @@ fireplace_scene:
       data:
         entity_id: light.kitchen_lights
         transition: 10
+    - service: climate.set_hvac_mode
+      data:
+        entity_id: climate.air_conditioner
+        hvac_mode: 'off'
+    - service: automation.turn_off
+      entity_id: automation.set_evening_scene
+    - service: automation.turn_off
+      entity_id: automation.set_night_scene
+    - service: automation.turn_off
+      entity_id: automation.Turn_on_lights_if_dark_during_the_day
+    - delay: '03:00:00'
+    - service: automation.turn_on
+      entity_id: automation.set_evening_scene
+    - service: automation.turn_on
+      entity_id: automation.set_night_scene
+    - service: automation.turn_on
+      entity_id: automation.Turn_on_lights_if_dark_during_the_day
