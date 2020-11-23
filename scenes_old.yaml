@@ -1,0 +1,136 @@
+- name: Sleeping
+  icon: mdi:sleep
+  entities:
+    light.bedroom_lights:
+      state: 'off'
+    light.hallway_lights:
+      state: 'off'
+    light.hallway_upstairs_lights:
+      state: 'off'
+    light.living_room_lights:
+      state: 'off'
+    light.table_lamp:
+      state: 'off'
+    light.tripod_lamp:
+      state: 'off'
+    light.media_room_lights:
+      state: 'off'
+    light.kitchen_lights:
+      state: 'off'
+    media_player.living_room:
+      state: paused
+      volume_level: 0.15
+    input_boolean.sleeping:
+      state: 'on'
+
+- name: Evening
+  icon: mdi:weather-sunset
+  entities:
+    light.hallway_lights:
+      state: 'on'
+      brightness: 153
+    light.hallway_upstairs_lights:
+      state: 'on'
+      brightness: 153
+    light.table_lamp:
+      state: 'on'
+      brightness: 153
+    light.tripod_lamp:
+      state: 'on'
+      brightness: 153
+      xy_color: [0.46,0.41]
+    light.living_room_lights:
+      state: 'on'
+      brightness: 153
+      xy_color: [0.46,0.41]
+    light.kitchen_lights:
+      state: 'on'
+      brightness: 153
+      xy_color: [0.46,0.41]
+    input_boolean.sleeping:
+      state: 'off'
+
+- name: Night
+  icon: mdi:weather-night
+  entities:
+    light.hallway_lights:
+      state: 'on'
+      brightness: 80
+    light.hallway_upstairs_lights:
+      state: 'on'
+      brightness: 80
+    light.table_lamp:
+      state: 'off'
+    light.tripod_lamp:
+      state: 'on'
+      brightness: 80
+      xy_color: [0.46,0.41]
+    light.living_room_lights:
+      state: 'off'
+    light.kitchen_lights:
+      state: 'on'
+      brightness: 80
+      xy_color: [0.46,0.41]
+    input_boolean.sleeping:
+      state: 'off'
+
+- name: Daytime
+  icon: mdi:weather-partly-cloudy
+  entities:
+    light.hallway_lights:
+      state: 'on'
+      brightness: 255
+    light.hallway_upstairs_lights:
+      state: 'on'
+      brightness: 255
+    light.living_room_lights:
+      state: 'on'
+      brightness: 255
+      xy_color: [0.38,0.38]
+    light.tripod_lamp:
+      state: 'on'
+      brightness: 255
+      xy_color: [0.38,0.38]
+    light.kitchen_lights:
+      state: 'on'
+      brightness: 255
+      xy_color: [0.38,0.38]
+    input_boolean.sleeping:
+      state: 'off'
+
+- name: Daytime bright
+  icon: mdi:weather-sunny
+  entities:
+    light.hallway_lights:
+      state: 'off'
+    light.hallway_upstairs_lights:
+      state: 'off'
+    light.living_room_lights:
+      state: 'off'
+    light.tripod_lamp:
+      state: 'off'
+    light.kitchen_lights:
+      state: 'off'
+    input_boolean.sleeping:
+      state: 'off'
+
+- name: Fireplace
+  icon: mdi:fireplace
+  entities:
+    light.hallway_lights:
+      state: 'on'
+      brightness: 108
+    light.hallway_upstairs_lights:
+      state: 'on'
+      brightness: 75
+    light.kitchen_lights:
+      state: 'off'
+    light.living_room_lights:
+      state: 'off'
+    light.tripod_lamp:
+      state: 'on'
+      brightness: 254
+      rgb_color:
+      - 255
+      - 128
+      - 25

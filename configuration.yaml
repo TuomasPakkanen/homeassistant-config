@@ -13,7 +13,7 @@ homeassistant:
 group: !include groups.yaml
 automation: !include_dir_merge_list automations/
 #light: !include light.yaml # light groups managed in Deconz
-#scene: !include scenes.yaml # scenes are created as scripts
+#scene: !include scenes.yaml
 script: !include scripts.yaml
 
 frontend:
@@ -42,6 +42,7 @@ logger:
     homeassistant.components.cast.media_player: error
     pychromecast: error
     pychromecast.discovery: error
+    custom_components.ble_monitor: debug
 
 # Recorder
 recorder:
@@ -65,6 +66,14 @@ history:
 
 
 ### INTEGRATIONS
+
+ble_monitor:
+  discovery: True
+  rounding: True
+  decimals: 1
+  period: 300
+  devices:
+    - mac: '58:2D:34:34:50:74'
 
 # InfluxDB configuration
 influxdb:
@@ -168,10 +177,6 @@ binary_sensor:
         value_template: "{{ is_state('group.people', 'home') }}"
 
 sensor:
-  - platform: mitemp_bt
-    rounding: True
-    decimals: 1
-    period: 300
   - platform: systemmonitor
     resources:
       - type: disk_use_percent
@@ -198,10 +203,10 @@ sensor:
         friendly_name: "Air Conditioner state"
         #unit_of_measurement: 'Mode'
         value_template: "{{states.climate.air_conditioner.state}}"
-      living_room_sensor_battery:
-        friendly_name: Xiaomi Mijia battery
-        unit_of_measurement: '%'
-        value_template: "{{states.sensor.mi_t_582d34345074.attributes.battery_level}}"
+      #living_room_sensor_battery:
+      #  friendly_name: Xiaomi Mijia battery
+      #  unit_of_measurement: '%'
+      #  value_template: "{{states.sensor.mi_t_582d34345074.attributes.battery_level}}"
   - platform: command_line
     name: "CPU Temperature"
     command: "cat /sys/class/thermal/thermal_zone0/temp"

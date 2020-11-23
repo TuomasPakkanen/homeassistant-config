@@ -67,7 +67,7 @@
     - service: climate.set_temperature
       entity_id: climate.air_conditioner
       data:
-        temperature: '20'
+        temperature: '20.5'
     - service: climate.set_fan_mode
       entity_id: climate.air_conditioner
       data:
@@ -106,7 +106,7 @@
     - service: climate.set_temperature
       entity_id: climate.air_conditioner
       data:
-        temperature: '20'
+        temperature: '20.5'
     - service: climate.set_fan_mode
       entity_id: climate.air_conditioner
       data:
@@ -219,7 +219,7 @@
     platform: numeric_state
     entity_id: sensor.mi_t_582d34345074
     below: 23.5
-    for: "00:15:00"
+    for: "00:30:00"
   condition: 
     - condition: template
       value_template: '{{ now().month >= 10 or now().month <= 4 }}'

@@ -13,6 +13,16 @@
     data:
       entity_id: light.bedroom_lights
       transition: 15
+
+- alias: "Turn off bedroom presence automatically"
+  trigger: 
+    platform: state
+    entity_id: input_boolean.bedroom_presence
+    to: 'on'
+    for: '02:00:00'
+  action:
+    service: input_boolean.turn_on
+    entity_id: input_boolean.bedroom_presence
     
 - alias: "Flash bedroom lights if either door is opened during the night"
   trigger: 
