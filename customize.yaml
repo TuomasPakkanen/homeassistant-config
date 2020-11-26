@@ -4,10 +4,10 @@ weather.home:
 media_player.living_room:
   friendly_name: Sonos
 
-sensor.mi_h_582d34345074:
+sensor.ble_humidity_582d34345074:
   friendly_name: Living room humidity
 
-sensor.mi_t_582d34345074:
+sensor.ble_temperature_582d34345074:
   friendly_name: Living room temperature
 
 sensor.travel_time_to_airport:

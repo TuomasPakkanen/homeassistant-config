@@ -264,7 +264,7 @@ fireplace_scene:
     - service: light.turn_on
       data:
         entity_id: light.hallway_upstairs_lights
-        brightness: 75
+        brightness: 254
         rgb_color:
           - 255
           - 128
