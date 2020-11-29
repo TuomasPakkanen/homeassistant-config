@@ -1,7 +1,52 @@
-- alias: "Turn on lights if dark during the day"
+- alias: "Turn on upstairs lights if dark during the day"
   trigger:
     platform: numeric_state
     entity_id: sensor.stairs_motion_sensor_2
+    below: 80
+  condition:
+    - condition: state
+      entity_id: sun.sun
+      state: 'above_horizon'
+    - condition: state
+      entity_id: input_boolean.sleeping
+      state: 'off'
+    - condition: state
+      entity_id: binary_sensor.occupancy
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.vacation_mode
+      state: 'off'
+  action:
+    service: scene.turn_on
+    data:
+      entity_id: >
+        {% if 7 <= now().hour < state_attr('input_datetime.evening_start', 'hour') %}
+          scene.hallway_upstairs_lights_daytime
+        {% elif state_attr('input_datetime.evening_start', 'hour') <= now().hour < state_attr('input_datetime.night_start', 'hour') %}
+          scene.hallway_upstairs_lights_evening
+        {% else %}
+          scene.hallway_upstairs_lights_night
+        {% endif %}
+
+- alias: "Turn off upstairs lights if bright during the day"
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.stairs_motion_sensor_2
+    above: 110
+    for: "00:03:00"
+  condition:
+    condition: state
+    entity_id: input_boolean.sleeping
+    state: 'off'
+  action:
+    service: light.turn_off
+    data:
+      entity_id: light.hallway_upstairs_lights
+
+- alias: "Turn on lights if dark during the day"
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.living_room_motion_sensor
     below: 80
   condition:
     - condition: state
@@ -28,10 +73,10 @@
           script.night_scene
         {% endif %}
 
-- alias: "Turn off lights if bright during the day"
+- alias: "Turn off downstairs lights if bright during the day"
   trigger:
     platform: numeric_state
-    entity_id: sensor.stairs_motion_sensor_2
+    entity_id: sensor.living_room_motion_sensor
     above: 110
     for: "00:03:00"
   condition:
@@ -39,6 +84,10 @@
     entity_id: input_boolean.sleeping
     state: 'off'
   action:
-    service: script.turn_on
+    service: light.turn_off
     data:
-      entity_id: script.daytime_bright_scene
+      entity_id: 
+        - light.hallway_lights
+        - light.living_room_lights
+        - light.kitchen_lights
+        - light.tripod_lamp

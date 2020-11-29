@@ -7,11 +7,21 @@
       above: 25
       for: "00:15:00"
   condition:
-    - condition: template
-      value_template: '{{ now().month >= 5 and now().month <= 9 }}'
-    - condition: state
-      entity_id: input_boolean.vacation_mode
-      state: 'off'
+    - condition: and
+      conditions:
+        - condition: template
+          value_template: '{{ now().month >= 5 and now().month <= 9 }}'
+        - condition: state
+          entity_id: input_boolean.vacation_mode
+          state: 'off'
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id: binary_sensor.occupancy
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.guest_mode
+              state: 'on'
   action:
     - service: climate.set_temperature
       entity_id: climate.air_conditioner
