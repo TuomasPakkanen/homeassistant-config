@@ -3,7 +3,7 @@
 - alias: "AC to cool mode"
   trigger:
     - platform: numeric_state
-      entity_id: sensor.mi_t_582d34345074
+      entity_id: sensor.ble_temperature_582d34345074
       above: 25
       for: "00:15:00"
   condition:
@@ -37,7 +37,7 @@
 - alias: "AC off when target temperature reached"
   trigger:
     - platform: numeric_state
-      entity_id: sensor.mi_t_582d34345074
+      entity_id: sensor.ble_temperature_582d34345074
       below: 24.4
       for: "02:00:00"
   condition:
@@ -193,7 +193,7 @@
 - alias: "AC off during winter if warm enough" # practically due to fireplace or warm outside
   trigger:
     platform: numeric_state
-    entity_id: sensor.mi_t_582d34345074
+    entity_id: sensor.ble_temperature_582d34345074
     above: 23.5
     for: "00:15:00"
   condition: 
@@ -217,7 +217,7 @@
 - alias: "AC back to comfort heat during winter if cold enough"
   trigger:
     platform: numeric_state
-    entity_id: sensor.mi_t_582d34345074
+    entity_id: sensor.ble_temperature_582d34345074
     below: 23.5
     for: "00:30:00"
   condition: 

@@ -21,7 +21,7 @@
     to: 'on'
     for: '02:00:00'
   action:
-    service: input_boolean.turn_on
+    service: input_boolean.turn_off
     entity_id: input_boolean.bedroom_presence
     
 - alias: "Flash bedroom lights if either door is opened during the night"

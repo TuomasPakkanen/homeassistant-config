@@ -203,10 +203,10 @@ sensor:
         friendly_name: "Air Conditioner state"
         #unit_of_measurement: 'Mode'
         value_template: "{{states.climate.air_conditioner.state}}"
-      #living_room_sensor_battery:
-      #  friendly_name: Xiaomi Mijia battery
-      #  unit_of_measurement: '%'
-      #  value_template: "{{states.sensor.mi_t_582d34345074.attributes.battery_level}}"
+      living_room_sensor_battery:
+        friendly_name: Xiaomi Mijia battery
+        unit_of_measurement: '%'
+        value_template: "{{states.sensor.ble_temperature_582d34345074.attributes.battery_level}}"
   - platform: command_line
     name: "CPU Temperature"
     command: "cat /sys/class/thermal/thermal_zone0/temp"
