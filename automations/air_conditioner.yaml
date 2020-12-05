@@ -174,7 +174,7 @@
 - alias: "AC to economical heat for the night"
   trigger:
     platform: time
-    at: '20:00:00'
+    at: '21:00:00'
   condition: 
     condition: template
     value_template: '{{ now().month >= 10 or now().month <= 4 }}'
@@ -204,7 +204,7 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.ble_temperature_582d34345074
-    above: 23.5
+    above: 24
     for: "00:15:00"
   condition: 
     - condition: template
@@ -228,7 +228,7 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.ble_temperature_582d34345074
-    below: 23.5
+    below: 24
     for: "00:30:00"
   condition: 
     - condition: template
