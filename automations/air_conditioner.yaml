@@ -71,8 +71,11 @@
     entity_id: binary_sensor.occupancy
     to: 'on'
   condition:
-    condition: template
-    value_template: '{{ now().month >= 10 or now().month <= 4 }}'
+    - condition: template
+      value_template: '{{ now().month >= 10 or now().month <= 4 }}'
+    - condition: numeric_state
+      entity_id: sensor.ble_temperature_582d34345074
+      below: 24
   action:
     - service: climate.set_temperature
       entity_id: climate.air_conditioner
@@ -104,6 +107,9 @@
       conditions:
         - condition: template
           value_template: '{{ now().month >= 10 or now().month <= 4 }}'
+        - condition: numeric_state
+          entity_id: sensor.ble_temperature_582d34345074
+          below: 24
         - condition: or
           conditions:
             - condition: state
@@ -149,6 +155,9 @@
     - condition: state
       entity_id: input_boolean.guest_mode
       state: 'off'
+    - condition: numeric_state
+      entity_id: sensor.ble_temperature_582d34345074
+      below: 24
   action:
     - service: climate.set_temperature
       entity_id: climate.air_conditioner
@@ -176,8 +185,11 @@
     platform: time
     at: '21:00:00'
   condition: 
-    condition: template
-    value_template: '{{ now().month >= 10 or now().month <= 4 }}'
+    - condition: template
+      value_template: '{{ now().month >= 10 or now().month <= 4 }}'
+    - condition: numeric_state
+      entity_id: sensor.ble_temperature_582d34345074
+      below: 24
   action: 
     - service: climate.set_temperature
       entity_id: climate.air_conditioner
@@ -217,12 +229,6 @@
       data:
         entity_id: climate.air_conditioner
         hvac_mode: 'off'
-    - service: automation.turn_off
-      entity_id: 
-        - automation.ac_to_comfort_heat_in_the_morning
-        - automation.ac_to_comfort_heat_occupancy
-        - automation.ac_to_economical_heat_for_the_night
-        - automation.ac_to_economical_heat_occupancy
 
 - alias: "AC back to comfort heat during winter if cold enough"
   trigger:
@@ -257,9 +263,3 @@
       data:
         entity_id: climate.air_conditioner
         hvac_mode: 'heat'
-    - service: automation.turn_on
-      entity_id: 
-        - automation.ac_to_comfort_heat_in_the_morning
-        - automation.ac_to_comfort_heat_occupancy
-        - automation.ac_to_economical_heat_for_the_night
-        - automation.ac_to_economical_heat_occupancy

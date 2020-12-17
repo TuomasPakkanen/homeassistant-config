@@ -14,7 +14,7 @@
       entity_id: light.tripod_lamp
       state: 'off'
     - condition: numeric_state
-      entity_id: sensor.stairs_motion_sensor_2
+      entity_id: sensor.living_room_motion_sensor
       below: 80
   action:
     service: script.turn_on
