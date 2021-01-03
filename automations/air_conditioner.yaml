@@ -80,7 +80,7 @@
     - service: climate.set_temperature
       entity_id: climate.air_conditioner
       data:
-        temperature: '20.5'
+        temperature: '21'
     - service: climate.set_fan_mode
       entity_id: climate.air_conditioner
       data:
@@ -122,7 +122,7 @@
     - service: climate.set_temperature
       entity_id: climate.air_conditioner
       data:
-        temperature: '20.5'
+        temperature: '21'
     - service: climate.set_fan_mode
       entity_id: climate.air_conditioner
       data:
@@ -246,7 +246,7 @@
     - service: climate.set_temperature
       entity_id: climate.air_conditioner
       data:
-        temperature: '20'
+        temperature: '21'
     - service: climate.set_fan_mode
       entity_id: climate.air_conditioner
       data:
