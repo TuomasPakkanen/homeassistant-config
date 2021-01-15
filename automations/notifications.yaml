@@ -6,9 +6,12 @@
     entity_id: binary_sensor.sampos_room
     to: 'on'
   condition:
-    condition: time
-    after: "07:00:00"
-    before: "9:30:00"
+    - condition: time
+      after: "06:00:00"
+      before: "9:30:00"
+    - condition: state
+      entity_id: input_boolean.sleeping
+      state: 'on'
   action:
     - service: tts.google_translate_say
       entity_id: media_player.google_home

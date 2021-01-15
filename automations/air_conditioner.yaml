@@ -217,7 +217,7 @@
     platform: numeric_state
     entity_id: sensor.ble_temperature_582d34345074
     above: 24
-    for: "00:15:00"
+    for: "01:00:00"
   condition: 
     - condition: template
       value_template: '{{ now().month >= 10 or now().month <= 4 }}'
@@ -235,7 +235,7 @@
     platform: numeric_state
     entity_id: sensor.ble_temperature_582d34345074
     below: 24
-    for: "00:30:00"
+    for: "01:00:00"
   condition: 
     - condition: template
       value_template: '{{ now().month >= 10 or now().month <= 4 }}'
