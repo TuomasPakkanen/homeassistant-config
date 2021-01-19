@@ -5,6 +5,9 @@
     to: 'on'
   condition:
     - condition: state
+      entity_id: light.bedroom_light_1
+      state: 'off'
+    - condition: state
       entity_id: input_boolean.sleeping
       state: 'off'
     - condition: state
