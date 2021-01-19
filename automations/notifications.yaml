@@ -36,25 +36,25 @@
       message: 'Sauna on lämmin!'
       language: 'fi'
 
-# MOONA TO HOME #
+# MOONA TO HOME # NOT IN USE
 
-- alias: "Notify when Moona left the airport"
-  trigger:
-    platform: state
-    entity_id: person.moona
-    from: 'Airport'
-  condition: 
-    condition: template
-    value_template: '{{ is_state_attr("sensor.iphone_moona_geocoded_location", "Country", "Suomi") }}'
-  action:
-    - service: notify.telegram
-      data:
-        message: "Moona is coming home"
-    - service: automation.turn_off
-      entity_id: automation.flash_bedroom_lights_if_either_door_is_opened_during_the_night
-    - delay: '00:30:00'
-    - service: automation.turn_on
-      entity_id: automation.flash_bedroom_lights_if_either_door_is_opened_during_the_night
+#- alias: "Notify when Moona left the airport"
+#  trigger:
+#    platform: state
+#    entity_id: person.moona
+#    from: 'Airport'
+#  condition: 
+#    condition: template
+#    value_template: '{{ is_state_attr("sensor.iphone_moona_geocoded_location", "Country", "Suomi") }}'
+#  action:
+#    - service: notify.mobile_app_oneplus7t_tuomas
+#      data:
+#       message: "Moona is coming home"
+#    - service: automation.turn_off
+#      entity_id: automation.flash_bedroom_lights_if_either_door_is_opened_during_the_night
+#    - delay: '00:30:00'
+#    - service: automation.turn_on
+#      entity_id: automation.flash_bedroom_lights_if_either_door_is_opened_during_the_night
 
 # BURGLAR ALARM #
 
@@ -74,7 +74,7 @@
     - condition: state
       entity_id: binary_sensor.occupancy
       state: 'off'
-    - service: notify.telegram
+    - service: notify.mobile_app_oneplus7t_tuomas
       data:
         title: "Burglar alarm triggered!"
         message: "{{ trigger.to_state.attributes.friendly_name }} has been opened!"
@@ -89,7 +89,7 @@
     condition: template
     value_template: "{{ now().day == 1 }}"
   action:
-    service: notify.telegram
+    service: notify.mobile_app_oneplus7t_tuomas
     data_template:
       title: "Here's the cumulative air conditioner energy usage"
       message: "{{ states('sensor.air_conditioner_energy') }} kWh"
@@ -110,7 +110,7 @@
     above: 75
     for: "00:02:00"
   action:
-    service: notify.telegram
+    service: notify.mobile_app_oneplus7t_tuomas
     data:
       title: "System alert!"
       message: "Raspberry Pi CPU temperature critical! Current temperature is {{ states('sensor.cpu_temperature') }}°C"
@@ -121,7 +121,7 @@
     entity_id: sensor.disk_use_percent
     above: 80.0
   action:
-    service: notify.telegram
+    service: notify.mobile_app_oneplus7t_tuomas
     data:
       title: "System alert!"
       message: "Raspberry Pi free disk space running low!"
@@ -134,7 +134,7 @@
     entity_id: sensor.living_room_sensor_battery
     below: 15
   action:
-    service: notify.telegram
+    service: notify.mobile_app_oneplus7t_tuomas
     data:
       title: '*Battery low alert!*'
       message: "Xiaomi Mijia temperature and humidity sensor battery is running low. Please replace the battery."
@@ -145,7 +145,7 @@
     entity_id: sensor.stairs_motion_sensor_battery_level
     below: 15
   action:
-    service: notify.telegram
+    service: notify.mobile_app_oneplus7t_tuomas
     data:
       title: '*Battery low alert!*'
       message: "Hue motion sensor battery is running low. Please replace the battery."

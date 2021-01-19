@@ -77,8 +77,8 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.living_room_motion_sensor
-    above: 110
-    for: "00:03:00"
+    above: 200
+    for: "00:05:00"
   condition:
     condition: state
     entity_id: input_boolean.sleeping
