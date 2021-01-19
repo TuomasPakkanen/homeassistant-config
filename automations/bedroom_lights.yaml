@@ -1,3 +1,55 @@
+- alias: "Turn on bedroom lights automatically"
+  trigger:
+    platform: state
+    entity_id: binary_sensor.bedroom_motion_sensor
+    to: 'on'
+  condition:
+    - condition: state
+      entity_id: input_boolean.sleeping
+      state: 'off'
+    - condition: state
+      entity_id: binary_sensor.occupancy
+      state: 'on'
+  action:
+    - service: automation.turn_off
+      entity_id: automation.set_bedroom_color_temperature_and_brightness
+    - service: light.turn_on
+      data:
+        entity_id: light.bedroom_lights
+        brightness_pct: >
+          {% if 7 <= now().hour < state_attr('input_datetime.evening_start', 'hour') %}
+            80
+          {% elif state_attr('input_datetime.evening_start', 'hour') <= now().hour < state_attr('input_datetime.night_start', 'hour') %}
+            60
+          {% else %}
+            20
+          {% endif %}
+    - service: light.turn_on
+      data:
+        entity_id: light.bedroom_spotlights
+        kelvin: > 
+          {% if 7 <= now().hour < state_attr('input_datetime.evening_start', 'hour') %}
+            4000
+          {% elif state_attr('input_datetime.evening_start', 'hour') <= now().hour < state_attr('input_datetime.night_start', 'hour') %}
+            2700
+          {% else %}
+            2200
+          {% endif %}
+    - delay: "00:00:01"
+    - service: light.turn_on
+      data:
+        entity_id: light.bedroom_spotlights
+        brightness_pct: >
+          {% if 7 <= now().hour < state_attr('input_datetime.evening_start', 'hour') %}
+            80
+          {% elif state_attr('input_datetime.evening_start', 'hour') <= now().hour < state_attr('input_datetime.night_start', 'hour') %}
+            60
+          {% else %}
+            20
+          {% endif %}
+    - service: automation.turn_on
+      entity_id: automation.set_bedroom_color_temperature_and_brightness
+
 - alias: "Turn off bedroom lights automatically"
   trigger: 
     platform: state
@@ -33,9 +85,12 @@
       entity_id: binary_sensor.backdoor
       to: 'on'
   condition:
-    condition: state
-    entity_id: input_boolean.sleeping
-    state: 'on'
+    - condition: state
+      entity_id: input_boolean.sleeping
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.guest_mode
+      state: 'off'
   action: 
     - service: light.turn_on
       data:
