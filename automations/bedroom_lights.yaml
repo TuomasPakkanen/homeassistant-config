@@ -13,6 +13,9 @@
     - condition: state
       entity_id: binary_sensor.occupancy
       state: 'on'
+    - condition: time
+      after: "09:30:00"
+      before: "23:30:00"
   action:
     - service: automation.turn_off
       entity_id: automation.set_bedroom_color_temperature_and_brightness
@@ -52,6 +55,7 @@
           {% endif %}
     - service: automation.turn_on
       entity_id: automation.set_bedroom_color_temperature_and_brightness
+    - delay: "00:10:00"
 
 - alias: "Turn off bedroom lights automatically"
   trigger: 
