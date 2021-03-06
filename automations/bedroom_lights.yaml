@@ -73,12 +73,47 @@
       entity_id: light.bedroom_lights
       transition: 15
 
-- alias: "Turn off bedroom presence automatically"
+- alias: "Turn on bedroom presence"
+  trigger:
+    platform: event
+    event_type: deconz_event
+    event_data:
+      id: bedroom_button
+      event: 1002
+  condition:
+    - condition: state
+      entity_id: input_boolean.sleeping
+      state: 'off'
+    - condition: state
+      entity_id: input_boolean.bedroom_presence
+      state: 'off'
+    - condition: time
+      before: '21:00:00'
+      after: '08:00:00'
+  action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.bedroom_presence
+    - service: tts.google_translate_say
+      entity_id: media_player.google_home
+      data:
+        message: 'I have turned on bedroom presence for you'
+        language: 'en'
+
+- alias: "Turn off bedroom presence"
   trigger: 
-    platform: state
+    - platform: state
+      entity_id: input_boolean.bedroom_presence
+      to: 'on'
+      for: '02:00:00'
+    - platform: event
+      event_type: deconz_event
+      event_data:
+        id: bedroom_button
+        event: 1002
+  condition:
+    condition: state
     entity_id: input_boolean.bedroom_presence
-    to: 'on'
-    for: '02:00:00'
+    state: 'on'
   action:
     service: input_boolean.turn_off
     entity_id: input_boolean.bedroom_presence

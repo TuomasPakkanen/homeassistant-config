@@ -9,6 +9,9 @@
     - condition: state
       entity_id: input_boolean.sleeping
       state: 'off'
+    - condition: time
+      after: '21:00:00'
+      before: '06:00:00'
   action:
     - service: script.turn_on
       data:
@@ -18,5 +21,3 @@
       data:
         message: 'Hyvää yötä!'
         language: 'fi'
-    - service: automation.turn_on
-      entity_id: automation.notify_when_sampo_woke_up
