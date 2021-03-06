@@ -47,7 +47,7 @@ logger:
 # Recorder
 recorder:
   db_url: !secret mariadb_url
-  purge_keep_days: 365
+  purge_keep_days: 30
   exclude:
     entities:
       - binary_sensor.updater
@@ -69,7 +69,6 @@ history:
 
 ble_monitor:
   discovery: True
-  rounding: True
   decimals: 1
   period: 300
   devices:
@@ -89,19 +88,6 @@ influxdb:
 rest_command:
   health_check:
     url: !secret health_check_url
-
-# Telegram Bot (polling method)
-telegram_bot:
-  - platform: polling
-    api_key: !secret telegram_token
-    allowed_chat_ids:
-      - !secret telegram_chatid
-
-# Notify components
-notify:
-  - name: telegram
-    platform: telegram
-    chat_id: !secret telegram_chatid
 
 # Spotify
 spotify:
