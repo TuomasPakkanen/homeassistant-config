@@ -74,13 +74,11 @@ evening_scene:
       data: 
         entity_id: light.table_lamp
         brightness: 153
-        transition: 15
-    - delay: "00:00:01"
-    - service: light.turn_on
-      data: 
-        entity_id: light.hallway_lights
-        brightness: 153
         transition: 10
+    - delay: "00:00:01"
+    - service: scene.turn_on
+      data: 
+        entity_id: scene.hallway_lights_evening
     - delay: "00:00:01"
     - service: scene.turn_on
       data: 
@@ -92,11 +90,9 @@ night_scene:
   alias: "Night scene"
   icon: mdi:weather-night
   sequence:
-    - service: light.turn_on
+    - service: scene.turn_on
       data: 
-        entity_id: light.hallway_lights
-        brightness: 80
-        transition: 10
+        entity_id: scene.hallway_lights_night
     - delay: "00:00:01"
     - service: scene.turn_on
       data: 
@@ -133,11 +129,9 @@ daytime_scene:
       data: 
         entity_id: scene.hallway_upstairs_lights_daytime
     - delay: "00:00:01"
-    - service: light.turn_on
+    - service: scene.turn_on
       data: 
-        entity_id: light.hallway_lights
-        brightness: 255
-        transition: 10
+        entity_id: scene.hallway_lights_daytime
     - delay: "00:00:01"
     - service: light.turn_on
       data: 
@@ -206,11 +200,9 @@ fireplace_scene:
         entity_id: light.living_room_lights
         transition: 10
     - delay: "00:00:01"
-    - service: light.turn_on
-      data: 
-        entity_id: light.hallway_lights
-        brightness: 108
-        transition: 10
+    - service: scene.turn_on
+      data:
+        entity_id: scene.hallway_lights_fireplace
     - delay: "00:00:01"
     - service: scene.turn_on
       data:
@@ -220,10 +212,6 @@ fireplace_scene:
       data:
         entity_id: light.kitchen_lights
         transition: 10
-    - service: climate.set_hvac_mode
-      data:
-        entity_id: climate.air_conditioner
-        hvac_mode: 'off'
     - service: automation.turn_off
       entity_id: automation.set_evening_scene
     - service: automation.turn_off

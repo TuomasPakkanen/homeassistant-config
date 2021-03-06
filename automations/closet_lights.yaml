@@ -1,0 +1,21 @@
+- alias: "Closet light on"
+  trigger: 
+    platform: state
+    entity_id: binary_sensor.closet_door
+    to: 'on'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.closet_light
+      brightness_pct: 100
+      transition: 5
+
+- alias: "Closet light off"
+  trigger: 
+    platform: state
+    entity_id: binary_sensor.closet_door
+    to: 'off'
+  action:
+    service: light.turn_off
+    entity_id: light.closet_light
+
