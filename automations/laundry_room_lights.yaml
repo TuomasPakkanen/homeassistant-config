@@ -6,9 +6,13 @@
   action:
     service: light.turn_on
     data:
-      entity_id: light.laundry_room_lights
-      brightness_pct: 100
-      transition: 5
+      entity_id: light.bedroom_lights
+      brightness_pct: >
+        {% if 6 <= now().hour < 21 %}
+          100
+        {% else %}
+          60
+        {% endif %}
 
 - alias: "Laundry room lights off"
   trigger: 

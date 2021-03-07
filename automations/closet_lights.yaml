@@ -8,7 +8,7 @@
     data:
       entity_id: light.closet_light
       brightness_pct: 100
-      transition: 5
+      transition: 2
 
 - alias: "Closet light off"
   trigger: 
