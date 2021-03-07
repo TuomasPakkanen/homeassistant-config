@@ -4,7 +4,7 @@ default_config:
 # Text to speech
 tts:
   - platform: google_translate
-    service_name: google_translate_say #added on 7.3.2021 to fix issue https://github.com/home-assistant/core/issues/28894
+    service_name: google_translate_say
 
 ### INCLUDES
 
@@ -14,20 +14,11 @@ homeassistant:
 group: !include groups.yaml
 automation: !include_dir_merge_list automations/
 #light: !include light.yaml # light groups managed in Deconz
-#scene: !include scenes.yaml
+#scene: !include scenes.yaml # scenes managed in Deconz and scripts
 script: !include scripts.yaml
 
 frontend:
   themes: !include_dir_merge_named themes
-
-# HTTP Setup
-#http:
-#  base_url: !secret duckdns_url
-#  ssl_certificate: /ssl/fullchain.pem
-#  ssl_key: /ssl/privkey.pem
-#  ip_ban_enabled: True
-#  login_attempts_threshold: 5
-
 
 ### RECORDER, HISTORY AND LOG SETUP
 
@@ -193,12 +184,11 @@ sensor:
         value_template: "{{states.climate.air_conditioner.attributes.temperature}}"
       ac_state:
         friendly_name: "Air Conditioner state"
-        #unit_of_measurement: 'Mode'
         value_template: "{{states.climate.air_conditioner.state}}"
       living_room_sensor_battery:
         friendly_name: Xiaomi Mijia battery
         unit_of_measurement: '%'
-        value_template: "{{states.sensor.ble_temperature_582d34345074.attributes.battery_level}}"
+        value_template: '{{ state_attr("sensor.ble_temperature_582d34345074", "battery_level") }}'
   - platform: command_line
     name: "CPU Temperature"
     command: "cat /sys/class/thermal/thermal_zone0/temp"
