@@ -1,0 +1,22 @@
+- alias: 'IKEA switch volume control'
+  trigger:
+    platform: event
+    event_type: deconz_event
+    event_data:
+      id: ikea_switch
+  action:
+    - choose: 
+      # Toggle bedroom lights
+      - conditions:
+        - condition: template
+          value_template: "{{ trigger.event.data.event == 1002 }}"
+        sequence:
+          - service: media_player.volume_up
+            entity_id: media_player.living_room
+      # Increase brightness of bedroom lights
+      - conditions:
+        - condition: template
+          value_template: "{{ trigger.event.data.event == 2002 }}"
+        sequence:
+          - service: media_player.volume_down
+            entity_id: media_player.living_room

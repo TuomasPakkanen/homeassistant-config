@@ -4,6 +4,7 @@ default_config:
 # Text to speech
 tts:
   - platform: google_translate
+    service_name: google_translate_say #added on 7.3.2021 to fix issue https://github.com/home-assistant/core/issues/28894
 
 ### INCLUDES
 
@@ -47,7 +48,7 @@ logger:
 # Recorder
 recorder:
   db_url: !secret mariadb_url
-  purge_keep_days: 30
+  purge_keep_days: 7
   exclude:
     entities:
       - binary_sensor.updater
@@ -64,6 +65,7 @@ history:
       - discovery
       - history_graph
 
+# Logbook:
 
 ### INTEGRATIONS
 
