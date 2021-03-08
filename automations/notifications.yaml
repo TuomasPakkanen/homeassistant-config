@@ -76,7 +76,7 @@
 - alias: "Health check"
   trigger:
     platform: time_pattern
-    minutes: "/15"
+    minutes: "/5"
   action:
     service: rest_command.health_check
 
