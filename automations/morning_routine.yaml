@@ -1,31 +1,21 @@
-- alias: "Morning routine"
+- alias: "Morning routine weekdays"
   trigger: 
     platform: state
     entity_id: binary_sensor.stairs_motion_sensor
     to: 'on'
   condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id: input_boolean.sleeping
-        state: 'on'
-      - condition: or
-        conditions:
-          - condition: time
-            after: '07:00:00'
-            before: '12:00:00'
-            weekday:
-              - mon
-              - tue
-              - wed
-              - thu
-              - fri
-          - condition: time
-            after: '08:15:00'
-            before: '12:00:00'
-            weekday:
-              - sat
-              - sun
+    - condition: state
+      entity_id: input_boolean.sleeping
+      state: 'on'
+    - condition: time
+      after: '07:00:00'
+      before: '12:00:00'
+      weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
   action:
     - service: script.turn_on
       data_template:
@@ -52,3 +42,33 @@
     - service: media_player.turn_on
       data:
         entity_id: media_player.living_room
+
+- alias: "Morning routine weekends"
+  trigger: 
+    platform: state
+    entity_id: binary_sensor.stairs_motion_sensor
+    to: 'on'
+  condition:
+    - condition: state
+      entity_id: input_boolean.sleeping
+      state: 'on'
+    - condition: time
+      after: '08:15:00'
+      before: '12:00:00'
+      weekday:
+        - sat
+        - sun
+  action:
+    - service: script.turn_on
+      data_template:
+        entity_id: >
+          {%-if states('sensor.motion_sensor_2') | float < 80 %}
+            script.daytime_scene
+          {%- else %}
+            script.daytime_bright_scene
+          {%- endif %}
+    - service: tts.google_translate_say
+      entity_id: media_player.living_room
+      data:
+        message: 'Hyvää huomenta!'
+        language: 'fi'
