@@ -75,7 +75,7 @@
       value_template: '{{ now().month >= 10 or now().month <= 4 }}'
     - condition: numeric_state
       entity_id: sensor.ble_temperature_582d34345074
-      below: 24
+      below: 23
   action:
     - service: climate.set_temperature
       entity_id: climate.air_conditioner
@@ -109,7 +109,7 @@
           value_template: '{{ now().month >= 10 or now().month <= 4 }}'
         - condition: numeric_state
           entity_id: sensor.ble_temperature_582d34345074
-          below: 24
+          below: 23
         - condition: or
           conditions:
             - condition: state
@@ -157,7 +157,7 @@
       state: 'off'
     - condition: numeric_state
       entity_id: sensor.ble_temperature_582d34345074
-      below: 24
+      below: 23
   action:
     - service: climate.set_temperature
       entity_id: climate.air_conditioner
@@ -189,7 +189,7 @@
       value_template: '{{ now().month >= 10 or now().month <= 4 }}'
     - condition: numeric_state
       entity_id: sensor.ble_temperature_582d34345074
-      below: 24
+      below: 23
   action: 
     - service: climate.set_temperature
       entity_id: climate.air_conditioner
@@ -216,7 +216,7 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.ble_temperature_582d34345074
-    above: 24
+    above: 23
     for: "01:00:00"
   condition: 
     - condition: template
@@ -234,7 +234,7 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.ble_temperature_582d34345074
-    below: 24
+    below: 23
     for: "01:00:00"
   condition: 
     - condition: template

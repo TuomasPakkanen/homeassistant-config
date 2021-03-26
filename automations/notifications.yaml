@@ -7,7 +7,7 @@
     above: 44
     for: '00:02:00'
   action:
-    service: tts.google_translate_say
+    service: tts.cloud_say
     entity_id: media_player.kitchen_display
     data:
       message: 'Sauna on lämmin!'

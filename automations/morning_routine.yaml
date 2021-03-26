@@ -25,7 +25,7 @@
           {%- else %}
             script.daytime_bright_scene
           {%- endif %}
-    - service: tts.google_translate_say
+    - service: tts.cloud_say
       entity_id: media_player.living_room
       data:
         message: 'Hyvää huomenta!'
@@ -67,7 +67,7 @@
           {%- else %}
             script.daytime_bright_scene
           {%- endif %}
-    - service: tts.google_translate_say
+    - service: tts.cloud_say
       entity_id: media_player.living_room
       data:
         message: 'Hyvää huomenta!'

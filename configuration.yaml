@@ -2,9 +2,9 @@
 default_config:
 
 # Text to speech
-tts:
-  - platform: google_translate
-    service_name: google_translate_say
+#tts:
+#  - platform: google_translate
+#    service_name: google_translate_say
 
 ### INCLUDES
 
