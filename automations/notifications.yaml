@@ -8,10 +8,12 @@
     for: '00:02:00'
   action:
     service: tts.cloud_say
-    entity_id: media_player.kitchen_display
     data:
+      entity_id: media_player.kitchen_display
       message: 'Sauna on lämmin!'
-      language: 'fi'
+      language: fi-FI
+      options:
+        gender: female
 
 # MOONA TO HOME # NOT IN USE
 

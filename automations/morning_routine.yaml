@@ -26,10 +26,12 @@
             script.daytime_bright_scene
           {%- endif %}
     - service: tts.cloud_say
-      entity_id: media_player.living_room
       data:
+        entity_id: media_player.living_room
         message: 'Hyvää huomenta!'
-        language: 'fi'
+        language: fi-FI
+        options:
+          gender: female
     - delay: '00:00:05'
     - service: media_player.select_source
       data: 
@@ -68,7 +70,9 @@
             script.daytime_bright_scene
           {%- endif %}
     - service: tts.cloud_say
-      entity_id: media_player.living_room
       data:
+        entity_id: media_player.living_room
         message: 'Hyvää huomenta!'
-        language: 'fi'
+        language: fi-FI
+        options:
+          gender: female
