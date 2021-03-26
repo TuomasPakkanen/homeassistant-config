@@ -45,6 +45,8 @@ recorder:
       - binary_sensor.updater
       - sensor.last_boot
       - automation.health_check
+      - sensor.time
+      - sun.sun
 
 # History
 history:
