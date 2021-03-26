@@ -16,8 +16,10 @@
     - service: script.turn_on
       data:
         entity_id: script.sleeping_scene
-    - service: tts.google_translate_say
-      entity_id: media_player.google_home
+    - service: tts.cloud_say
       data:
+        entity_id: media_player.google_home
         message: 'Hyvää yötä!'
-        language: 'fi'
+        language: 'fi-FI'
+        options:
+          gender: female

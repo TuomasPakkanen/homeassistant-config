@@ -96,7 +96,7 @@
     - service: tts.cloud_say
       data:
         entity_id: media_player.google_home
-        message: 'I have turned on bedroom presence for you'
+        message: 'Makuuhuoneen valot pysyvät nyt päällä'
         language: fi-FI
         options:
           gender: female
@@ -106,7 +106,7 @@
     - platform: state
       entity_id: input_boolean.bedroom_presence
       to: 'on'
-      for: '02:00:00'
+      for: '01:30:00'
     - platform: event
       event_type: deconz_event
       event_data:
