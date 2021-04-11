@@ -4,7 +4,7 @@
   trigger:
   - platform: numeric_state
     entity_id: sensor.porch
-    above: '20'
+    above: 20
   condition:
   - condition: state
     entity_id: binary_sensor.occupancy
