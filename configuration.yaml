@@ -1,11 +1,6 @@
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
 
-# Text to speech
-#tts:
-#  - platform: google_translate
-#    service_name: google_translate_say
-
 ### INCLUDES
 
 homeassistant:
@@ -58,7 +53,15 @@ history:
       - discovery
       - history_graph
 
-# Logbook:
+# Logbook
+# logbook: Currently no excludes
+
+notify:
+  - name: ALL_DEVICES
+    platform: group
+    services:
+      - service: notify.mobile_app_oneplus7t
+      - service: notify.mobile_app_iphone_moona
 
 ### INTEGRATIONS
 
