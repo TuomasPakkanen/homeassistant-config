@@ -60,8 +60,8 @@ notify:
   - name: ALL_DEVICES
     platform: group
     services:
-      - service: notify.mobile_app_oneplus7t
-      - service: notify.mobile_app_iphone_moona
+      - service: mobile_app_oneplus7t
+      - service: mobile_app_iphone_moona
 
 ### INTEGRATIONS
 
