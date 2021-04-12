@@ -102,6 +102,18 @@
   action:
     service: rest_command.health_check
 
+- alias: "CPU temperature sensor not responding"
+  trigger:
+    platform: state
+    entity_id: sensor.cpu_temperature
+    for: '00:10:00'
+  action:
+    service: notify.mobile_app_oneplus7t
+    data:
+      title: "System alert!"
+      message: "System monitor sensors are not responding"
+    
+
 - alias: "CPU Temperature too high"
   trigger:
     platform: numeric_state
