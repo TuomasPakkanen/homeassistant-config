@@ -2,18 +2,19 @@
 
 - alias: "Notify when warm in porch"
   trigger:
-  - platform: numeric_state
+    platform: numeric_state
     entity_id: sensor.porch
     above: 20
+    for: "00:05:00"
   condition:
-  - condition: state
+    condition: state
     entity_id: binary_sensor.occupancy
-    state: 'On'
+    state: 'on'
   action:
-  - service: tts.cloud_say
+    service: tts.cloud_say
     data:
       entity_id: media_player.living_room
-      message: 'Kuistilla on yli kaksikymmentä astetta'
+      message: "Kuistilla on yli kaksikymmentä astetta"
       language: fi-FI
       options:
         gender: female
@@ -25,12 +26,12 @@
     platform: numeric_state
     entity_id: sensor.sauna
     above: 44
-    for: '00:02:00'
+    for: "00:02:00"
   action:
     service: tts.cloud_say
     data:
       entity_id: media_player.kitchen_display
-      message: 'Sauna on lämmin!'
+      message: "Sauna on lämmin!"
       language: fi-FI
       options:
         gender: female
@@ -42,7 +43,7 @@
 #    platform: state
 #    entity_id: person.moona
 #    from: 'Airport'
-#  condition: 
+#  condition:
 #    condition: template
 #    value_template: '{{ is_state_attr("sensor.iphone_moona_geocoded_location", "Country", "Suomi") }}'
 #  action:
@@ -58,21 +59,21 @@
 # BURGLAR ALARM #
 
 - alias: "Burglar alarm"
-  trigger: 
+  trigger:
     platform: state
     entity_id:
       - binary_sensor.frontdoor
       - binary_sensor.backdoor
-    to: 'on'
+    to: "on"
   condition:
     condition: state
     entity_id: binary_sensor.occupancy
-    state: 'off'
+    state: "off"
   action:
-    - delay: '00:02:00'
+    - delay: "00:02:00"
     - condition: state
       entity_id: binary_sensor.occupancy
-      state: 'off'
+      state: "off"
     - service: notify.mobile_app_oneplus7t
       data:
         title: "Burglar alarm triggered!"
@@ -83,7 +84,7 @@
 - alias: "Report AC energy usage"
   trigger:
     platform: time
-    at: '17:00:00'
+    at: "17:00:00"
   condition:
     condition: template
     value_template: "{{ now().day == 1 }}"
@@ -106,13 +107,12 @@
   trigger:
     platform: state
     entity_id: sensor.cpu_temperature
-    for: '00:10:00'
+    for: "00:10:00"
   action:
     service: notify.mobile_app_oneplus7t
     data:
       title: "System alert!"
       message: "System monitor sensors are not responding"
-    
 
 - alias: "CPU Temperature too high"
   trigger:
@@ -147,7 +147,7 @@
   action:
     service: notify.mobile_app_oneplus7t
     data:
-      title: '*Battery low alert!*'
+      title: "*Battery low alert!*"
       message: "Xiaomi Mijia temperature and humidity sensor battery is running low. Please replace the battery."
 
 - alias: "Hue motion sensor battery low"
@@ -158,5 +158,5 @@
   action:
     service: notify.mobile_app_oneplus7t
     data:
-      title: '*Battery low alert!*'
+      title: "*Battery low alert!*"
       message: "Hue motion sensor battery is running low. Please replace the battery."
