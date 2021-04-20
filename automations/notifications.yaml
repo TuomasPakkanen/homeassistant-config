@@ -7,17 +7,26 @@
     above: 20
     for: "00:05:00"
   condition:
-    condition: state
-    entity_id: binary_sensor.occupancy
-    state: 'on'
+    - condition: state
+      entity_id: binary_sensor.occupancy
+      state: 'on'
+    - condition: time
+      after: '09:00:00'
+      before: '14:00:00'
   action:
-    service: tts.cloud_say
-    data:
+    - service: sonos.snapshot
       entity_id: media_player.living_room
-      message: "Kuistilla on yli kaksikymmentä astetta"
-      language: fi-FI
-      options:
-        gender: female
+    - service: tts.cloud_say
+      data:
+        entity_id: media_player.living_room
+        message: "Kuistilla on yli kaksikymmentä astetta"
+        language: fi-FI
+        options:
+          gender: female
+    - delay: "00:00:05"
+    - service: sonos.restore
+      entity_id: media_player.living_room
+    - delay: "02:00:00"
 
 # SAUNA #
 
