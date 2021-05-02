@@ -10,7 +10,7 @@
     - condition: and
       conditions:
         - condition: template
-          value_template: '{{ now().month >= 5 and now().month <= 9 }}'
+          value_template: '{{ now().month >= 6 and now().month <= 9 }}'
         - condition: state
           entity_id: input_boolean.vacation_mode
           state: 'off'
@@ -52,7 +52,7 @@
       for: "02:00:00"
   condition:
     - condition: template
-      value_template: '{{ now().month >= 5 and now().month <= 9 }}'
+      value_template: '{{ now().month >= 6 and now().month <= 9 }}'
     - condition: state
       entity_id: switch.ac
       state: 'on'
@@ -72,7 +72,7 @@
     to: 'on'
   condition:
     - condition: template
-      value_template: '{{ now().month >= 10 or now().month <= 4 }}'
+      value_template: '{{ now().month >= 10 or now().month <= 5 }}'
     - condition: numeric_state
       entity_id: sensor.ble_temperature_582d34345074
       below: 23
@@ -106,7 +106,7 @@
     - condition: and
       conditions:
         - condition: template
-          value_template: '{{ now().month >= 10 or now().month <= 4 }}'
+          value_template: '{{ now().month >= 10 or now().month <= 5 }}'
         - condition: numeric_state
           entity_id: sensor.ble_temperature_582d34345074
           below: 23
@@ -151,7 +151,7 @@
       to: 'on'
   condition: 
     - condition: template
-      value_template: '{{ now().month >= 10 or now().month <= 4 }}'
+      value_template: '{{ now().month >= 10 or now().month <= 5 }}'
     - condition: state
       entity_id: input_boolean.guest_mode
       state: 'off'
@@ -186,7 +186,7 @@
     at: '21:00:00'
   condition: 
     - condition: template
-      value_template: '{{ now().month >= 10 or now().month <= 4 }}'
+      value_template: '{{ now().month >= 10 or now().month <= 5 }}'
     - condition: numeric_state
       entity_id: sensor.ble_temperature_582d34345074
       below: 23
@@ -220,7 +220,7 @@
     for: "01:00:00"
   condition: 
     - condition: template
-      value_template: '{{ now().month >= 10 or now().month <= 4 }}'
+      value_template: '{{ now().month >= 10 or now().month <= 5 }}'
     - condition: state
       entity_id: switch.ac
       state: 'on'
@@ -238,7 +238,7 @@
     for: "01:00:00"
   condition: 
     - condition: template
-      value_template: '{{ now().month >= 10 or now().month <= 4 }}'
+      value_template: '{{ now().month >= 10 or now().month <= 5 }}'
     - condition: state
       entity_id: switch.ac
       state: 'off'
