@@ -1,6 +1,8 @@
 # PORCH #
 
-- alias: "Notify when warm in porch"
+- id: "640963565240394"
+  alias: "Notify when warm in porch"
+  initial_state: true
   trigger:
     platform: numeric_state
     entity_id: sensor.porch
@@ -30,7 +32,9 @@
 
 # SAUNA #
 
-- alias: "Notify when Sauna is warm"
+- id: "602087689671487"
+  alias: "Notify when Sauna is warm"
+  initial_state: true
   trigger:
     platform: numeric_state
     entity_id: sensor.sauna
@@ -47,7 +51,9 @@
 
 # MOONA TO HOME # NOT IN USE
 
-#- alias: "Notify when Moona left the airport"
+#- id: "628723990166856"
+#  alias: "Notify when Moona left the airport"
+#  initial_state: true
 #  trigger:
 #    platform: state
 #    entity_id: person.moona
@@ -67,7 +73,9 @@
 
 # BURGLAR ALARM #
 
-- alias: "Burglar alarm"
+- id: "352616061132267"
+  alias: "Burglar alarm"
+  initial_state: true
   trigger:
     platform: state
     entity_id:
@@ -90,7 +98,9 @@
 
 # AIR CONDITIONER ENERGY USAGE MONTHLY REPORTING
 
-- alias: "Report AC energy usage"
+- id: "483503244225301"
+  alias: "Report AC energy usage"
+  initial_state: true
   trigger:
     platform: time
     at: "17:00:00"
@@ -105,14 +115,18 @@
 
 # SYSTEM #
 
-- alias: "Health check"
+- id: "286627067140465"
+  alias: "Health check"
+  initial_state: true
   trigger:
     platform: time_pattern
     minutes: "/5"
   action:
     service: rest_command.health_check
 
-- alias: "CPU temperature sensor not responding"
+- id: "353753600591459"
+  alias: "CPU temperature sensor not responding"
+  initial_state: true
   trigger:
     platform: state
     entity_id: sensor.cpu_temperature
@@ -123,7 +137,9 @@
       title: "System alert!"
       message: "System monitor sensors are not responding"
 
-- alias: "CPU Temperature too high"
+- id: "727362657855238"
+  alias: "CPU Temperature too high"
+  initial_state: true
   trigger:
     platform: numeric_state
     entity_id: sensor.cpu_temperature
@@ -135,7 +151,9 @@
       title: "System alert!"
       message: "Raspberry Pi CPU temperature critical! Current temperature is {{ states('sensor.cpu_temperature') }}°C"
 
-- alias: "Disk usage exceeded 80 percent"
+- id: "365975100947030"
+  alias: "Disk usage exceeded 80 percent"
+  initial_state: true
   trigger:
     platform: numeric_state
     entity_id: sensor.disk_use_percent
@@ -148,7 +166,9 @@
 
 # BATTERY WARNINGS #
 
-- alias: "Xiaomi temperature sensor battery low"
+- id: "396703216932691"
+  alias: "Xiaomi temperature sensor battery low"
+  initial_state: true
   trigger:
     platform: numeric_state
     entity_id: sensor.living_room_sensor_battery
@@ -159,7 +179,9 @@
       title: "*Battery low alert!*"
       message: "Xiaomi Mijia temperature and humidity sensor battery is running low. Please replace the battery."
 
-- alias: "Hue motion sensor battery low"
+- id: "404377578232232"
+  alias: "Hue motion sensor battery low"
+  initial_state: true
   trigger:
     platform: numeric_state
     entity_id: sensor.stairs_motion_sensor_battery_level

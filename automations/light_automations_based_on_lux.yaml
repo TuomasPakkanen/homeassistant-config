@@ -1,4 +1,6 @@
-- alias: "Turn on upstairs lights if dark during the day"
+- id: "832870314929381"
+  alias: "Turn on upstairs lights if dark during the day"
+  initial_state: true
   trigger:
     platform: numeric_state
     entity_id: sensor.stairs_motion_sensor_2
@@ -28,7 +30,9 @@
           scene.hallway_upstairs_lights_night
         {% endif %}
 
-- alias: "Turn off upstairs lights if bright during the day"
+- id: "258490832455964"
+  alias: "Turn off upstairs lights if bright during the day"
+  initial_state: true
   trigger:
     platform: numeric_state
     entity_id: sensor.stairs_motion_sensor_2
@@ -43,7 +47,9 @@
     data:
       entity_id: light.hallway_upstairs_lights
 
-- alias: "Turn on lights if dark during the day"
+- id: "334896447746121"
+  alias: "Turn on lights if dark during the day"
+  initial_state: true
   trigger:
     platform: numeric_state
     entity_id: sensor.living_room_motion_sensor
@@ -73,7 +79,9 @@
           script.night_scene
         {% endif %}
 
-- alias: "Turn off downstairs lights if bright during the day"
+- id: "524195186056420"
+  alias: "Turn off downstairs lights if bright during the day"
+  initial_state: true
   trigger:
     platform: numeric_state
     entity_id: sensor.living_room_motion_sensor

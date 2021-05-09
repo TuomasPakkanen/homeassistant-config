@@ -1,4 +1,6 @@
-- alias: 'Media room lights remote'
+- id: "113861016757957"
+  alias: 'Media room lights remote'
+  initial_state: true
   trigger:
     platform: event
     event_type: deconz_event

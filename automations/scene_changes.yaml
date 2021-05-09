@@ -1,4 +1,5 @@
-- alias: "Set evening start time"
+- id: "666325280311971"
+  alias: "Set evening start time"
   trigger: 
     platform: sun
     event: sunset
@@ -8,7 +9,9 @@
       data:
         time: "{{ now().strftime('%H:%M:%S') }}"
 
-- alias: "Set evening scene"
+- id: "124149515716238"
+  alias: "Set evening scene"
+  initial_state: true
   trigger:
     platform: time
     at: input_datetime.evening_start
@@ -34,7 +37,9 @@
     data:
       entity_id: script.evening_scene
 
-- alias: "Set night scene"
+- id: "182161780608125"
+  alias: "Set night scene"
+  initial_state: true
   trigger:
     platform: time
     at: input_datetime.night_start

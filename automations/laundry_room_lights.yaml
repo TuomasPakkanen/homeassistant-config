@@ -1,4 +1,6 @@
-- alias: "Laundry room lights on"
+- id: "025080918303378"
+  alias: "Laundry room lights on"
+  initial_state: true
   trigger: 
     platform: state
     entity_id: binary_sensor.laundry_room_motion_sensor
@@ -14,7 +16,9 @@
           60
         {% endif %}
 
-- alias: "Laundry room lights off"
+- id: "342330556150808"
+  alias: "Laundry room lights off"
+  initial_state: true
   trigger: 
     platform: state
     entity_id: binary_sensor.laundry_room_motion_sensor

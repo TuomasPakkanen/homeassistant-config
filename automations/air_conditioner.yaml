@@ -1,6 +1,8 @@
 ### SUMMER / COOL ###
 
-- alias: "AC to cool mode"
+- id: "717578705204295"
+  alias: "AC to cool mode"
+  initial_state: true
   trigger:
     - platform: numeric_state
       entity_id: sensor.ble_temperature_582d34345074
@@ -44,7 +46,9 @@
         entity_id: climate.air_conditioner
         hvac_mode: 'cool'
 
-- alias: "AC off when target temperature reached"
+- id: "180754907671563"
+  alias: "AC off when target temperature reached"
+  initial_state: true
   trigger:
     - platform: numeric_state
       entity_id: sensor.ble_temperature_582d34345074
@@ -65,7 +69,9 @@
 
 ### WINTER / HEAT ###
 
-- alias: "AC to comfort heat occupancy"
+- id: "665514724514416"
+  alias: "AC to comfort heat occupancy"
+  initial_state: true
   trigger: 
     platform: state
     entity_id: binary_sensor.occupancy
@@ -98,7 +104,9 @@
         entity_id: climate.air_conditioner
         hvac_mode: 'heat'
 
-- alias: "AC to comfort heat in the morning"
+- id: "989718886472829"
+  alias: "AC to comfort heat in the morning"
+  initial_state: true
   trigger: 
     platform: time
     at: '06:00:00'
@@ -140,7 +148,9 @@
         entity_id: climate.air_conditioner
         hvac_mode: 'heat'
     
-- alias: "AC to economical heat occupancy"
+- id: "972617434507094"
+  alias: "AC to economical heat occupancy"
+  initial_state: true
   trigger:
     - platform: state
       entity_id: binary_sensor.occupancy
@@ -180,7 +190,9 @@
         entity_id: climate.air_conditioner
         hvac_mode: 'heat'
 
-- alias: "AC to economical heat for the night"
+- id: "813660167275957"
+  alias: "AC to economical heat for the night"
+  initial_state: true
   trigger:
     platform: time
     at: '21:00:00'
@@ -212,7 +224,9 @@
         entity_id: climate.air_conditioner
         hvac_mode: 'heat'
 
-- alias: "AC off during winter if warm enough" # practically due to fireplace or warm outside
+- id: "252266803156161"
+  alias: "AC off during winter if warm enough" # practically due to fireplace or warm outside
+  initial_state: true
   trigger:
     platform: numeric_state
     entity_id: sensor.ble_temperature_582d34345074
@@ -230,7 +244,9 @@
         entity_id: climate.air_conditioner
         hvac_mode: 'off'
 
-- alias: "AC back to comfort heat during winter if cold enough"
+- id: "061044068410156"
+  alias: "AC back to comfort heat during winter if cold enough"
+  initial_state: true
   trigger:
     platform: numeric_state
     entity_id: sensor.ble_temperature_582d34345074

@@ -1,4 +1,6 @@
-- alias: 'Bedroom lights remote'
+- id: "538490745244439"
+  alias: 'Bedroom lights remote'
+  initial_state: true
   trigger:
     platform: event
     event_type: deconz_event

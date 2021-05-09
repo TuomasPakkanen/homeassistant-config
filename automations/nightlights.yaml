@@ -1,4 +1,6 @@
-- alias: "Turn on lights during the night"
+- id: "350984424798416"
+  alias: "Turn on lights during the night"
+  initial_state: true
   trigger:
     platform: event
     event_type: deconz_event
@@ -31,7 +33,9 @@
       data:
         entity_id: media_player.living_room
 
-- alias: "Turn off lights when left home during the night"
+- id: "883238697194304"
+  alias: "Turn off lights when left home during the night"
+  initial_state: true
   trigger: 
     - platform: state
       entity_id: binary_sensor.frontdoor

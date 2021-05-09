@@ -1,4 +1,6 @@
-- alias: "Turn on lights for a while during the night if coming downstairs"
+- id: "721006540436064"
+  alias: "Turn on lights for a while during the night if coming downstairs"
+  initial_state: true
   trigger: 
     platform: state
     entity_id: binary_sensor.stairs_motion_sensor

@@ -1,4 +1,6 @@
-- alias: "Turn on bedroom lights automatically"
+- id: "272242893254458"
+  alias: "Turn on bedroom lights automatically"
+  initial_state: true
   trigger:
     platform: state
     entity_id: binary_sensor.bedroom_motion_sensor
@@ -57,7 +59,9 @@
       entity_id: automation.set_bedroom_color_temperature_and_brightness
     - delay: "00:10:00"
 
-- alias: "Turn off bedroom lights automatically"
+- id: "256673725240744"
+  alias: "Turn off bedroom lights automatically"
+  initial_state: true
   trigger: 
     platform: state
     entity_id: binary_sensor.bedroom_motion_sensor
@@ -73,7 +77,9 @@
       entity_id: light.bedroom_lights
       transition: 15
 
-- alias: "Turn on bedroom presence"
+- id: "708827857893271"
+  alias: "Turn on bedroom presence"
+  initial_state: true
   trigger:
     platform: event
     event_type: deconz_event
@@ -101,7 +107,9 @@
         options:
           gender: female
 
-- alias: "Turn off bedroom presence"
+- id: "785204513598070"
+  alias: "Turn off bedroom presence"
+  initial_state: true
   trigger: 
     - platform: state
       entity_id: input_boolean.bedroom_presence
@@ -120,7 +128,9 @@
     service: input_boolean.turn_off
     entity_id: input_boolean.bedroom_presence
     
-- alias: "Flash bedroom lights if either door is opened during the night"
+- id: "088631594810806"
+  alias: "Flash bedroom lights if either door is opened during the night"
+  initial_state: true
   trigger: 
     - platform: state
       entity_id: binary_sensor.frontdoor
@@ -149,7 +159,9 @@
         options:
           gender: female
 
-- alias: "Set bedroom color temperature and brightness"
+- id: "197436348308428"
+  alias: "Set bedroom color temperature and brightness"
+  initial_state: true
   trigger:
     platform: state
     entity_id: light.bedroom_light_1

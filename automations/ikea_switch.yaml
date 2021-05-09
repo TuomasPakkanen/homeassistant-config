@@ -1,4 +1,6 @@
-- alias: 'IKEA switch volume control'
+- id: "252892278210440"
+  alias: 'IKEA switch volume control'
+  initial_state: true
   trigger:
     platform: event
     event_type: deconz_event

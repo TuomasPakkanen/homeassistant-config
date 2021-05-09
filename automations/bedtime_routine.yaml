@@ -1,4 +1,6 @@
-- alias: "Bedtime routine"
+- id: "266202236118850"
+  alias: "Bedtime routine"
+  initial_state: true
   trigger:
     platform: event
     event_type: deconz_event

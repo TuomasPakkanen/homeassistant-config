@@ -1,4 +1,6 @@
-- alias: "Turn on lights when coming home if it's dark"
+- id: "207578983162881"
+  alias: "Turn on lights when coming home if it's dark"
+  initial_state: true
   trigger: 
     - platform: state
       entity_id: person.tuomas_pakkanen

@@ -1,4 +1,6 @@
-- alias: 'Set theme at startup'
+- id: "658719194457410"
+  alias: 'Set theme at startup'
+  initial_state: true
   trigger:
     - platform: homeassistant
       event: start

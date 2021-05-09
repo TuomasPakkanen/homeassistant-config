@@ -1,4 +1,6 @@
-- alias: "Morning routine weekdays"
+- id: "776829761229640"
+  alias: "Morning routine weekdays"
+  initial_state: true
   trigger: 
     platform: state
     entity_id: binary_sensor.stairs_motion_sensor
@@ -45,7 +47,9 @@
       data:
         entity_id: media_player.living_room
 
-- alias: "Morning routine weekends"
+- id: "195301270699419"
+  alias: "Morning routine weekends"
+  initial_state: true
   trigger: 
     platform: state
     entity_id: binary_sensor.stairs_motion_sensor

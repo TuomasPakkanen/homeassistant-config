@@ -1,4 +1,6 @@
-- alias: "Closet light on"
+- id: "871345327268120"
+  alias: "Closet light on"
+  initial_state: true
   trigger: 
     platform: state
     entity_id: binary_sensor.closet_door
@@ -15,7 +17,9 @@
           {% endif %}
       transition: 0
 
-- alias: "Closet light off"
+- id: "764631238874943"
+  alias: "Closet light off"
+  initial_state: true
   trigger: 
     platform: state
     entity_id: binary_sensor.closet_door
@@ -23,4 +27,3 @@
   action:
     service: light.turn_off
     entity_id: light.closet_light
-

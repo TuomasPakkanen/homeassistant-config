@@ -1,4 +1,6 @@
-- alias: "Turn off lights and music when leaving home"
+- id: "365581533620149"
+  alias: "Turn off lights and music when leaving home"
+  initial_state: true
   trigger:
     - platform: state
       entity_id: binary_sensor.occupancy

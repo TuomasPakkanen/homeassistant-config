@@ -1,4 +1,6 @@
-- alias: 'Table lamp button'
+- id: "039382917163273"
+  alias: 'Table lamp button'
+  initial_state: true
   trigger:
     platform: event
     event_type: deconz_event

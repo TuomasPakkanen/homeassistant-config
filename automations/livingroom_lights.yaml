@@ -1,4 +1,6 @@
-- alias: "Turn off living room lights an hour after last movement"
+- id: "197401042178329"
+  alias: "Turn off living room lights an hour after last movement"
+  initial_state: true
   trigger: 
     platform: state
     entity_id: binary_sensor.living_room_motion_sensor

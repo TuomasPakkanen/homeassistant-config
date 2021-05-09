@@ -1,4 +1,6 @@
-- alias: '1st floor dimmer'
+- id: "263855701633333"
+  alias: '1st floor dimmer'
+  initial_state: true
   trigger:
     platform: event
     event_type: deconz_event
