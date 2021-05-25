@@ -1,5 +1,5 @@
 - id: "832870314929381"
-  alias: "Turn on upstairs lights if dark during the day"
+  alias: "Turn on hallway lights if dark during the day"
   initial_state: true
   trigger:
     platform: numeric_state
@@ -19,19 +19,30 @@
       entity_id: input_boolean.vacation_mode
       state: 'off'
   action:
-    service: scene.turn_on
-    data:
-      entity_id: >
-        {% if 7 <= now().hour < state_attr('input_datetime.evening_start', 'hour') %}
-          scene.hallway_upstairs_lights_daytime
-        {% elif state_attr('input_datetime.evening_start', 'hour') <= now().hour < state_attr('input_datetime.night_start', 'hour') %}
-          scene.hallway_upstairs_lights_evening
-        {% else %}
-          scene.hallway_upstairs_lights_night
-        {% endif %}
+    - service: scene.turn_on
+      data:
+        entity_id: >
+          {% if 7 <= now().hour < state_attr('input_datetime.evening_start', 'hour') %}
+            scene.hallway_upstairs_lights_daytime
+          {% elif state_attr('input_datetime.evening_start', 'hour') <= now().hour < state_attr('input_datetime.night_start', 'hour') %}
+            scene.hallway_upstairs_lights_evening
+          {% else %}
+            scene.hallway_upstairs_lights_night
+          {% endif %}
+    - delay: "00:00:01"
+    - service: scene.turn_on
+      data:
+        entity_id: >
+          {% if 7 <= now().hour < state_attr('input_datetime.evening_start', 'hour') %}
+            scene.hallway_lights_daytime
+          {% elif state_attr('input_datetime.evening_start', 'hour') <= now().hour < state_attr('input_datetime.night_start', 'hour') %}
+            scene.hallway_lights_evening
+          {% else %}
+            scene.hallway_lights_night
+          {% endif %}
 
 - id: "258490832455964"
-  alias: "Turn off upstairs lights if bright during the day"
+  alias: "Turn off hallway lights if bright during the day"
   initial_state: true
   trigger:
     platform: numeric_state
@@ -43,9 +54,13 @@
     entity_id: input_boolean.sleeping
     state: 'off'
   action:
-    service: light.turn_off
-    data:
-      entity_id: light.hallway_upstairs_lights
+    - service: light.turn_off
+      data:
+        entity_id: light.hallway_upstairs_lights
+    - delay: "00:00:01"
+    - service: light.turn_off
+      data:
+        entity_id: light.hallway_lights
 
 - id: "334896447746121"
   alias: "Turn on lights if dark during the day"
@@ -95,7 +110,6 @@
     service: light.turn_off
     data:
       entity_id: 
-        - light.hallway_lights
         - light.living_room_lights
         - light.kitchen_lights
         - light.tripod_lamp

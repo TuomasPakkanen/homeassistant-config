@@ -83,9 +83,14 @@
       - binary_sensor.backdoor
     to: "on"
   condition:
-    condition: state
-    entity_id: binary_sensor.occupancy
-    state: "off"
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: input_boolean.guest_mode
+        state: "off"
+      - condition: state
+        entity_id: binary_sensor.occupancy
+        state: "off"
   action:
     - delay: "00:02:00"
     - condition: state
