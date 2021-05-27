@@ -44,3 +44,6 @@
     - condition: time
       after: '22:00:00'
       before: '04:00:00'
+  action:
+    service: scene.turn_on
+    entity_id: script.sleeping_scene
