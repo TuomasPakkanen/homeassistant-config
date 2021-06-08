@@ -99,6 +99,32 @@ spotcast:
 # Circadian lightning for lights (HACS custom component), currently not used
 # circadian_lighting:
 
+# Apple HomeKit
+homekit:
+  filter:
+    include_domains:
+      - media_player
+      - script
+    include_entities:
+      - light.living_room_lights
+      - light.hallway_lights
+      - light.hallway_upstairs_lights
+      - light.bedroom_lights
+      - light.kitchen_lights
+      - light.tripod_lamp
+      - light.media_room_lights
+      - light.laundry_room_lights
+      - climate.air_conditioner
+      - vacuum.watson
+      - input_boolean.guest_mode
+      - input_boolean.bedroom_presence
+      - input_boolean.vacation_mode
+      - sensor.ble_temperature_582d34345074
+      - sensor.ble_humidity_582d34345074
+      - sensor.porch
+      - sensor.porch_2
+      - sensor.sauna
+
 ### SWITCHES ###
 switch:
   - platform: template
