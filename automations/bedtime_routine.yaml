@@ -25,26 +25,3 @@
         language: 'fi-FI'
         options:
           gender: female
-
-- id: "266207426118850"
-  alias: "Auto initiate bedtime routine"
-  initial_state: true
-  trigger: 
-    platform: state
-    entity_id: binary_sensor.stairs_motion_sensor
-    to: 'off'
-    for: '03:00:00'
-  condition:
-    - condition: state
-      entity_id: binary_sensor.occupancy
-      state: 'on'
-    - condition: state
-      entity_id: input_boolean.sleeping
-      state: 'off'
-    - condition: time
-      after: '22:00:00'
-      before: '04:00:00'
-  action:
-    service: script.turn_on
-    data:
-      entity_id: script.sleeping_scene

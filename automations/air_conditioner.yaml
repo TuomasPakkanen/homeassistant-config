@@ -6,8 +6,8 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.ble_temperature_582d34345074
-      above: 25
-      for: "00:15:00"
+      above: 25.5
+      for: "00:10:00"
   condition:
     - condition: and
       conditions:
@@ -45,6 +45,7 @@
       data:
         entity_id: climate.air_conditioner
         hvac_mode: 'cool'
+    - delay: "01:00:00"
 
 - id: "180754907671563"
   alias: "AC off when target temperature reached"
