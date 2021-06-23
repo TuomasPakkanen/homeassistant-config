@@ -151,10 +151,11 @@
     above: 75
     for: "00:03:00"
   action:
-    service: notify.mobile_app_oneplus7t
-    data:
-      title: "System alert!"
-      message: "Raspberry Pi CPU temperature critical! Current temperature is {{ states('sensor.cpu_temperature') }}°C"
+    - service: notify.mobile_app_oneplus7t
+      data:
+        title: "System alert!"
+        message: "Raspberry Pi CPU temperature critical! Current temperature is {{ states('sensor.cpu_temperature') }}°C"
+    - delay: "02:00:00"
 
 - id: "365975100947030"
   alias: "Disk usage exceeded 80 percent"
