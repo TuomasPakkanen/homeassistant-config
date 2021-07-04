@@ -15,35 +15,3 @@
     data:
       entity_id: light.media_room_lights
       transition: 10
-
-- id: "916767716339511"
-  alias: "Set media room color temperature and brightness"
-  initial_state: true
-  trigger:
-    platform: state
-    entity_id: light.media_room_light_1
-    to: 'on'
-  action:
-    - service: light.turn_on
-      data:
-        entity_id: light.media_room_lights
-        kelvin: > 
-          {% if 7 <= now().hour < state_attr('input_datetime.evening_start', 'hour') %}
-            4000
-          {% elif state_attr('input_datetime.evening_start', 'hour') <= now().hour < state_attr('input_datetime.night_start', 'hour') %}
-            2700
-          {% else %}
-            2200
-          {% endif %}
-        transition: 0
-    - service: light.turn_on
-      data:
-        entity_id: light.media_room_lights
-        brightness_pct: >
-          {% if 7 <= now().hour < state_attr('input_datetime.evening_start', 'hour') %}
-            80
-          {% elif state_attr('input_datetime.evening_start', 'hour') <= now().hour < state_attr('input_datetime.night_start', 'hour') %}
-            60
-          {% else %}
-            20
-          {% endif %}

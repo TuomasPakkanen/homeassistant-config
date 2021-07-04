@@ -76,7 +76,47 @@ turn_on_hallway_upstairs_lights:
             scene.hallway_upstairs_lights_night
           {% endif %}
 
+turn_on_bedroom_lights:
+  alias: "Turn on bedroom lights"
+  sequence:
+    - service: scene.turn_on
+      data: 
+        entity_id: >
+          {% if 7 <= now().hour < state_attr('input_datetime.evening_start', 'hour') %}
+            scene.bedroom_lights_daytime
+          {% elif state_attr('input_datetime.evening_start', 'hour') <= now().hour < state_attr('input_datetime.night_start', 'hour') %}
+            scene.bedroom_lights_evening
+          {% else %}
+            scene.bedroom_lights_night
+          {% endif %}
 
+turn_off_bedroom_lights:
+  alias: "Turn off bedroom lights"
+  sequence:
+    - service: light.turn_off
+      data:
+        entity_id: light.bedroom_lights
+
+turn_on_media_room_lights:
+  alias: "Turn on media room lights"
+  sequence:
+    - service: scene.turn_on
+      data: 
+        entity_id: >
+          {% if 7 <= now().hour < state_attr('input_datetime.evening_start', 'hour') %}
+            scene.media_room_lights_daytime
+          {% elif state_attr('input_datetime.evening_start', 'hour') <= now().hour < state_attr('input_datetime.night_start', 'hour') %}
+            scene.media_room_lights_evening
+          {% else %}
+            scene.media_room_lights_night
+          {% endif %}
+
+turn_off_media_room_lights:
+  alias: "Turn off media room lights"
+  sequence:
+    - service: light.turn_off
+      data:
+        entity_id: light.media_room_lights
 
 ### SCENES ###
 
