@@ -1,3 +1,85 @@
+### ROOMS ###
+
+turn_on_living_room_lights:
+  alias: "Turn on living room lights"
+  sequence:
+    - service: scene.turn_on
+      data: 
+        entity_id: >
+          {% if 7 <= now().hour < state_attr('input_datetime.evening_start', 'hour') %}
+            scene.living_room_lights_daytime
+          {% elif state_attr('input_datetime.evening_start', 'hour') <= now().hour < state_attr('input_datetime.night_start', 'hour') %}
+            scene.living_room_lights_evening
+          {% else %}
+            scene.living_room_lights_night
+          {% endif %}
+    - service: light.turn_on
+      data:
+        entity_id: light.tripod_lamp
+        brightness: >
+          {% if 7 <= now().hour < state_attr('input_datetime.evening_start', 'hour') %}
+            255
+          {% elif state_attr('input_datetime.evening_start', 'hour') <= now().hour < state_attr('input_datetime.night_start', 'hour') %}
+            153
+          {% else %}
+            130
+          {% endif %}
+        xy_color: >
+          {% if 7 <= now().hour < state_attr('input_datetime.evening_start', 'hour') %}
+            [0.38,0.38]
+          {% elif state_attr('input_datetime.evening_start', 'hour') <= now().hour < state_attr('input_datetime.night_start', 'hour') %}
+            [0.46,0.41]
+          {% else %}
+            [0.46,0.41]
+          {% endif %}
+        transition: 10
+
+turn_on_kitchen_lights:
+  alias: "Turn on kitchen lights"
+  sequence:
+    - service: scene.turn_on
+      data: 
+        entity_id: >
+          {% if 7 <= now().hour < state_attr('input_datetime.evening_start', 'hour') %}
+            scene.kitchen_lights_daytime
+          {% elif state_attr('input_datetime.evening_start', 'hour') <= now().hour < state_attr('input_datetime.night_start', 'hour') %}
+            scene.kitchen_lights_evening
+          {% else %}
+            scene.kitchen_lights_night
+          {% endif %}
+
+turn_on_hallway_lights:
+  alias: "Turn on hallway lights"
+  sequence:
+    - service: scene.turn_on
+      data: 
+        entity_id: >
+          {% if 7 <= now().hour < state_attr('input_datetime.evening_start', 'hour') %}
+            scene.hallway_lights_daytime
+          {% elif state_attr('input_datetime.evening_start', 'hour') <= now().hour < state_attr('input_datetime.night_start', 'hour') %}
+            scene.hallway_lights_evening
+          {% else %}
+            scene.hallway_lights_night
+          {% endif %}
+
+turn_on_hallway_upstairs_lights:
+  alias: "Turn on hallway upstairs lights"
+  sequence:
+    - service: scene.turn_on
+      data: 
+        entity_id: >
+          {% if 7 <= now().hour < state_attr('input_datetime.evening_start', 'hour') %}
+            scene.hallway_upstairs_lights_daytime
+          {% elif state_attr('input_datetime.evening_start', 'hour') <= now().hour < state_attr('input_datetime.night_start', 'hour') %}
+            scene.hallway_upstairs_lights_evening
+          {% else %}
+            scene.hallway_upstairs_lights_night
+          {% endif %}
+
+
+
+### SCENES ###
+
 sleeping_scene:
   alias: "Sleeping scene"
   icon: mdi:sleep
@@ -28,11 +110,11 @@ sleeping_scene:
         entity_id: light.hallway_upstairs_lights
         transition: 11
     - delay: "00:00:01"
-    - service: light.turn_off
-      data:
-        entity_id: light.table_lamp
-        transition: 10
-    - delay: "00:00:01"
+    #- service: light.turn_off
+    #  data:
+    #    entity_id: light.table_lamp
+    #    transition: 10
+    #- delay: "00:00:01"
     - service: light.turn_off
       data:
         entity_id: light.bedroom_lights

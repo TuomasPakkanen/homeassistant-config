@@ -19,27 +19,13 @@
       entity_id: input_boolean.vacation_mode
       state: 'off'
   action:
-    - service: scene.turn_on
+    - service: script.turn_on
       data:
-        entity_id: >
-          {% if 7 <= now().hour < state_attr('input_datetime.evening_start', 'hour') %}
-            scene.hallway_upstairs_lights_daytime
-          {% elif state_attr('input_datetime.evening_start', 'hour') <= now().hour < state_attr('input_datetime.night_start', 'hour') %}
-            scene.hallway_upstairs_lights_evening
-          {% else %}
-            scene.hallway_upstairs_lights_night
-          {% endif %}
+        entity_id: script.turn_on_hallway_upstairs_lights
     - delay: "00:00:01"
-    - service: scene.turn_on
+    - service: script.turn_on
       data:
-        entity_id: >
-          {% if 7 <= now().hour < state_attr('input_datetime.evening_start', 'hour') %}
-            scene.hallway_lights_daytime
-          {% elif state_attr('input_datetime.evening_start', 'hour') <= now().hour < state_attr('input_datetime.night_start', 'hour') %}
-            scene.hallway_lights_evening
-          {% else %}
-            scene.hallway_lights_night
-          {% endif %}
+        entity_id: script.turn_on_hallway_lights
 
 - id: "258490832455964"
   alias: "Turn off hallway lights if bright during the day"
@@ -63,7 +49,7 @@
         entity_id: light.hallway_lights
 
 - id: "334896447746121"
-  alias: "Turn on lights if dark during the day"
+  alias: "Turn on downstairs lights if dark during the day"
   initial_state: true
   trigger:
     platform: numeric_state
@@ -85,14 +71,7 @@
   action:
     service: script.turn_on
     data:
-      entity_id: >
-        {% if 7 <= now().hour < state_attr('input_datetime.evening_start', 'hour') %}
-          script.daytime_scene
-        {% elif state_attr('input_datetime.evening_start', 'hour') <= now().hour < state_attr('input_datetime.night_start', 'hour') %}
-          script.evening_scene
-        {% else %}
-          script.night_scene
-        {% endif %}
+      entity_id: script.turn_on_living_room_lights, script.turn_on_kitchen_lights
 
 - id: "524195186056420"
   alias: "Turn off downstairs lights if bright during the day"

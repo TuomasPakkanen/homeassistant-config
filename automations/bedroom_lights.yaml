@@ -16,8 +16,8 @@
       entity_id: binary_sensor.occupancy
       state: 'on'
     - condition: time
-      after: "09:30:00"
-      before: "21:30:00"
+      after: "11:00:00"
+      before: "21:00:00"
   action:
     - service: automation.turn_off
       entity_id: automation.set_bedroom_color_temperature_and_brightness

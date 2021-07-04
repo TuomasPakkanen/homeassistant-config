@@ -22,11 +22,15 @@
     - service: script.turn_on
       data_template:
         entity_id: >
-          {%-if states('sensor.motion_sensor_2') | float < 80 %}
-            script.daytime_scene
-          {%- else %}
-            script.daytime_bright_scene
-          {%- endif %}
+          {%-if states('sensor.living_room_motion_sensor') | float < 80 %}
+            script.turn_on_living_room_lights,script.turn_on_kitchen_lights
+          {% endif %}
+    - service: script.turn_on
+      data_template:
+        entity_id: >
+          {%-if states('sensor.stairs_motion_sensor_2') | float < 80 %}
+            script.turn_on_hallway_lights,script.turn_on_hallway_upstairs_lights
+          {% endif %}
     - service: tts.cloud_say
       data:
         entity_id: media_player.living_room
@@ -68,11 +72,15 @@
     - service: script.turn_on
       data_template:
         entity_id: >
-          {%-if states('sensor.motion_sensor_2') | float < 80 %}
-            script.daytime_scene
-          {%- else %}
-            script.daytime_bright_scene
-          {%- endif %}
+          {%-if states('sensor.living_room_motion_sensor') | float < 80 %}
+            script.turn_on_living_room_lights,script.turn_on_kitchen_lights
+          {% endif %}
+    - service: script.turn_on
+      data_template:
+        entity_id: >
+          {%-if states('sensor.stairs_motion_sensor_2') | float < 80 %}
+            script.turn_on_hallway_lights,script.turn_on_hallway_upstairs_lights
+          {% endif %}
     - service: tts.cloud_say
       data:
         entity_id: media_player.living_room
