@@ -30,6 +30,34 @@
       entity_id: media_player.living_room
     - delay: "02:00:00"
 
+- id: "640963565240123"
+  alias: "Notify if porch door left open and it is hot"
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: binary_sensor.backdoor
+    to: 'on'
+    for: '00:10:00'
+  condition:
+    condition: numeric_state
+    entity_id: sensor.porch
+    above: 25
+  action:
+    - service: sonos.snapshot
+      entity_id: media_player.living_room
+    - service: tts.cloud_say
+      data:
+        entity_id: media_player.living_room
+        message: "Terve! Sulkisitko kuistin oven, jotta sisällä säilyy viileä ilma. Kiitos!"
+        language: fi-FI
+        options:
+          gender: female
+    - delay: "00:00:10"
+    - service: sonos.restore
+      entity_id: media_player.living_room
+    - delay: "02:00:00"
+
+
 # SAUNA #
 
 - id: "602087689671487"
