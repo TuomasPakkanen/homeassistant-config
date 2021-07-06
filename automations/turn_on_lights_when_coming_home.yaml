@@ -23,8 +23,10 @@
       below: 80
   action:
     - service: automation.trigger
-      entity_id: automation.turn_on_lights_if_dark_during_the_day
-      skip_condition: false
+      data:
+        entity_id: automation.turn_on_lights_if_dark_during_the_day
+        skip_condition: false
     - service: automation.trigger
-      entity_id: automation.turn_on_upstairs_lights_if_dark_during_the_day
-      skip_condition: false
+      data:
+        entity_id: automation.turn_on_upstairs_lights_if_dark_during_the_day
+        skip_condition: false

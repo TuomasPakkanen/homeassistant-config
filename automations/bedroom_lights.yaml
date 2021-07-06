@@ -22,8 +22,6 @@
       after: "11:00:00"
       before: "21:00:00"
   action:
-    - service: automation.turn_off
-      entity_id: automation.set_bedroom_color_temperature_and_brightness
     - service: light.turn_on
       data:
         entity_id: light.bedroom_lights
@@ -58,8 +56,6 @@
           {% else %}
             20
           {% endif %}
-    - service: automation.turn_on
-      entity_id: automation.set_bedroom_color_temperature_and_brightness
     - delay: "00:10:00"
 
 - id: "256673725240744"

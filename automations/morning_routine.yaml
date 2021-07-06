@@ -20,17 +20,9 @@
         - fri
   action:
     - service: script.turn_on
-      data_template:
-        entity_id: >
-          {%-if states('sensor.living_room_motion_sensor') | float < 80 %}
-            script.turn_on_living_room_lights,script.turn_on_kitchen_lights
-          {% endif %}
+      entity_id: script.turn_on_all_living_area_lights_lux
     - service: script.turn_on
-      data_template:
-        entity_id: >
-          {%-if states('sensor.stairs_motion_sensor_2') | float < 80 %}
-            script.turn_on_hallway_lights,script.turn_on_hallway_upstairs_lights
-          {% endif %}
+      entity_id: script.turn_on_all_hallway_lights_lux
     - service: tts.cloud_say
       data:
         entity_id: media_player.living_room
@@ -70,17 +62,9 @@
         - sun
   action:
     - service: script.turn_on
-      data_template:
-        entity_id: >
-          {%-if states('sensor.living_room_motion_sensor') | float < 80 %}
-            script.turn_on_living_room_lights,script.turn_on_kitchen_lights
-          {% endif %}
+      entity_id: script.turn_on_all_living_area_lights_lux
     - service: script.turn_on
-      data_template:
-        entity_id: >
-          {%-if states('sensor.stairs_motion_sensor_2') | float < 80 %}
-            script.turn_on_hallway_lights,script.turn_on_hallway_upstairs_lights
-          {% endif %}
+      entity_id: script.turn_on_all_hallway_lights_lux
     - service: tts.cloud_say
       data:
         entity_id: media_player.living_room
