@@ -15,17 +15,16 @@
     - condition: state
       entity_id: light.tripod_lamp
       state: 'off'
+    - condition: state
+      entity_id: input_boolean.guest_mode
+      state: 'off'
     - condition: numeric_state
       entity_id: sensor.living_room_motion_sensor
       below: 80
   action:
-    service: script.turn_on
-    data:
-      entity_id: >
-        {% if 7 <= now().hour < state_attr('input_datetime.evening_start', 'hour') %}
-          script.daytime_scene
-        {% elif state_attr('input_datetime.evening_start', 'hour') <= now().hour < state_attr('input_datetime.night_start', 'hour') %}
-          script.evening_scene
-        {% else %}
-          script.night_scene
-        {% endif %}
+    - service: automation.trigger
+      entity_id: automation.turn_on_lights_if_dark_during_the_day
+      skip_condition: false
+    - service: automation.trigger
+      entity_id: automation.turn_on_upstairs_lights_if_dark_during_the_day
+      skip_condition: false

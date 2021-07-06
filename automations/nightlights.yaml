@@ -34,22 +34,35 @@
         entity_id: media_player.living_room
 
 - id: "883238697194304"
-  alias: "Turn off lights when left home during the night"
+  alias: "Turn off lights during the night if no movement for a while"
   initial_state: true
   trigger: 
     - platform: state
-      entity_id: binary_sensor.frontdoor
-      from: 'on'
+      entity_id: binary_sensor.living_room_motion_sensor
+      to: 'off'
+      for: '01:00:00'
     - platform: state
-      entity_id: binary_sensor.backdoor
-      from: 'on'
+      entity_id: binary_sensor.stairs_motion_sensor
+      to: 'off'
+      for: '01:00:00'
   condition:
     - condition: state
       entity_id: light.tripod_lamp
       state: 'on'
+    - condition: state
+      entity_id: input_boolean.sleeping
+      state: 'off'
+    - condition: state
+      entity_id: binary_sensor.living_room_motion_sensor
+      to: 'off'
+      for: '01:00:00'
+    - condition: state
+      entity_id: binary_sensor.stairs_motion_sensor
+      to: 'off'
+      for: '01:00:00'
     - condition: time
-      after: '03:00:00'
-      before: '07:30:00'
+      after: '23:00:00'
+      before: '05:00:00'
   action:
     - service: script.turn_on
       data:
