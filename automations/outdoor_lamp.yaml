@@ -1,0 +1,63 @@
+- id: "180897423023111"
+  alias: "Turn on outdoor lamp at sunset"
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: sun.sun
+    to: 'below_horizon'
+  condition:
+    condition: state
+    entity_id: input_boolean.vacation_mode
+    state: 'off'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.outdoor_lamp
+      transition: 30
+
+- id: "180897423023222"
+  alias: "Turn on outdoor lamp in the morning if dark"
+  initial_state: true
+  trigger:
+    platform: time
+    at: "07:30:00"
+  condition:
+    - condition: state
+      entity_id: input_boolean.vacation_mode
+      state: 'off'
+    - condition: state
+      entity_id: light.outdoor_lamp
+      state: 'off'
+    - condition: state
+      entity_id: sun.sun
+      state: "below_horizon"
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.outdoor_lamp
+      transition: 30
+
+- id: "180897423023333"
+  alias: "Turn off outdoor lamp at sunrise"
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: sun.sun
+    to: 'above_horizon'
+  action:
+    service: light.turn_off
+    data:
+      entity_id: light.outdoor_lamp
+      transition: 30
+
+- id: "180897423023444"
+  alias: "Turn off outdoor lamp for the night"
+  initial_state: true
+  trigger:
+    platform: time
+    at: "01:00:00"
+  action:
+    service: light.turn_off
+    data:
+      entity_id: light.outdoor_lamp
+      transition: 30

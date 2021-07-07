@@ -212,12 +212,12 @@ evening_scene:
       data: 
         entity_id: scene.kitchen_lights_evening
     - delay: "00:00:01"
-    - service: light.turn_on
-      data: 
-        entity_id: light.table_lamp
-        brightness: 153
-        transition: 10
-    - delay: "00:00:01"
+    #- service: light.turn_on
+    #  data: 
+    #    entity_id: light.table_lamp
+    #    brightness: 153
+    #    transition: 10
+    #- delay: "00:00:01"
     - service: scene.turn_on
       data: 
         entity_id: scene.hallway_lights_evening
@@ -240,11 +240,11 @@ night_scene:
       data: 
         entity_id: scene.hallway_upstairs_lights_night
     - delay: "00:00:01"
-    - service: light.turn_off
-      data: 
-        entity_id: light.table_lamp
-        transition: 15
-    - delay: "00:00:01"
+    #- service: light.turn_off
+    #  data: 
+    #    entity_id: light.table_lamp
+    #    transition: 15
+    #- delay: "00:00:01"
     - service: light.turn_off
       data: 
         entity_id: light.living_room_lights
