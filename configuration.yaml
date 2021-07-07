@@ -124,6 +124,8 @@ homekit:
       - sensor.porch
       - sensor.porch_2
       - sensor.sauna
+    exclude_entities:
+      - media_player.sony_bravia_tv
 
 ### SWITCHES ###
 switch:
