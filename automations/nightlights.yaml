@@ -1,37 +1,48 @@
-- id: "350984424798416"
-  alias: "Turn on lights during the night"
+- id: "721006540436064"
+  alias: "Turn on lights for a while during the night if coming downstairs"
   initial_state: true
-  trigger:
-    platform: event
-    event_type: deconz_event
-    event_data:
-      id: bedroom_remote
-      event: 1001
+  trigger: 
+    platform: state
+    entity_id: binary_sensor.stairs_motion_sensor
+    to: 'on'
   condition:
     - condition: state
       entity_id: light.tripod_lamp
       state: 'off'
-    - condition: state
-      entity_id: input_boolean.sleeping
-      state: 'on'
     - condition: time
-      after: '01:00:00'
-      before: '07:30:00'
+      after: '21:00:00'
+      before: '06:00:00'
   action:
-    - service: script.turn_on
+    - service: light.turn_on
       data:
-        entity_id: script.evening_scene
-    - service: media_player.select_source
-      data: 
-        entity_id: media_player.living_room
-        source: 'Yle Radio Suomi'
-    - service: media_player.volume_set
+        entity_id: light.tripod_lamp
+        brightness_pct: 70
+        kelvin: 2200
+        transition: 5
+    - service: light.turn_on
       data:
-        entity_id: media_player.living_room
-        volume_level: 0.10
-    - service: media_player.turn_on
+        entity_id: light.hallway_lights
+        brightness_pct: 10
+        transition: 5
+    - service: light.turn_on
       data:
-        entity_id: media_player.living_room
+        entity_id: light.kitchen_lights
+        brightness_pct: 40
+        kelvin: 2200
+        transition: 5
+    - delay: '00:10:00'
+    - service: light.turn_off
+      data:
+        entity_id: light.tripod_lamp
+        transition: 15
+    - service: light.turn_off
+      data:
+        entity_id: light.hallway_lights
+        transition: 15
+    - service: light.turn_off
+      data:
+        entity_id: light.kitchen_lights
+        transition: 15
 
 - id: "883238697194304"
   alias: "Turn off lights during the night if no movement for a while"
