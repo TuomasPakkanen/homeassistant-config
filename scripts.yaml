@@ -124,7 +124,7 @@ turn_on_all_hallway_lights_lux:
   alias: "Turn on all hallway lights lux"
   sequence:
     - condition: numeric_state
-      entity_id: sensor.stairs_room_motion_sensor
+      entity_id: sensor.stairs_motion_sensor_2
       below: 80
     - service: script.turn_on
       entity_id:
@@ -135,7 +135,7 @@ turn_on_all_living_area_lights_lux:
   alias: "Turn on all living area lights lux"
   sequence:
     - condition: numeric_state
-      entity_id: sensor.stairs_room_motion_sensor
+      entity_id: sensor.living_room_motion_sensor
       below: 80
     - service: script.turn_on
       entity_id:
@@ -148,8 +148,6 @@ sleeping_scene:
   alias: "Sleeping scene"
   icon: mdi:sleep
   sequence:
-    - service: automation.turn_off
-      entity_id: automation.set_bedroom_color_temperature_and_brightness
     - service: light.turn_off
       data:
         entity_id: light.living_room_lights
@@ -194,8 +192,6 @@ sleeping_scene:
     - service: input_boolean.turn_on
       entity_id: input_boolean.sleeping
     - delay: "00:00:15"
-    - service: automation.turn_on
-      entity_id: automation.set_bedroom_color_temperature_and_brightness
 
 evening_scene:
   alias: "Evening scene"
