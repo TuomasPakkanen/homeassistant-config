@@ -13,6 +13,7 @@
     service: light.turn_on
     data:
       entity_id: light.outdoor_lamp
+      brightness_pct: 100
       transition: 30
 
 - id: "180897423023222"
@@ -35,6 +36,7 @@
     service: light.turn_on
     data:
       entity_id: light.outdoor_lamp
+      brightness_pct: 100
       transition: 30
 
 - id: "180897423023333"
